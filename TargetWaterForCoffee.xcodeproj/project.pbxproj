@@ -13,6 +13,8 @@
 		4936CBA828522FBB002A30D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4936CBA628522FBB002A30D9 /* Main.storyboard */; };
 		4936CBAA28522FBE002A30D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4936CBA928522FBE002A30D9 /* Assets.xcassets */; };
 		4936CBAD28522FBE002A30D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */; };
+		4936CBB628523439002A30D9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB528523439002A30D9 /* SnapKit */; };
+		4936CBB928523455002A30D9 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB828523455002A30D9 /* Charts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4936CBB628523439002A30D9 /* SnapKit in Frameworks */,
+				4936CBB928523455002A30D9 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +87,10 @@
 			dependencies = (
 			);
 			name = TargetWaterForCoffee;
+			packageProductDependencies = (
+				4936CBB528523439002A30D9 /* SnapKit */,
+				4936CBB828523455002A30D9 /* Charts */,
+			);
 			productName = TargetWaterForCoffee;
 			productReference = 4936CB9D28522FBB002A30D9 /* TargetWaterForCoffee.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +119,10 @@
 				Base,
 			);
 			mainGroup = 4936CB9428522FBB002A30D9;
+			packageReferences = (
+				4936CBB428523439002A30D9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				4936CBB728523455002A30D9 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = 4936CB9E28522FBB002A30D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -358,6 +370,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4936CBB428523439002A30D9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		4936CBB728523455002A30D9 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4936CBB528523439002A30D9 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4936CBB428523439002A30D9 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		4936CBB828523455002A30D9 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4936CBB728523455002A30D9 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4936CB9528522FBB002A30D9 /* Project object */;
 }
