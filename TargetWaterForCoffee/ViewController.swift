@@ -8,21 +8,45 @@
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController {
-    
-    let sampleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
 
+///
+class ViewController: UIViewController, UISearchBarDelegate {
+    
+    let mainView = MainListView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNavBar()
+        setMainListView()
         view.backgroundColor = .white
-        
-        view.addSubview(sampleView)
-        sampleView.backgroundColor = .red
-        sampleView.layer.cornerRadius = 100
         // Do any additional setup after loading the view.
     }
+    
+    func setNavBar(){
+        self.title = "LIST"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal.decrease")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
+            style: .done,
+            target: self,
+            action: nil
+        )
+    }
+    
+    
+    
+    func setMainListView(){
+        view.addSubview(mainView)
+        mainView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(view)
+            make.height.equalTo(view.safeAreaLayoutGuide)
+//            make.edges.equalToSuperview()
+        }
+        mainView.searchBar.delegate = self
+    }
 }
+
 
 // MARK: - Using Canvas Preview in SwiftUI for UIKit
 struct ViewControllerRepresentable : UIViewControllerRepresentable {

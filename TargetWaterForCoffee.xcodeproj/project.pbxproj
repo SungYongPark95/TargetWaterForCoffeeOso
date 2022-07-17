@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4900C2DB2883FCA900E002E9 /* MainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4900C2DA2883FCA900E002E9 /* MainListView.swift */; };
+		4900C2DD2884042300E002E9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4900C2DC2884042300E002E9 /* Store.swift */; };
 		4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4936CBA028522FBB002A30D9 /* AppDelegate.swift */; };
 		4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4936CBA228522FBB002A30D9 /* SceneDelegate.swift */; };
 		4936CBA528522FBB002A30D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4936CBA428522FBB002A30D9 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4900C2DA2883FCA900E002E9 /* MainListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListView.swift; sourceTree = "<group>"; };
+		4900C2DC2884042300E002E9 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		4936CB9D28522FBB002A30D9 /* TargetWaterForCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TargetWaterForCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4936CBA028522FBB002A30D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4936CBA228522FBB002A30D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 				4936CBA928522FBE002A30D9 /* Assets.xcassets */,
 				4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */,
 				4936CBAE28522FBE002A30D9 /* Info.plist */,
+				4900C2DA2883FCA900E002E9 /* MainListView.swift */,
+				4900C2DC2884042300E002E9 /* Store.swift */,
 			);
 			path = TargetWaterForCoffee;
 			sourceTree = "<group>";
@@ -147,8 +153,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4936CBA528522FBB002A30D9 /* ViewController.swift in Sources */,
+				4900C2DB2883FCA900E002E9 /* MainListView.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
 				4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */,
+				4900C2DD2884042300E002E9 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
