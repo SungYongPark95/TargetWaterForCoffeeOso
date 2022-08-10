@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController {
+class CafeDetailViewController: UIViewController {
     
     let sampleView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
 
@@ -26,15 +26,15 @@ class ViewController: UIViewController {
 
 // MARK: - Using Canvas Preview in SwiftUI for UIKit
 struct ViewControllerRepresentable : UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
+    func makeUIViewController(context: Context) -> CafeDetailViewController {
+        return CafeDetailViewController()
     }
     
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: CafeDetailViewController, context: Context) {
         
     }
     
-    typealias UIViewControllerType = ViewController
+    typealias UIViewControllerType = CafeDetailViewController
 }
 
 @available(iOS 13.0.0, *)
