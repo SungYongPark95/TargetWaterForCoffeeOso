@@ -14,6 +14,7 @@
 		4936CBAD28522FBE002A30D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */; };
 		4936CBB628523439002A30D9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB528523439002A30D9 /* SnapKit */; };
 		4936CBB928523455002A30D9 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB828523455002A30D9 /* Charts */; };
+		CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4936CBA928522FBE002A30D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4936CBAC28522FBE002A30D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4936CBAE28522FBE002A30D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableHeaderUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				4936CBA028522FBB002A30D9 /* AppDelegate.swift */,
 				4936CBA228522FBB002A30D9 /* SceneDelegate.swift */,
 				4936CBA428522FBB002A30D9 /* CafeDetailViewController.swift */,
+				CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */,
 				4936CBA928522FBE002A30D9 /* Assets.xcassets */,
 				4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */,
 				4936CBAE28522FBE002A30D9 /* Info.plist */,
@@ -148,6 +151,7 @@
 			files = (
 				4936CBA528522FBB002A30D9 /* CafeDetailViewController.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
+				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
 				4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
