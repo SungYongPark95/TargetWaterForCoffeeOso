@@ -17,6 +17,7 @@
 		CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */; };
 		CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */; };
 		CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */; };
+		CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableHeaderUIView.swift; sourceTree = "<group>"; };
 		CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
+		CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */,
 				CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */,
 				CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */,
+				CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */,
 				4936CBA928522FBE002A30D9 /* Assets.xcassets */,
 				4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */,
 				4936CBAE28522FBE002A30D9 /* Info.plist */,
@@ -158,6 +161,7 @@
 				CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */,
 				4936CBA528522FBB002A30D9 /* CafeDetailViewController.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
+				CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */,
 				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
 				CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */,
 				4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */,
