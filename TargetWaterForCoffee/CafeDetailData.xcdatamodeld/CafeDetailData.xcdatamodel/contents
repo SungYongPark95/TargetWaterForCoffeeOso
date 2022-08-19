@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CafeDetailData" representedClassName="CafeDetailData" syncable="YES">
+        <attribute name="alkalinity" optional="YES" attributeType="String"/>
+        <attribute name="cafePrimaryKey" optional="YES" attributeType="String"/>
+        <attribute name="circles" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="hardness" optional="YES" attributeType="String"/>
+        <attribute name="ph" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="CafeDetailData" positionX="-27" positionY="18" width="128" height="119"/>
+    </elements>
+</model>

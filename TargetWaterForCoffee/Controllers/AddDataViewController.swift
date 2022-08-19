@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddDataViewController: UIViewController {
 
@@ -14,6 +15,9 @@ class AddDataViewController: UIViewController {
     let memoTextView = UITextView()
     let saveButton = UIButton(type: .system)
     let dataTypes = ["Total Hardness", "Alkalinity", "PH", "Filter"]
+    let InsertData = ["", "", "", "", ""]
+    
+    var container: NSPersistentContainer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +82,15 @@ class AddDataViewController: UIViewController {
         saveButton.setTitle("저장하기", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
         saveButton.layer.cornerRadius = 10
+        
+        // [ CoreData ]
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.container = appDelegate.persistentContainer
+        
+        let entity = NSEntityDescription.entity(forEntityName: "CafeDetail", in: self.container.viewContext)!
+        let cafeData = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
         
     }
     
@@ -105,6 +117,7 @@ extension AddDataViewController: UITableViewDataSource{
         }
         // 셀 선택 이벤트 제거
         cell.selectionStyle = .none
+        cell.tag = indexPath.row
         return cell
     }
 }
@@ -119,6 +132,12 @@ extension AddDataViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .none
+    }
+}
+
+extension AddDataViewController: AddDataTableViewCellDelegate{
+    func setAddedData(data: String, tag: Int){
+        
     }
 }
 

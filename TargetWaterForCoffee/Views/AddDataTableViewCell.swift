@@ -7,10 +7,16 @@
 
 import UIKit
 
-class AddDataTableViewCell: UITableViewCell {
+protocol AddDataTableViewCellDelegate: AnyObject{
+    func setAddedData(data: String, tag: Int)
+}
+
+class AddDataTableViewCell: UITableViewCell{
     
     let dataTypeLabel = UILabel()
     let textField = UITextField()
+    
+    weak var delegate: AddDataTableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,10 +44,19 @@ class AddDataTableViewCell: UITableViewCell {
         textField.keyboardType = .numberPad
         textField.textAlignment = .right
         textField.tintColor = .clear
+        textField.delegate = self
         
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+// Delegate Pattern
+extension AddDataTableViewCell: UITextFieldDelegate{
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        delegate?.setAddedData(data: textField.text ?? "No Data", tag: tag)
+        return true
+    }
 }

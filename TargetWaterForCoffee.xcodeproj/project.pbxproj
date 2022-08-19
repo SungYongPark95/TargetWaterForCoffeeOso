@@ -14,6 +14,9 @@
 		4936CBAD28522FBE002A30D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */; };
 		4936CBB628523439002A30D9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB528523439002A30D9 /* SnapKit */; };
 		4936CBB928523455002A30D9 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB828523455002A30D9 /* Charts */; };
+		CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */; };
+		CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */; };
+		CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */; };
 		CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */; };
 		CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */; };
 		CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */; };
@@ -28,6 +31,9 @@
 		4936CBA928522FBE002A30D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4936CBAC28522FBE002A30D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4936CBAE28522FBE002A30D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE94A76628AFB7C100AA315A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableHeaderUIView.swift; sourceTree = "<group>"; };
 		CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +80,7 @@
 				4936CBA928522FBE002A30D9 /* Assets.xcassets */,
 				4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */,
 				4936CBAE28522FBE002A30D9 /* Info.plist */,
+				CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */,
 			);
 			path = TargetWaterForCoffee;
 			sourceTree = "<group>";
@@ -81,6 +88,8 @@
 		CE067D9928A4873100184E57 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */,
+				CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,8 +192,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */,
+				CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */,
 				4936CBA528522FBB002A30D9 /* CafeDetailViewController.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
+				CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */,
+				CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */,
 				CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */,
 				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
 				CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */,
@@ -428,6 +440,20 @@
 			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE94A76628AFB7C100AA315A /* Model.xcdatamodel */,
+			);
+			currentVersion = CE94A76628AFB7C100AA315A /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = ../Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4936CB9528522FBB002A30D9 /* Project object */;
 }
