@@ -11,8 +11,8 @@ class AddDataViewController: UIViewController {
 
     let tableView = UITableView()
     let memoLabel = UILabel()
-    let memoTextField = UITextField()
-    let saveButton = UIButton()
+    let memoTextView = UITextView()
+    let saveButton = UIButton(type: .system)
     let dataTypes = ["Total Hardness", "Alkalinity", "PH", "Filter"]
     
     override func viewDidLoad() {
@@ -22,12 +22,12 @@ class AddDataViewController: UIViewController {
         
         view.addSubview(tableView)
         view.addSubview(memoLabel)
-        view.addSubview(memoTextField)
+        view.addSubview(memoTextView)
         view.addSubview(saveButton)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         memoLabel.translatesAutoresizingMaskIntoConstraints = false
-        memoTextField.translatesAutoresizingMaskIntoConstraints = false
+        memoTextView.translatesAutoresizingMaskIntoConstraints = false
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -40,12 +40,12 @@ class AddDataViewController: UIViewController {
             memoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             memoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -313),
             
-            memoTextField.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
-            memoTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            memoTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            memoTextField.heightAnchor.constraint(equalToConstant: 93),
+            memoTextView.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
+            memoTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            memoTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            memoTextView.heightAnchor.constraint(equalToConstant: 93),
             
-            saveButton.topAnchor.constraint(equalTo: memoTextField.bottomAnchor, constant: 28),
+            saveButton.topAnchor.constraint(equalTo: memoTextView.bottomAnchor, constant: 28),
             saveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -227),
@@ -66,20 +66,18 @@ class AddDataViewController: UIViewController {
         // [ Memo Label ]
         memoLabel.text = "Memo"
         
-        // [ Memo TextField]
-        memoTextField.backgroundColor = .white
-        memoTextField.layer.cornerRadius = 10
-        memoTextField.font = UIFont.systemFont(ofSize: 14)
-//        memoTextField.text = textViewPlaceHolder
-        memoTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        memoTextField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        memoTextField.rightViewMode = .always
-        memoTextField.leftViewMode = .always
-        memoTextField.keyboardType = .decimalPad
+        // [ Memo TextView]
+        memoTextView.backgroundColor = .white
+        memoTextView.layer.cornerRadius = 10
+        memoTextView.font = UIFont.systemFont(ofSize: 14)
+        memoTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        memoTextView.keyboardType = .decimalPad
         
         // [ Save Button ]
         saveButton.backgroundColor = .systemBlue
         saveButton.setTitle("저장하기", for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         saveButton.layer.cornerRadius = 10
         
     }

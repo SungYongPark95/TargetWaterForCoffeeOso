@@ -66,18 +66,42 @@
 		4936CB9F28522FBB002A30D9 /* TargetWaterForCoffee */ = {
 			isa = PBXGroup;
 			children = (
+				CE067D9B28A4874100184E57 /* Controllers */,
+				CE067D9A28A4873B00184E57 /* Views */,
+				CE067D9928A4873100184E57 /* Models */,
 				4936CBA028522FBB002A30D9 /* AppDelegate.swift */,
 				4936CBA228522FBB002A30D9 /* SceneDelegate.swift */,
-				4936CBA428522FBB002A30D9 /* CafeDetailViewController.swift */,
-				CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */,
-				CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */,
-				CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */,
-				CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */,
 				4936CBA928522FBE002A30D9 /* Assets.xcassets */,
 				4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */,
 				4936CBAE28522FBE002A30D9 /* Info.plist */,
 			);
 			path = TargetWaterForCoffee;
+			sourceTree = "<group>";
+		};
+		CE067D9928A4873100184E57 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE067D9A28A4873B00184E57 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */,
+				CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */,
+				CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CE067D9B28A4874100184E57 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4936CBA428522FBB002A30D9 /* CafeDetailViewController.swift */,
+				CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
