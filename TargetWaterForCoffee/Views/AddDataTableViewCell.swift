@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddDataTableViewCellDelegate: AnyObject{
-    func setAddedData(data: String, tag: Int)
+    func setData(data: String, tag: Int)
 }
 
 class AddDataTableViewCell: UITableViewCell{
@@ -55,8 +55,8 @@ class AddDataTableViewCell: UITableViewCell{
 
 // Delegate Pattern
 extension AddDataTableViewCell: UITextFieldDelegate{
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        delegate?.setAddedData(data: textField.text ?? "No Data", tag: tag)
-        return true
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let textData = textField.text else { print("error"); return}
+        delegate?.setData(data: textData, tag: tag) ?? print("Error")
     }
 }

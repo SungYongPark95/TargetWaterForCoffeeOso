@@ -15,7 +15,7 @@ class AddDataViewController: UIViewController {
     let memoTextView = UITextView()
     let saveButton = UIButton(type: .system)
     let dataTypes = ["Total Hardness", "Alkalinity", "PH", "Filter"]
-    let InsertData = ["", "", "", "", ""]
+    var InsertData = ["", "", "", "", ""]
     
     var container: NSPersistentContainer!
     
@@ -59,7 +59,6 @@ class AddDataViewController: UIViewController {
         // [ Table View ]
         tableView.register(AddDataTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
-        tableView.delegate = self
         tableView.separatorStyle = .singleLine
         tableView.layer.cornerRadius = 10
         tableView.separatorInset.left = 20
@@ -96,7 +95,16 @@ class AddDataViewController: UIViewController {
     
     @objc
     func didTapSaveButton(_ sender: UIButton){
-        
+        InsertData[4] = memoTextView.text ?? ""
+        if InsertData[0] == "" || InsertData[1] == "" || InsertData[2] == ""{
+            let alertController = UIAlertController(title: "", message: "데이터를 모두 입력하세요", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default)
+            alertController.addAction(confirmAction)
+            present(alertController, animated: true)
+        }else if InsertData[3] == ""{
+            InsertData[3] = "No Filter"
+        }
+        print(InsertData)
     }
 }
 
@@ -117,27 +125,16 @@ extension AddDataViewController: UITableViewDataSource{
         }
         // 셀 선택 이벤트 제거
         cell.selectionStyle = .none
+        cell.delegate = self
         cell.tag = indexPath.row
         return cell
     }
 }
 
-
-extension AddDataViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .none
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .none
-    }
-}
-
+// [MARK] Protocol Function Setting
 extension AddDataViewController: AddDataTableViewCellDelegate{
-    func setAddedData(data: String, tag: Int){
-        
+    func setData(data: String, tag: Int){
+        InsertData[tag] = data
     }
 }
 
