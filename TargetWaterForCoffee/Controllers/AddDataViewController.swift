@@ -15,12 +15,20 @@ class AddDataViewController: UIViewController {
     let memoTextView = UITextView()
     let saveButton = UIButton(type: .system)
     let dataTypes = ["Total Hardness", "Alkalinity", "PH", "Filter"]
-    var InsertData = ["", "", "", "", ""]
+    let coreDataKeys = ["hardness", "alkalinity", "ph", "filter", "memo", "circle", "date", "cafePrimaryKey"]
+    var InsertData = ["", "", "", "", "", "", "", ""]
     
     var container: NSPersistentContainer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
+    }
+}
+
+// [ MARK ] Set UI
+extension AddDataViewController{
+    func setUI(){
         view.backgroundColor = UIColor(red: 0.949, green: 0.949, blue: 0.97, alpha: 1)
         navigationItem.title = "데이터 입력하기"
         
@@ -56,7 +64,7 @@ class AddDataViewController: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 49)
             ])
         
-        // [ Table View ]
+        // Table View
         tableView.register(AddDataTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
@@ -66,36 +74,30 @@ class AddDataViewController: UIViewController {
         tableView.layer.borderWidth = 1
         tableView.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         
-        // [ Memo Label ]
+        // Memo Label
         memoLabel.text = "Memo"
         
-        // [ Memo TextView]
+        // Memo TextView
         memoTextView.backgroundColor = .white
         memoTextView.layer.cornerRadius = 10
         memoTextView.font = UIFont.systemFont(ofSize: 14)
         memoTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         memoTextView.keyboardType = .decimalPad
         
-        // [ Save Button ]
+        // Save Button
         saveButton.backgroundColor = .systemBlue
         saveButton.setTitle("저장하기", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
         saveButton.layer.cornerRadius = 10
-        
-        // [ CoreData ]
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.container = appDelegate.persistentContainer
-        
-        let entity = NSEntityDescription.entity(forEntityName: "CafeDetail", in: self.container.viewContext)!
-        let cafeData = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
-        
     }
-    
-    @objc
+}
+
+// [ MARK ] Function
+extension AddDataViewController{
+    @objc // Save Button
     func didTapSaveButton(_ sender: UIButton){
-        InsertData[4] = memoTextView.text ?? ""
         if InsertData[0] == "" || InsertData[1] == "" || InsertData[2] == ""{
             let alertController = UIAlertController(title: "", message: "데이터를 모두 입력하세요", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default)
@@ -103,13 +105,29 @@ class AddDataViewController: UIViewController {
             present(alertController, animated: true)
         }else if InsertData[3] == ""{
             InsertData[3] = "No Filter"
+        }else{
+            InsertData[4] = memoTextView.text ?? ""
+            if InsertData[4] == ""{
+                InsertData[4] = "No Memo"
+            }
+            InsertData[5] = circles(hardness: Int(InsertData[0])!, alkalinity: Int(InsertData[1])!)
+            InsertData[6] = calcDate()
+            InsertData[7] = "CafePrimaryKey"
+            print(InsertData)
         }
-        print(InsertData)
+        
+        // CoreData
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.container = appDelegate.persistentContainer
+        
+        let entity = NSEntityDescription.entity(forEntityName: "CafeDetail", in: self.container.viewContext)!
+        let cafeData = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
+        //cafeData.setValue(<#T##value: Any?##Any?#>, forKey: <#T##String#>)
     }
 }
 
+// [ MARK ] Table View Data Source
 extension AddDataViewController: UITableViewDataSource{
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataTypes.count
     }

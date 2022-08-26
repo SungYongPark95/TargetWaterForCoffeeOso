@@ -11,7 +11,8 @@ class CafeDetailViewController: UIViewController {
     
     let graphImageUIView = UIView()
     let graphImageView = UIImageView()
-    let graphDrawPointUIview = UIView()
+    let graphDrawPointUIView = UIView()
+    let graphPointImageView = UIImageView()
     let graphDotImage = UIImage()
     let separator1 = UILabel()
     let tableHeaderUIView = DataTableHeaderUIView()
@@ -26,8 +27,16 @@ class CafeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // [ navigation ]
+        setUI()
+    }
+
+}
+
+
+// [ MARK ] Set UI
+extension CafeDetailViewController{
+    func setUI(){
+        // navigation
         navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "Cafe Name"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add
@@ -39,74 +48,90 @@ class CafeDetailViewController: UIViewController {
         
         view.addSubview(graphImageUIView)
         view.addSubview(graphImageView)
-        view.addSubview(graphDrawPointUIview)
+        view.addSubview(graphDrawPointUIView)
+        view.addSubview(graphPointImageView)
         view.addSubview(separator1)
         view.addSubview(tableHeaderUIView)
         view.addSubview(separator2)
         view.addSubview(tableView)
         
         graphImageUIView.translatesAutoresizingMaskIntoConstraints = false
-        graphDrawPointUIview.translatesAutoresizingMaskIntoConstraints = false
         graphImageView.translatesAutoresizingMaskIntoConstraints = false
+        graphDrawPointUIView.translatesAutoresizingMaskIntoConstraints = false
+        graphPointImageView.translatesAutoresizingMaskIntoConstraints = false
         separator1.translatesAutoresizingMaskIntoConstraints = false
         tableHeaderUIView.translatesAutoresizingMaskIntoConstraints = false
         separator2.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        // [ graph ]
-        graphImageUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        graphImageUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        graphImageUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        graphImageUIView.heightAnchor.constraint(equalToConstant: 325).isActive = true
+        
+        NSLayoutConstraint.activate([
+            // graph
+            graphImageUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            graphImageUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            graphImageUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            graphImageUIView.heightAnchor.constraint(equalToConstant: 325),
+            
+            graphImageView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 27),
+            graphImageView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 12),
+            graphImageView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -11),
+            graphImageView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -20),
+            // graph - pointUIView
+            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 39),
+            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67),
+            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27),
+            graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
+            
+            // separator1
+            separator1.topAnchor.constraint(equalTo: graphImageUIView.bottomAnchor),
+            separator1.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            separator1.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            separator1.heightAnchor.constraint(equalToConstant: 2),
+            
+            // tableHeaderUIView
+            tableHeaderUIView.topAnchor.constraint(equalTo: separator1.bottomAnchor),
+            tableHeaderUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableHeaderUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            tableHeaderUIView.heightAnchor.constraint(equalToConstant: 50),
+            
+            // separator2
+            separator2.topAnchor.constraint(equalTo: tableHeaderUIView.bottomAnchor),
+            separator2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            separator2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            separator2.heightAnchor.constraint(equalToConstant: 2),
+            
+            // tableView
+            tableView.topAnchor.constraint(equalTo: separator2.bottomAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -10)
+        ])
+        
         graphImageUIView.backgroundColor = .white
         
-        let image = UIImage(named: "WaterGraph")
-        graphImageView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 27).isActive = true
-        graphImageView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 12).isActive = true
-        graphImageView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -11).isActive = true
-        graphImageView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -20).isActive = true
-        graphImageView.image = image
+        let graphImage = UIImage(named: "WaterGraph")
+        graphImageView.image = graphImage
         
-        graphDrawPointUIview.backgroundColor = .clear
-        graphDrawPointUIview.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 39).isActive = true
-        graphDrawPointUIview.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67).isActive = true
-        graphDrawPointUIview.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27).isActive = true
-        graphDrawPointUIview.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64).isActive = true
+        graphDrawPointUIView.backgroundColor = .clear
         
-        // [separator1]
+        let pointImage = UIImage(named: "GraphDotPointer")
+        graphPointImageView.image = pointImage
+        
         separator1.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        separator1.topAnchor.constraint(equalTo: graphImageUIView.bottomAnchor).isActive = true
-        separator1.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        separator1.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        separator1.heightAnchor.constraint(equalToConstant: 2).isActive = true
-        
-        // [ tableHeaderUIView ]
-        tableHeaderUIView.topAnchor.constraint(equalTo: separator1.bottomAnchor).isActive = true
-        tableHeaderUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        tableHeaderUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        tableHeaderUIView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         tableHeaderUIView.backgroundColor = .white
-        
-        // [separator2]
         separator2.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
-        separator2.topAnchor.constraint(equalTo: tableHeaderUIView.bottomAnchor).isActive = true
-        separator2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        separator2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        separator2.heightAnchor.constraint(equalToConstant: 2).isActive = true
         
-        // [ tableView ]
-        tableView.topAnchor.constraint(equalTo: separator2.bottomAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -10).isActive = true
         tableView.backgroundColor = .white
         tableView.separatorInset.left = 0
+        
         // 셀 등록 및 데이터 삽입
         tableView.register(DataTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
-
     }
-    
+}
+
+// [ Mark ] function
+extension CafeDetailViewController{
     @objc
     func didTapBarButton(_ sender: UIBarButtonItem){
         if sender == navigationItem.rightBarButtonItem{
@@ -116,10 +141,9 @@ class CafeDetailViewController: UIViewController {
             // navigation left button click event
         }
     }
-
 }
 
-// 테스트 데이터를 사용하여 데이터 테이블에 셀 생성
+// [ Mark ] 테스트 데이터를 사용하여 데이터 테이블에 셀 생성
 extension CafeDetailViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return circles.count
@@ -139,7 +163,5 @@ extension CafeDetailViewController: UITableViewDataSource{
         cell.phLabel.sizeToFit()
         return cell
     }
-    
-    
 }
 
