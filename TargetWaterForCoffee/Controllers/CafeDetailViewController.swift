@@ -29,7 +29,6 @@ class CafeDetailViewController: UIViewController {
         super.viewDidLoad()
         setUI()
     }
-
 }
 
 
@@ -76,11 +75,16 @@ extension CafeDetailViewController{
             graphImageView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 12),
             graphImageView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -11),
             graphImageView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -20),
+            
             // graph - pointUIView
             graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 39),
             graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67),
             graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27),
             graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
+            
+            // graph - pointImageView
+            graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40),
+            graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37),
             
             // separator1
             separator1.topAnchor.constraint(equalTo: graphImageUIView.bottomAnchor),
@@ -123,6 +127,7 @@ extension CafeDetailViewController{
         
         tableView.backgroundColor = .white
         tableView.separatorInset.left = 0
+        tableView.delegate = self
         
         // 셀 등록 및 데이터 삽입
         tableView.register(DataTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -165,3 +170,8 @@ extension CafeDetailViewController: UITableViewDataSource{
     }
 }
 
+extension CafeDetailViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}

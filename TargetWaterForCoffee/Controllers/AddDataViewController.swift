@@ -62,7 +62,7 @@ extension AddDataViewController{
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -227),
             saveButton.heightAnchor.constraint(equalToConstant: 49)
-            ])
+        ])
         
         // Table View
         tableView.register(AddDataTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -122,7 +122,20 @@ extension AddDataViewController{
         
         let entity = NSEntityDescription.entity(forEntityName: "CafeDetail", in: self.container.viewContext)!
         let cafeData = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
-        //cafeData.setValue(<#T##value: Any?##Any?#>, forKey: <#T##String#>)
+        
+        // CoreData : Set Value
+        for i in 0..<coreDataKeys.count{
+            print(coreDataKeys[i])
+            cafeData.setValue(InsertData[i], forKey: coreDataKeys[i])
+        }
+        
+        // CoreData : Save Data
+        do{
+            try self.container.viewContext.save()
+        }catch{
+            fatalError()
+        }
+
     }
 }
 

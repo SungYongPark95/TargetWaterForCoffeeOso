@@ -22,6 +22,8 @@ extension CafeDetail {
     @NSManaged public var ph: String?
     @NSManaged public var alkalinity: String?
     @NSManaged public var hardness: String?
+    @NSManaged public var filter: String?
+    @NSManaged public var memo: String?
 
 }
 
