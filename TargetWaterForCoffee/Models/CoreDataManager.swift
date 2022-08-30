@@ -70,27 +70,39 @@ extension CoreDataManager{
     }
     
     // Get Data
-    func getCafeDetails() -> [CafeDetail]{
-        var cafeDetails: [CafeDetail] = []
+    func getCafeDetails() -> [MesureData]{
+        var MesureDatas: [MesureData] = []
         let fetchResults = fetchCafeDetails()
         
         for result in fetchResults{
-            let MesureData = MesureData(hardness: result.hardness ?? "",
-                                        alkalinity: result.alkalinity ?? "",
-                                        ph: result.ph ?? "",
-                                        filter: result.filter ?? "",
-                                        memo: result.memo ?? "",
-                                        circle: result.circle ?? "",
+            let MesureData = MesureData(cafePrimaryKey: result.cafePrimaryKey ?? "",
                                         date: result.date ?? "",
-                                        cafePrimaryKey: result.cafePrimaryKey ?? "")
-            cafeDetails.append(MesureData)
+                                        circle: result.circle ?? "",
+                                        ph: result.ph ?? "",
+                                        alkalinity: result.alkalinity ?? "",
+                                        hardness: result.hardness ?? "",
+                                        filter: result.filter ?? "",
+                                        memo: result.memo ?? "")
+            MesureDatas.append(MesureData)
         }
-        return cafeDetails
+        return MesureDatas
     }
     
     // Update Data
+    func updateCafeDetails(_ mesureData: MesureData){
+        let fetchResults = fetchCafeDetails()
+        for result in fetchResults{
+           //if result.date == mesureData.date{ mesureData.date = Date() }
+        }
+        saveToContext()
+    }
     
-    
-    
+    // DeleteCafeDetail
+    func deleteCafeDetail(_ mesureData: MesureData){
+        let fetchResults = fetchCafeDetails()
+        let date = fetchResults.filter({ $0.date == mesureData.date })[0]
+        context.delete(mesureData)
+        saveToContext()
+    }
     
 }
