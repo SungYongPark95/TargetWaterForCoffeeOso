@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CafeDetailTableViewCellDelegate: AnyObject{
+    func getXY(totalHardness: String, Alkalinity: String)
+}
+
 class DataTableViewCell: UITableViewCell {
 
     let circleDataImageView = UIImageView()
@@ -14,6 +18,9 @@ class DataTableViewCell: UITableViewCell {
     let hardnessLabel = UILabel()
     let alkalinityLabel = UILabel()
     let phLabel = UILabel()
+//    let clearButton = UIButton()
+    
+    weak var delegate: CafeDetailTableViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,6 +35,8 @@ class DataTableViewCell: UITableViewCell {
         alkalinityLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(phLabel)
         phLabel.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.addSubview(clearButton)
+//        clearButton.translatesAutoresizingMaskIntoConstraints = false
         
         circleDataImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 6).isActive = true
         circleDataImageView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
@@ -64,8 +73,26 @@ class DataTableViewCell: UITableViewCell {
         phLabel.textAlignment = .center
         phLabel.font = UIFont.systemFont(ofSize: 14)
         
+//        clearButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        clearButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+//        clearButton.widthAnchor.constraint(equalToConstant: 370).isActive = true
+//        clearButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        clearButton.backgroundColor = .clear
+//        clearButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+        
+        if self.isFocused{
+            print("!!!")
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension DataTableViewCell{
+    @objc
+    func didTapButton(_ sender: UIButton){
+        print("cell")
+        //delegate?.getXY(totalHardness: hardnessLabel.text ?? "", Alkalinity: alkalinityLabel.text ?? "")
     }
 }

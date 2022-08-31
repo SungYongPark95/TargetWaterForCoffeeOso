@@ -19,11 +19,14 @@ class CafeDetailViewController: UIViewController {
     let separator2 = UILabel()
     let tableView = UITableView()
     
-    let circles = ["GraphDataCircles_000", "GraphDataCircles_100", "GraphDataCircles_010", "GraphDataCircles_101", "GraphDataCircles_110", "GraphDataCircles_111","GraphDataCircles_000", "GraphDataCircles_100", "GraphDataCircles_010", "GraphDataCircles_101", "GraphDataCircles_110", "GraphDataCircles_111"]
-    let dates = ["00.00.00", "00.00.00", "00.00.00", "00.00.00", "00.00.00", "00.00.00","00.00.00", "00.00.00", "00.00.00", "00.00.00", "00.00.00", "00.00.00"]
-    let hardnesses = ["0", "0", "0", "0", "0", "0","0", "0", "0", "0", "0", "0"]
-    let alkalinities = ["0", "0", "0", "0", "0", "0","0", "0", "0", "0", "0", "0"]
-    let pHs = ["0", "0", "0", "0", "0", "0","0", "0", "0", "0", "0", "0"]
+//    var dotXAnchor: NSLayoutConstraint?
+//    var dotYAnchor: NSLayoutConstraint?
+    
+    let circles = ["GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101", "GraphDataCircles_100", "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110"]
+    let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
+    let hardnesses = ["60", "65", "65", "52", "52", "50", "50"]
+    let alkalinities = ["40", "41", "45", "45", "44", "40", "40"]
+    let pHs = ["3", "3", "3", "3", "3", "3", "3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +37,7 @@ class CafeDetailViewController: UIViewController {
 
 // [ MARK ] Set UI
 extension CafeDetailViewController{
-    func setUI(){
+    private func setUI(){
         // navigation
         navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "Cafe Name"
@@ -45,24 +48,16 @@ extension CafeDetailViewController{
         navigationItem.rightBarButtonItem?.tintColor = .black
         navigationItem.leftBarButtonItem?.tintColor = .black
         
-        view.addSubview(graphImageUIView)
-        view.addSubview(graphImageView)
-        view.addSubview(graphDrawPointUIView)
-        view.addSubview(graphPointImageView)
-        view.addSubview(separator1)
-        view.addSubview(tableHeaderUIView)
-        view.addSubview(separator2)
-        view.addSubview(tableView)
+        [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, separator1,
+         tableHeaderUIView, separator2, tableView].forEach{
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
-        graphImageUIView.translatesAutoresizingMaskIntoConstraints = false
-        graphImageView.translatesAutoresizingMaskIntoConstraints = false
-        graphDrawPointUIView.translatesAutoresizingMaskIntoConstraints = false
-        graphPointImageView.translatesAutoresizingMaskIntoConstraints = false
-        separator1.translatesAutoresizingMaskIntoConstraints = false
-        tableHeaderUIView.translatesAutoresizingMaskIntoConstraints = false
-        separator2.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+//        dotXAnchor = graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37)
+//        dotXAnchor?.isActive = true
+//        dotYAnchor = graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40)
+//        dotYAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
             // graph
@@ -83,8 +78,8 @@ extension CafeDetailViewController{
             graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
             
             // graph - pointImageView
-            graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40),
             graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37),
+            graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40),
             
             // separator1
             separator1.topAnchor.constraint(equalTo: graphImageUIView.bottomAnchor),
@@ -110,8 +105,6 @@ extension CafeDetailViewController{
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -10)
         ])
-        
-        graphImageUIView.backgroundColor = .white
         
         let graphImage = UIImage(named: "WaterGraph")
         graphImageView.image = graphImage
@@ -166,12 +159,35 @@ extension CafeDetailViewController: UITableViewDataSource{
         cell.alkalinityLabel.sizeToFit()
         cell.phLabel.text = pHs[indexPath.row]
         cell.phLabel.sizeToFit()
+        cell.delegate = self
         return cell
     }
 }
 
 extension CafeDetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("delegate")
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .disclosureIndicator{
+            let navVC = UINavigationController(rootViewController: DataDetailController())
+            navVC.modalPresentationStyle = .fullScreen
+            present(navVC, animated: false)
+        }else{
+            tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
+//            tableView.cellForRow(at: indexPath)?.getData()
+        }
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+    }
+}
+
+extension CafeDetailViewController: CafeDetailTableViewCellDelegate{
+    func getXY(totalHardness: String, Alkalinity: String){
+        print("protocol")
+        let x = Int(0.5 * Double(Alkalinity)!)
+        let y = Int(0.8 * Double(totalHardness)!)
         
+//        self.dotXAnchor?.constant = CGFloat(x)
+//        self.dotYAnchor?.constant = CGFloat(y)
     }
 }

@@ -28,19 +28,14 @@ class AddDataViewController: UIViewController {
 
 // [ MARK ] Set UI
 extension AddDataViewController{
-    func setUI(){
+    private func setUI(){
         view.backgroundColor = UIColor(red: 0.949, green: 0.949, blue: 0.97, alpha: 1)
         navigationItem.title = "데이터 입력하기"
         
-        view.addSubview(tableView)
-        view.addSubview(memoLabel)
-        view.addSubview(memoTextView)
-        view.addSubview(saveButton)
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        memoLabel.translatesAutoresizingMaskIntoConstraints = false
-        memoTextView.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        [tableView, memoLabel, memoTextView, saveButton].forEach{
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor , constant: 82),
@@ -114,6 +109,7 @@ extension AddDataViewController{
             InsertData[6] = calcDate()
             InsertData[7] = "CafePrimaryKey"
             print(InsertData)
+            self.dismiss(animated: true)
         }
         
         // CoreData

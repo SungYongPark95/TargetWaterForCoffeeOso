@@ -100,7 +100,7 @@ extension CoreDataManager{
     // DeleteCafeDetail
     func deleteCafeDetail(_ mesureData: MesureData){
         let fetchResults = fetchCafeDetails()
-        let date = fetchResults.filter({ $0.date == mesureData.date })[0]
+        let mesureData = fetchResults.filter({ $0.date == mesureData.date })[0]
         context.delete(mesureData)
         saveToContext()
     }
