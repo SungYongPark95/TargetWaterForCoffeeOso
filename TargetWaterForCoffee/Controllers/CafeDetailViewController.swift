@@ -19,8 +19,8 @@ class CafeDetailViewController: UIViewController {
     let separator2 = UILabel()
     let tableView = UITableView()
     
-//    var dotXAnchor: NSLayoutConstraint?
-//    var dotYAnchor: NSLayoutConstraint?
+    var dotXAnchor: NSLayoutConstraint?
+    var dotYAnchor: NSLayoutConstraint?
     
     let circles = ["GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101", "GraphDataCircles_100", "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110"]
     let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
@@ -54,10 +54,10 @@ extension CafeDetailViewController{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-//        dotXAnchor = graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37)
-//        dotXAnchor?.isActive = true
-//        dotYAnchor = graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40)
-//        dotYAnchor?.isActive = true
+        dotXAnchor = graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37)
+        dotXAnchor?.isActive = true
+        dotYAnchor = graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40)
+        dotYAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
             // graph
@@ -76,10 +76,6 @@ extension CafeDetailViewController{
             graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67),
             graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27),
             graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
-            
-            // graph - pointImageView
-            graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37),
-            graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40),
             
             // separator1
             separator1.topAnchor.constraint(equalTo: graphImageUIView.bottomAnchor),
@@ -160,6 +156,7 @@ extension CafeDetailViewController: UITableViewDataSource{
         cell.phLabel.text = pHs[indexPath.row]
         cell.phLabel.sizeToFit()
         cell.delegate = self
+        cell.tag = indexPath.row
         return cell
     }
 }
@@ -173,7 +170,7 @@ extension CafeDetailViewController: UITableViewDelegate{
             present(navVC, animated: false)
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
-//            tableView.cellForRow(at: indexPath)?.getData()
+            NotificationCenter.default.post(name: Notification.Name.callCell, object: nil, userInfo: [NotificationKey.indexPath: indexPath])
         }
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -181,13 +178,20 @@ extension CafeDetailViewController: UITableViewDelegate{
     }
 }
 
+extension Notification.Name{
+    static let callCell = Notification.Name("callCell")
+}
+
+enum NotificationKey{
+    case indexPath
+}
+
 extension CafeDetailViewController: CafeDetailTableViewCellDelegate{
     func getXY(totalHardness: String, Alkalinity: String){
-        print("protocol")
+        print("protocol:  \(totalHardness)/\(Alkalinity)")
         let x = Int(0.5 * Double(Alkalinity)!)
         let y = Int(0.8 * Double(totalHardness)!)
-        
-//        self.dotXAnchor?.constant = CGFloat(x)
-//        self.dotYAnchor?.constant = CGFloat(y)
+        self.dotXAnchor?.constant = CGFloat(x)
+        self.dotYAnchor?.constant = CGFloat(y)
     }
 }

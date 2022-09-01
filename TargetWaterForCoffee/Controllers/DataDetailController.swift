@@ -47,8 +47,7 @@ extension DataDetailController{
             fatalError()
         }
     }
-    
-    func setTitle(title: String, subTitle: String){
+        func setTitle(title: String, subTitle: String){
         let main = UILabel()
         main.text = title
         main.font = UIFont.systemFont(ofSize: 15, weight: .bold)

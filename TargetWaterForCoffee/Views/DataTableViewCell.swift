@@ -80,9 +80,7 @@ class DataTableViewCell: UITableViewCell {
 //        clearButton.backgroundColor = .clear
 //        clearButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         
-        if self.isFocused{
-            print("!!!")
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(getXY(notification:)), name: Notification.Name.callCell, object: nil)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -91,8 +89,13 @@ class DataTableViewCell: UITableViewCell {
 
 extension DataTableViewCell{
     @objc
-    func didTapButton(_ sender: UIButton){
-        print("cell")
-        //delegate?.getXY(totalHardness: hardnessLabel.text ?? "", Alkalinity: alkalinityLabel.text ?? "")
+    func getXY(notification: Notification) {
+        print(tag)
+        guard let object = notification.userInfo?[NotificationKey.indexPath] as? String else{ return }
+        print(object)
+        if Int(object)! == tag{
+            print("data table view cell")
+            delegate?.getXY(totalHardness: hardnessLabel.text ?? "", Alkalinity: alkalinityLabel.text ?? "")
+        }
     }
 }
