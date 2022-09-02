@@ -18,7 +18,6 @@ class DataTableViewCell: UITableViewCell {
     let hardnessLabel = UILabel()
     let alkalinityLabel = UILabel()
     let phLabel = UILabel()
-//    let clearButton = UIButton()
     
     weak var delegate: CafeDetailTableViewCellDelegate?
     
@@ -35,8 +34,6 @@ class DataTableViewCell: UITableViewCell {
         alkalinityLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(phLabel)
         phLabel.translatesAutoresizingMaskIntoConstraints = false
-//        contentView.addSubview(clearButton)
-//        clearButton.translatesAutoresizingMaskIntoConstraints = false
         
         circleDataImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 6).isActive = true
         circleDataImageView.leftAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
@@ -73,13 +70,6 @@ class DataTableViewCell: UITableViewCell {
         phLabel.textAlignment = .center
         phLabel.font = UIFont.systemFont(ofSize: 14)
         
-//        clearButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-//        clearButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-//        clearButton.widthAnchor.constraint(equalToConstant: 370).isActive = true
-//        clearButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-//        clearButton.backgroundColor = .clear
-//        clearButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(getXY(notification:)), name: Notification.Name.callCell, object: nil)
     }
     required init?(coder: NSCoder) {
@@ -87,14 +77,12 @@ class DataTableViewCell: UITableViewCell {
     }
 }
 
+// [Mark] Cell Protocol Function
 extension DataTableViewCell{
     @objc
     func getXY(notification: Notification) {
-        print(tag)
-        guard let object = notification.userInfo?[NotificationKey.indexPath] as? String else{ return }
-        print(object)
-        if Int(object)! == tag{
-            print("data table view cell")
+        let object = notification.object as? Int ?? 0
+        if object == tag{
             delegate?.getXY(totalHardness: hardnessLabel.text ?? "", Alkalinity: alkalinityLabel.text ?? "")
         }
     }

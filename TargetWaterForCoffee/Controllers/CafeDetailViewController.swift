@@ -24,8 +24,10 @@ class CafeDetailViewController: UIViewController {
     
     let circles = ["GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101", "GraphDataCircles_100", "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110"]
     let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
-    let hardnesses = ["60", "65", "65", "52", "52", "50", "50"]
-    let alkalinities = ["40", "41", "45", "45", "44", "40", "40"]
+    let hardnesses = ["0", "20", "40", "60", "80", "100", "120"]
+    let alkalinities = ["0", "50", "80", "100", "130", "150", "200"]
+//    let hardnesses = ["60", "65", "65", "52", "52", "50", "50"]
+//    let alkalinities = ["40", "41", "45", "45", "44", "40", "40"]
     let pHs = ["3", "3", "3", "3", "3", "3", "3"]
 
     override func viewDidLoad() {
@@ -54,9 +56,9 @@ extension CafeDetailViewController{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        dotXAnchor = graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 37)
+        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 49)
         dotXAnchor?.isActive = true
-        dotYAnchor = graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -40)
+        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -52)
         dotYAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
@@ -170,7 +172,7 @@ extension CafeDetailViewController: UITableViewDelegate{
             present(navVC, animated: false)
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
-            NotificationCenter.default.post(name: Notification.Name.callCell, object: nil, userInfo: [NotificationKey.indexPath: indexPath])
+            NotificationCenter.default.post(name: Notification.Name.callCell, object: indexPath.row)
         }
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -178,19 +180,16 @@ extension CafeDetailViewController: UITableViewDelegate{
     }
 }
 
+// [Mark] Notification Center Name
 extension Notification.Name{
     static let callCell = Notification.Name("callCell")
 }
 
-enum NotificationKey{
-    case indexPath
-}
-
+// [Mark] Cell Delegate Protocol
 extension CafeDetailViewController: CafeDetailTableViewCellDelegate{
     func getXY(totalHardness: String, Alkalinity: String){
-        print("protocol:  \(totalHardness)/\(Alkalinity)")
-        let x = Int(0.5 * Double(Alkalinity)!)
-        let y = Int(0.8 * Double(totalHardness)!)
+        let x = (49 / 20) * (Double(totalHardness) ?? 0)
+        let y = (-52 / 50) * (Double(Alkalinity) ?? 0)
         self.dotXAnchor?.constant = CGFloat(x)
         self.dotYAnchor?.constant = CGFloat(y)
     }
