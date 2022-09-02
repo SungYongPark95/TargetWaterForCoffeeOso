@@ -29,6 +29,9 @@ class DataDetailController: UIViewController {
     let memoLabel = UILabel()
     let memoDataLabel = UITextView()
     
+    var dotXAnchor: NSLayoutConstraint?
+    var dotYAnchor: NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -119,10 +122,6 @@ extension DataDetailController{
             graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67),
             graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27),
             graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
-            
-            // graph - pointImageView
-            graphPointImageView.bottomAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -51),
-            graphPointImageView.leadingAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 86),
             
             // filter UIView
             filterUIView.topAnchor.constraint(equalTo: graphImageView.bottomAnchor, constant: 30),
@@ -256,6 +255,14 @@ extension DataDetailController{
         totalHardnessDataLabel.text = "60"
         alkalinityDataLabel.text = "40"
         phDataLabel.text = "3"
+        
+        // set dot position
+        let x = (49 / 20) * (Double(alkalinityDataLabel.text ?? "") ?? 0)
+        let y = (-52 / 50) * (Double(totalHardnessDataLabel.text ?? "") ?? 0)
+        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: x)
+        dotXAnchor?.isActive = true
+        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: y)
+        dotYAnchor?.isActive = true
         
         // memo Label
         memoLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)

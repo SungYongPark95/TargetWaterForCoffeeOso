@@ -186,3 +186,7 @@ func calcDate() -> String{
     let current_date_string = formatter.string(from: Date())
     return current_date_string
 }
+
+func setDot(){
+    
+}
