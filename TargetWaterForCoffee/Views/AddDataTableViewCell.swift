@@ -20,12 +20,21 @@ class AddDataTableViewCell: UITableViewCell{
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.addSubview(dataTypeLabel)
-        contentView.addSubview(textField)
-        
-        dataTypeLabel.translatesAutoresizingMaskIntoConstraints = false
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        setUI()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+// [MARK] Set UI
+extension AddDataTableViewCell{
+    func setUI(){
+        [dataTypeLabel, textField].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             dataTypeLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 16),
@@ -45,15 +54,10 @@ class AddDataTableViewCell: UITableViewCell{
         textField.textAlignment = .right
         textField.tintColor = .clear
         textField.delegate = self
-        
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }
 
-// Delegate Pattern
+// [MARK] Delegate Pattern
 extension AddDataTableViewCell: UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let textData = textField.text else { print("error"); return}

@@ -43,8 +43,7 @@ extension CafeDetailViewController{
         // navigation
         navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "Cafe Name"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add
-                                                            , target: self, action: #selector(didTapBarButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
         
         navigationItem.rightBarButtonItem?.tintColor = .black
@@ -165,7 +164,6 @@ extension CafeDetailViewController: UITableViewDataSource{
 
 extension CafeDetailViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("delegate")
         if tableView.cellForRow(at: indexPath)?.accessoryType == .disclosureIndicator{
             let navVC = UINavigationController(rootViewController: DataDetailController())
             navVC.modalPresentationStyle = .fullScreen

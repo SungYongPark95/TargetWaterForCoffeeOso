@@ -35,6 +35,7 @@ class DataDetailController: UIViewController {
     }
 }
 
+// [MARK] Button Function
 extension DataDetailController{
     @objc
     private func didTapBarButton(_ sender: UIBarButtonItem){
@@ -47,7 +48,11 @@ extension DataDetailController{
             fatalError()
         }
     }
-        func setTitle(title: String, subTitle: String){
+}
+
+// [MARK] Function
+extension DataDetailController{
+    func setTitle(title: String, subTitle: String){
         let main = UILabel()
         main.text = title
         main.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -75,6 +80,8 @@ extension DataDetailController{
     }
 }
 
+
+// [MARK] Set UI
 extension DataDetailController{
     func setUI(){
         // navigation
@@ -207,7 +214,7 @@ extension DataDetailController{
             memoDataLabel.bottomAnchor.constraint(equalTo: memoUIView.bottomAnchor)
             
         ])
-
+        
         // graph Image
         let graphImage = UIImage(named: "WaterGraph")
         graphImageView.image = graphImage
@@ -221,7 +228,7 @@ extension DataDetailController{
         filterLabel.text = "Filter"
         filterLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         filterLabel.textColor = .gray
-
+        
         // filter Data Label
         filterDataLabel.text = "Claris Prime"
         filterDataLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -261,6 +268,5 @@ extension DataDetailController{
         memoDataLabel.textContainerInset.left = .zero
         memoDataLabel.textColor = .lightGray
         memoDataLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
-        
     }
 }
