@@ -38,52 +38,6 @@ class DataDetailController: UIViewController {
     }
 }
 
-// [MARK] Button Function
-extension DataDetailController{
-    @objc
-    private func didTapBarButton(_ sender: UIBarButtonItem){
-        switch sender.tag{
-        case 0:
-            self.dismiss(animated: false)
-        case 1:
-            print("share")
-        default :
-            fatalError()
-        }
-    }
-}
-
-// [MARK] Function
-extension DataDetailController{
-    func setTitle(title: String, subTitle: String){
-        let main = UILabel()
-        main.text = title
-        main.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        main.sizeToFit()
-        
-        let sub = UILabel()
-        sub.text = subTitle
-        sub.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        sub.textColor = .lightGray
-        sub.textAlignment = .center
-        sub.sizeToFit()
-        
-        let titleStackView = UIStackView(arrangedSubviews: [main, sub])
-        titleStackView.distribution = .equalSpacing
-        titleStackView.axis = .vertical
-        titleStackView.alignment = .center
-        
-        let width = max(main.frame.size.width, sub.frame.size.width)
-        titleStackView.frame = CGRect(x: 0, y: 0, width: width, height: 35)
-        
-        main.sizeToFit()
-        sub.sizeToFit()
-        
-        self.navigationItem.titleView = titleStackView
-    }
-}
-
-
 // [MARK] Set UI
 extension DataDetailController{
     func setUI(){
@@ -106,21 +60,22 @@ extension DataDetailController{
         }
         
         NSLayoutConstraint.activate([
-            // graph
+            // graph - UIView
             graphImageUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             graphImageUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             graphImageUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             graphImageUIView.heightAnchor.constraint(equalToConstant: 325),
             
-            graphImageView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 27),
-            graphImageView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 12),
-            graphImageView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -11),
-            graphImageView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -20),
+            // graph - ImageView
+            graphImageView.widthAnchor.constraint(equalToConstant: 360),
+            graphImageView.heightAnchor.constraint(equalToConstant: 288),
+            graphImageView.centerXAnchor.constraint(equalTo:graphImageUIView.centerXAnchor),
+            graphImageView.centerYAnchor.constraint(equalTo: graphImageUIView.centerYAnchor),
             
             // graph - pointUIView
-            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 39),
-            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67),
-            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27),
+            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 32),
+            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 69),
+            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -32),
             graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
             
             // filter UIView
@@ -204,18 +159,19 @@ extension DataDetailController{
             // memo Label
             memoLabel.topAnchor.constraint(equalTo: memoUIView.topAnchor),
             memoLabel.leadingAnchor.constraint(equalTo: memoUIView.leadingAnchor, constant: 30),
+            memoLabel.widthAnchor.constraint(equalToConstant: 50),
             memoLabel.bottomAnchor.constraint(equalTo: memoDataLabel.topAnchor),
             
             // memo Data Label
             memoDataLabel.topAnchor.constraint(equalTo: memoLabel.bottomAnchor),
             memoDataLabel.leadingAnchor.constraint(equalTo: memoUIView.leadingAnchor, constant: 25),
             memoDataLabel.trailingAnchor.constraint(equalTo: memoUIView.trailingAnchor, constant: 30),
-            memoDataLabel.bottomAnchor.constraint(equalTo: memoUIView.bottomAnchor)
+            memoDataLabel.bottomAnchor.constraint(equalTo: memoUIView.bottomAnchor, constant: 20)
             
         ])
         
         // graph Image
-        let graphImage = UIImage(named: "WaterGraph")
+        let graphImage = UIImage(named: "graph")
         graphImageView.image = graphImage
         
         // graph point
@@ -257,8 +213,8 @@ extension DataDetailController{
         phDataLabel.text = "3"
         
         // set dot position
-        let x = (49 / 20) * (Double(alkalinityDataLabel.text ?? "") ?? 0)
-        let y = (-52 / 50) * (Double(totalHardnessDataLabel.text ?? "") ?? 0)
+        let x = (290 / 120) * (Double(alkalinityDataLabel.text ?? "") ?? 0)
+        let y = (-220 / 200) * (Double(totalHardnessDataLabel.text ?? "") ?? 0)
         dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: x)
         dotXAnchor?.isActive = true
         dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: y)
@@ -277,3 +233,50 @@ extension DataDetailController{
         memoDataLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
     }
 }
+
+// [MARK] Button Function
+extension DataDetailController{
+    @objc
+    private func didTapBarButton(_ sender: UIBarButtonItem){
+        switch sender.tag{
+        case 0:
+            self.dismiss(animated: true)
+        case 1:
+            print("share")
+        default :
+            fatalError()
+        }
+    }
+}
+
+// [MARK] Function
+extension DataDetailController{
+    func setTitle(title: String, subTitle: String){
+        let main = UILabel()
+        main.text = title
+        main.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        main.sizeToFit()
+        
+        let sub = UILabel()
+        sub.text = subTitle
+        sub.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        sub.textColor = .lightGray
+        sub.textAlignment = .center
+        sub.sizeToFit()
+        
+        let titleStackView = UIStackView(arrangedSubviews: [main, sub])
+        titleStackView.distribution = .equalSpacing
+        titleStackView.axis = .vertical
+        titleStackView.alignment = .center
+        
+        let width = max(main.frame.size.width, sub.frame.size.width)
+        titleStackView.frame = CGRect(x: 0, y: 0, width: width, height: 35)
+        
+        main.sizeToFit()
+        sub.sizeToFit()
+        
+        self.navigationItem.titleView = titleStackView
+    }
+}
+
+

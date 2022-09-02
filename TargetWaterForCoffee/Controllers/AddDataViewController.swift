@@ -126,7 +126,6 @@ extension AddDataViewController {
         
         // CoreData : Set Value
         for i in 0..<coreDataKeys.count {
-            print(coreDataKeys[i])
             cafeData.setValue(InsertData[i], forKey: coreDataKeys[i])
         }
         
@@ -152,7 +151,6 @@ extension AddDataViewController{
         self.view.frame.origin.y = -75
     }
 }
-
 extension AddDataViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.view.frame.origin.y = -150
@@ -190,6 +188,7 @@ extension AddDataViewController: UITableViewDataSource {
 extension AddDataViewController: AddDataTableViewCellDelegate {
     func setData(data: String, tag: Int){
         InsertData[tag] = data
+        print(InsertData)
     }
 }
 

@@ -55,27 +55,28 @@ extension CafeDetailViewController{
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 49)
+        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 290)
         dotXAnchor?.isActive = true
-        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -52)
+        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -220)
         dotYAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
-            // graph
+            // graph - UIView
             graphImageUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             graphImageUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             graphImageUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             graphImageUIView.heightAnchor.constraint(equalToConstant: 325),
             
-            graphImageView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 27),
-            graphImageView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 12),
-            graphImageView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -11),
-            graphImageView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -20),
+            // graph - ImageView
+            graphImageView.widthAnchor.constraint(equalToConstant: 360),
+            graphImageView.heightAnchor.constraint(equalToConstant: 288),
+            graphImageView.centerXAnchor.constraint(equalTo:graphImageUIView.centerXAnchor),
+            graphImageView.centerYAnchor.constraint(equalTo: graphImageUIView.centerYAnchor),
             
             // graph - pointUIView
-            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 39),
-            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 67),
-            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -27),
+            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 32),
+            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 69),
+            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -32),
             graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
             
             // separator1
@@ -167,7 +168,8 @@ extension CafeDetailViewController: UITableViewDelegate{
         if tableView.cellForRow(at: indexPath)?.accessoryType == .disclosureIndicator{
             let navVC = UINavigationController(rootViewController: DataDetailController())
             navVC.modalPresentationStyle = .fullScreen
-            present(navVC, animated: false)
+            navVC.modalTransitionStyle = .crossDissolve
+            present(navVC, animated: true)
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
             NotificationCenter.default.post(name: Notification.Name.callCell, object: indexPath.row)
@@ -186,8 +188,8 @@ extension Notification.Name{
 // [Mark] Cell Delegate Protocol
 extension CafeDetailViewController: CafeDetailTableViewCellDelegate{
     func getXY(totalHardness: String, Alkalinity: String){
-        let x = (49 / 20) * (Double(totalHardness) ?? 0)
-        let y = (-52 / 50) * (Double(Alkalinity) ?? 0)
+        let x = (290 / 120) * (Double(totalHardness) ?? 0)
+        let y = (-220 / 200) * (Double(Alkalinity) ?? 0)
         self.dotXAnchor?.constant = CGFloat(x)
         self.dotYAnchor?.constant = CGFloat(y)
     }
