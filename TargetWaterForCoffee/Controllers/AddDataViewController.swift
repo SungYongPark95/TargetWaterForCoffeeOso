@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class AddDataViewController: UIViewController {
-
+    
     let tableView = UITableView()
     let memoLabel = UILabel()
     let memoTextView = UITextView()
@@ -23,16 +23,20 @@ class AddDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
     }
 }
 
 // [ MARK ] Set UI
-extension AddDataViewController{
+extension AddDataViewController {
     private func setUI(){
         view.backgroundColor = UIColor(red: 0.949, green: 0.949, blue: 0.97, alpha: 1)
         navigationItem.title = "데이터 입력하기"
         
-        [tableView, memoLabel, memoTextView, saveButton].forEach{
+        [tableView, memoLabel, memoTextView, saveButton].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -77,7 +81,8 @@ extension AddDataViewController{
         memoTextView.layer.cornerRadius = 10
         memoTextView.font = UIFont.systemFont(ofSize: 14)
         memoTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        memoTextView.keyboardType = .decimalPad
+        memoTextView.keyboardType = .default
+        memoTextView.delegate = self
         
         // Save Button
         saveButton.backgroundColor = .systemBlue
@@ -90,10 +95,10 @@ extension AddDataViewController{
 }
 
 // [ MARK ] Function
-extension AddDataViewController{
+extension AddDataViewController {
     @objc // Save Button
-    func didTapSaveButton(_ sender: UIButton){
-        if InsertData[0] == "" || InsertData[1] == "" || InsertData[2] == ""{
+    func didTapSaveButton(_ sender: UIButton) {
+        if InsertData[0] == "" || InsertData[1] == "" || InsertData[2] == "" {
             let alertController = UIAlertController(title: "", message: "데이터를 모두 입력하세요", preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default)
             alertController.addAction(confirmAction)
@@ -120,7 +125,7 @@ extension AddDataViewController{
         let cafeData = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
         
         // CoreData : Set Value
-        for i in 0..<coreDataKeys.count{
+        for i in 0..<coreDataKeys.count {
             print(coreDataKeys[i])
             cafeData.setValue(InsertData[i], forKey: coreDataKeys[i])
         }
@@ -131,12 +136,35 @@ extension AddDataViewController{
         }catch{
             fatalError()
         }
+    }
+}
 
+// [ MARK ] Keyboard Set
+extension AddDataViewController{
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.navigationItem.title = "데이터 입력하기"
+        self.view.frame.origin.y = 0
+        self.view.endEditing(true)
+    }
+    @objc func keyboardWillShow(_ sender:Notification){
+        self.navigationItem.title = ""
+        self.view.frame.origin.y = 0
+        self.view.frame.origin.y = -75
+    }
+}
+
+extension AddDataViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.view.frame.origin.y = -150
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.view.frame.origin.y = 0
     }
 }
 
 // [ MARK ] Table View Data Source
-extension AddDataViewController: UITableViewDataSource{
+extension AddDataViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataTypes.count
     }
@@ -159,7 +187,7 @@ extension AddDataViewController: UITableViewDataSource{
 }
 
 // [MARK] Protocol Function Setting
-extension AddDataViewController: AddDataTableViewCellDelegate{
+extension AddDataViewController: AddDataTableViewCellDelegate {
     func setData(data: String, tag: Int){
         InsertData[tag] = data
     }
