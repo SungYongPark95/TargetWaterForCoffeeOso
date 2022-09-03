@@ -26,8 +26,6 @@ class CafeDetailViewController: UIViewController {
     let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
     let hardnesses = ["0", "20", "40", "60", "80", "100", "120"]
     let alkalinities = ["0", "50", "80", "100", "130", "150", "200"]
-//    let hardnesses = ["60", "65", "65", "52", "52", "50", "50"]
-//    let alkalinities = ["40", "41", "45", "45", "44", "40", "40"]
     let pHs = ["3", "3", "3", "3", "3", "3", "3"]
 
     override func viewDidLoad() {

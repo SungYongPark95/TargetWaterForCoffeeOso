@@ -19,6 +19,8 @@
 		CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */; };
 		CE97EC4A28B7587800FBDD79 /* CheckGraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */; };
 		CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */; };
+		CE9F84DC28C24A5400F2D294 /* DataDetailShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */; };
+		CE9F84DE28C24A7B00F2D294 /* DataDetailUpDelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DD28C24A7B00F2D294 /* DataDetailUpDelController.swift */; };
 		CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */; };
 		CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */; };
 		CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */; };
@@ -40,6 +42,8 @@
 		CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckGraphData.swift; sourceTree = "<group>"; };
 		CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailController.swift; sourceTree = "<group>"; };
+		CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailShareController.swift; sourceTree = "<group>"; };
+		CE9F84DD28C24A7B00F2D294 /* DataDetailUpDelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailUpDelController.swift; sourceTree = "<group>"; };
 		CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableHeaderUIView.swift; sourceTree = "<group>"; };
 		CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				4936CBA428522FBB002A30D9 /* CafeDetailViewController.swift */,
 				CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */,
 				CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */,
+				CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */,
+				CE9F84DD28C24A7B00F2D294 /* DataDetailUpDelController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -208,7 +214,9 @@
 				4936CBA528522FBB002A30D9 /* CafeDetailViewController.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
 				CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */,
+				CE9F84DE28C24A7B00F2D294 /* DataDetailUpDelController.swift in Sources */,
 				CECB2A5B28BB8DA500754FFF /* MesureData.swift in Sources */,
+				CE9F84DC28C24A5400F2D294 /* DataDetailShareController.swift in Sources */,
 				CE97EC4A28B7587800FBDD79 /* CheckGraphData.swift in Sources */,
 				CECB2A5928BB887B00754FFF /* CoreDataManager.swift in Sources */,
 				CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */,
@@ -362,6 +370,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,6 +398,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

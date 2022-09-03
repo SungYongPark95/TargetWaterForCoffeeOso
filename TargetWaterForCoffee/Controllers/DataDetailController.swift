@@ -193,6 +193,7 @@ extension DataDetailController{
         multifuncButton.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         multifuncButton.setTitle("● ● ●", for: .normal)
         multifuncButton.setTitleColor(.black, for: .normal)
+        multifuncButton.addTarget(self, action: #selector(didTapMuitiFunctionButton(_:)), for: .touchUpInside)
         
         // mesure labels
         [totalHardnessLabel, alkalinityLabel, phLabel].forEach{
@@ -238,14 +239,30 @@ extension DataDetailController{
 extension DataDetailController{
     @objc
     private func didTapBarButton(_ sender: UIBarButtonItem){
-        switch sender.tag{
-        case 0:
+        if sender == navigationItem.rightBarButtonItem{
+            let DataDeatilShareController = UINavigationController(rootViewController: DataDeatilShareController())
+            DataDeatilShareController.modalPresentationStyle = .overCurrentContext
+            present(DataDeatilShareController, animated: false)
+        } else{
             self.dismiss(animated: true)
-        case 1:
-            print("share")
-        default :
-            fatalError()
         }
+    }
+    
+    @objc
+    private func didTapMuitiFunctionButton(_ sender: UIButton){
+        if sender == navigationItem.rightBarButtonItem{
+            let DataDetailUpDelController = UINavigationController(rootViewController: DataDetailUpDelController())
+            DataDetailUpDelController.modalPresentationStyle = .overCurrentContext
+            present(DataDetailUpDelController, animated: false)
+        } else{
+            self.dismiss(animated: true)
+        }
+    }
+}
+
+extension DataDetailController: UISheetPresentationControllerDelegate {
+    func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
+
     }
 }
 
