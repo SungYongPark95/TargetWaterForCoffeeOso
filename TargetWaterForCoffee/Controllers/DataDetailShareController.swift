@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 
 class DataDeatilShareController: UIViewController{
-    // 1
+    
+    let label = UILabel()
+    let pdfSaveButton = UIButton(type: .system)
+    let pdfShareButton = UIButton(type: .system)
+    
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -18,7 +22,6 @@ class DataDeatilShareController: UIViewController{
         return view
     }()
     
-    // 2
     let maxDimmedAlpha: CGFloat = 0.6
     lazy var dimmedView: UIView = {
         let view = UIView()
@@ -27,34 +30,70 @@ class DataDeatilShareController: UIViewController{
         return view
     }()
     
-    let defaultHeight: CGFloat = 250
+    let defaultHeight: CGFloat = 207
     
-    // 3. Dynamic container constraint
+    // Dynamic container constraint
     var containerViewHeightConstraint: NSLayoutConstraint?
     var containerViewBottomConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setBackgroundUI()
         setupTapGesture()
         setupConstraints()
+        setUI()
     }
 }
 
 // [ MARK ] Set UI
 extension DataDeatilShareController{
-    func setupView() {
+    func setBackgroundUI() {
         view.backgroundColor = .clear
     }
     
+    func setUI(){
+        [label, pdfSaveButton, pdfShareButton].forEach {
+            containerView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            label.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 25),
+            pdfSaveButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            pdfSaveButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            pdfSaveButton.widthAnchor.constraint(equalToConstant: 200),
+            pdfShareButton.topAnchor.constraint(equalTo: pdfSaveButton.bottomAnchor, constant: 20),
+            pdfShareButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            pdfShareButton.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        // label
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
+        label.text = "공유하기"
+        label.sizeToFit()
+        
+        // PDF Save Button
+        pdfSaveButton.setTitle("PDF 파일로 저장하기", for: .normal)
+        pdfSaveButton.titleLabel?.tintColor = .black
+        pdfSaveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        
+        // PDF Share Button
+        pdfShareButton.setTitle("PDF 파일로 내보내기", for: .normal)
+        pdfShareButton.titleLabel?.tintColor = .black
+        pdfShareButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    }
+    
     func setupConstraints() {
-        // 4. Add subviews
+        // Add subviews
         view.addSubview(dimmedView)
         view.addSubview(containerView)
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        // 5. Set static constraints
+        // Set static constraints
         NSLayoutConstraint.activate([
             // set dimmedView edges to superview
             dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -66,9 +105,9 @@ extension DataDeatilShareController{
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
-        // 6. Set container to default height
+        // Set container to default height
         containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
-        // 7. Set bottom constant to 0
+        // Set bottom constant to 0
         containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         // Activate constraints
         containerViewHeightConstraint?.isActive = true

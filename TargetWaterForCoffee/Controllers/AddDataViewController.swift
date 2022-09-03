@@ -91,6 +91,8 @@ extension AddDataViewController {
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
         saveButton.layer.cornerRadius = 10
+        saveButton.isEnabled = false
+        saveButton.backgroundColor = .lightGray
     }
 }
 
@@ -188,6 +190,13 @@ extension AddDataViewController: UITableViewDataSource {
 extension AddDataViewController: AddDataTableViewCellDelegate {
     func setData(data: String, tag: Int){
         InsertData[tag] = data
+        if InsertData[0] != "", InsertData[1] != "", InsertData[2] != ""{
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = .systemBlue
+        }else{
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = .lightGray
+        }
         print(InsertData)
     }
 }

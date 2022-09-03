@@ -44,9 +44,7 @@ extension DataDetailController{
         // navigation
         setTitle(title: "2022년 8월 31일", subTitle: "10:02 AM")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
-        navigationItem.rightBarButtonItem?.tag = 1
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
-        navigationItem.leftBarButtonItem?.tag = 0
         
         navigationItem.rightBarButtonItem?.tintColor = .black
         navigationItem.leftBarButtonItem?.tintColor = .black
@@ -250,13 +248,9 @@ extension DataDetailController{
     
     @objc
     private func didTapMuitiFunctionButton(_ sender: UIButton){
-        if sender == navigationItem.rightBarButtonItem{
-            let DataDetailUpDelController = UINavigationController(rootViewController: DataDetailUpDelController())
-            DataDetailUpDelController.modalPresentationStyle = .overCurrentContext
-            present(DataDetailUpDelController, animated: false)
-        } else{
-            self.dismiss(animated: true)
-        }
+        let DataDetailUpDelController = UINavigationController(rootViewController: DataDetailUpDelController())
+        DataDetailUpDelController.modalPresentationStyle = .overCurrentContext
+        present(DataDetailUpDelController, animated: false)
     }
 }
 
