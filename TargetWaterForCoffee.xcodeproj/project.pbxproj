@@ -21,6 +21,7 @@
 		CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */; };
 		CE9F84DC28C24A5400F2D294 /* DataDetailShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */; };
 		CE9F84DE28C24A7B00F2D294 /* DataDetailUpDelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DD28C24A7B00F2D294 /* DataDetailUpDelController.swift */; };
+		CE9F84E028C3656C00F2D294 /* Extentensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DF28C3656C00F2D294 /* Extentensions.swift */; };
 		CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */; };
 		CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */; };
 		CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */; };
@@ -44,6 +45,7 @@
 		CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailController.swift; sourceTree = "<group>"; };
 		CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailShareController.swift; sourceTree = "<group>"; };
 		CE9F84DD28C24A7B00F2D294 /* DataDetailUpDelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailUpDelController.swift; sourceTree = "<group>"; };
+		CE9F84DF28C3656C00F2D294 /* Extentensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentensions.swift; sourceTree = "<group>"; };
 		CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableHeaderUIView.swift; sourceTree = "<group>"; };
 		CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				CECB2A5828BB887B00754FFF /* CoreDataManager.swift */,
 				CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */,
 				CECB2A5A28BB8DA500754FFF /* MesureData.swift */,
+				CE9F84DF28C3656C00F2D294 /* Extentensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */,
 				CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */,
 				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
+				CE9F84E028C3656C00F2D294 /* Extentensions.swift in Sources */,
 				CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */,
 				CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */,
 				4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */,
@@ -363,7 +367,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z8242274XN;
+				DEVELOPMENT_TEAM = GC62836342;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TargetWaterForCoffee/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -376,7 +380,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.sungyongpark95.TargetWaterForCoffee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.gomji81.TargetWaterForCoffee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -391,7 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z8242274XN;
+				DEVELOPMENT_TEAM = GC62836342;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TargetWaterForCoffee/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -404,7 +408,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.sungyongpark95.TargetWaterForCoffee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.gomji81.TargetWaterForCoffee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

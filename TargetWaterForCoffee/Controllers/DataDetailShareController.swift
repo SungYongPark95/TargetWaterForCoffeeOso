@@ -56,14 +56,15 @@ extension DataDeatilShareController{
             containerView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
 
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             label.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 25),
+            
             pdfSaveButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             pdfSaveButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             pdfSaveButton.widthAnchor.constraint(equalToConstant: 200),
+            
             pdfShareButton.topAnchor.constraint(equalTo: pdfSaveButton.bottomAnchor, constant: 20),
             pdfShareButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             pdfShareButton.widthAnchor.constraint(equalToConstant: 200)
@@ -71,19 +72,20 @@ extension DataDeatilShareController{
         
         // label
         label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 19, weight: .heavy)
         label.text = "공유하기"
         label.sizeToFit()
         
         // PDF Save Button
         pdfSaveButton.setTitle("PDF 파일로 저장하기", for: .normal)
         pdfSaveButton.titleLabel?.tintColor = .black
-        pdfSaveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        pdfSaveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        pdfSaveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
         
         // PDF Share Button
         pdfShareButton.setTitle("PDF 파일로 내보내기", for: .normal)
         pdfShareButton.titleLabel?.tintColor = .black
-        pdfShareButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        pdfShareButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     }
     
     func setupConstraints() {
@@ -112,6 +114,25 @@ extension DataDeatilShareController{
         // Activate constraints
         containerViewHeightConstraint?.isActive = true
         containerViewBottomConstraint?.isActive = true
+    }
+}
+
+// [ MARK ] Button Action
+extension DataDeatilShareController{
+    // Save Button
+    @objc
+    func didTapSaveButton(_ sender: UIButton){
+        self.animateDissmiss()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let dataView = UIApplication.topViewController()!
+            print(UIView.exportAsPdfFromView(dataView.view)())
+        }
+    }
+    
+    // Share Button
+    @objc
+    func didTapShareButton(_ sender: UIButton){
+        
     }
 }
 

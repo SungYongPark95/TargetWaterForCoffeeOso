@@ -3,6 +3,10 @@ import Foundation
 import UIKit
 
 class DataDetailUpDelController: UIViewController{
+    
+    let editButton = UIButton(type: .system)
+    let deleteButton = UIButton(type: .system)
+    
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -19,7 +23,7 @@ class DataDetailUpDelController: UIViewController{
         return view
     }()
     
-    let defaultHeight: CGFloat = 250
+    let defaultHeight: CGFloat = 161
     
     // Dynamic container constraint
     var containerViewHeightConstraint: NSLayoutConstraint?
@@ -30,6 +34,7 @@ class DataDetailUpDelController: UIViewController{
         setupView()
         setupTapGesture()
         setupConstraints()
+        setUI()
     }
 }
 
@@ -37,6 +42,35 @@ class DataDetailUpDelController: UIViewController{
 extension DataDetailUpDelController{
     func setupView() {
         view.backgroundColor = .clear
+    }
+    
+    func setUI(){
+        [editButton, deleteButton].forEach {
+            containerView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        NSLayoutConstraint.activate([
+            editButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
+            editButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            editButton.widthAnchor.constraint(equalToConstant: 200),
+            
+            deleteButton.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 20),
+            deleteButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            deleteButton.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        // PDF Save Button
+        editButton.setTitle("편집하기", for: .normal)
+        editButton.titleLabel?.tintColor = .black
+        editButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        editButton.addTarget(self, action: #selector(didTapEditButton(_:)), for: .touchUpInside)
+        
+        // PDF Share Button
+        deleteButton.setTitle("삭제하기", for: .normal)
+        deleteButton.titleLabel?.tintColor = .red
+        deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        deleteButton.addTarget(self, action: #selector(didTapDeleteButton(_:)), for: .touchUpInside)
     }
     
     func setupConstraints() {
@@ -65,6 +99,24 @@ extension DataDetailUpDelController{
         // Activate constraints
         containerViewHeightConstraint?.isActive = true
         containerViewBottomConstraint?.isActive = true
+    }
+}
+
+// [ MARK ] Button Function
+extension DataDetailUpDelController{
+    @objc
+    func didTapEditButton(_ sender: UIButton){
+        
+    }
+    
+    @objc
+    func didTapDeleteButton(_ sender: UIButton){
+        let alertController = UIAlertController(title: "", message: "삭제하시겠습니까?.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
     }
 }
 
