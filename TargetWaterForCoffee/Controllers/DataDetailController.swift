@@ -14,17 +14,20 @@ class DataDetailController: UIViewController {
     let graphImageView = UIImageView()
     let graphDrawPointUIView = UIView()
     let graphPointImageView = UIImageView()
+    
     let filterUIView = UIView()
     let filterLabel = UILabel()
-    let filterDataLabel = UILabel()
+    let filterDataTextView = UITextView()
     let multifuncButton = UIButton(type: .system)
+    
     let mesureDataUIView = UIView()
     let totalHardnessLabel = UILabel()
-    let totalHardnessDataLabel = UILabel()
+    let totalHardnessTextView = UITextView()
     let alkalinityLabel = UILabel()
-    let alkalinityDataLabel = UILabel()
+    let alkalinityDataTextView = UITextView()
     let phLabel = UILabel()
-    let phDataLabel = UILabel()
+    let phDataTextView = UITextView()
+    
     let memoUIView = UIView()
     let memoLabel = UILabel()
     let memoDataLabel = UITextView()
@@ -49,9 +52,9 @@ extension DataDetailController{
         navigationItem.rightBarButtonItem?.tintColor = .black
         navigationItem.leftBarButtonItem?.tintColor = .black
         
-        [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, filterLabel,
-         filterDataLabel, filterUIView, multifuncButton,mesureDataUIView, totalHardnessLabel,
-         totalHardnessDataLabel, alkalinityLabel, alkalinityDataLabel, phLabel, phDataLabel,
+        [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, filterUIView,
+         filterLabel, filterDataTextView, multifuncButton, mesureDataUIView, totalHardnessLabel,
+         totalHardnessTextView, alkalinityLabel, alkalinityDataTextView, phLabel, phDataTextView,
          memoUIView, memoLabel, memoDataLabel].forEach{
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -85,14 +88,13 @@ extension DataDetailController{
             // filter Label
             filterLabel.topAnchor.constraint(equalTo: filterUIView.topAnchor),
             filterLabel.leadingAnchor.constraint(equalTo: filterUIView.leadingAnchor, constant: 30),
-            filterLabel.trailingAnchor.constraint(equalTo: multifuncButton.leadingAnchor),
-            filterLabel.bottomAnchor.constraint(equalTo: filterDataLabel.topAnchor),
+            filterLabel.widthAnchor.constraint(equalToConstant: 60),
             
-            // filter Data Label
-            filterDataLabel.topAnchor.constraint(equalTo: filterLabel.bottomAnchor),
-            filterDataLabel.leadingAnchor.constraint(equalTo: filterUIView.leadingAnchor, constant: 30),
-            filterDataLabel.trailingAnchor.constraint(equalTo: multifuncButton.leadingAnchor),
-            filterDataLabel.bottomAnchor.constraint(equalTo: filterUIView.bottomAnchor),
+            // filter Data TextView
+            filterDataTextView.topAnchor.constraint(equalTo: filterLabel.bottomAnchor),
+            filterDataTextView.bottomAnchor.constraint(equalTo: filterUIView.bottomAnchor),
+            filterDataTextView.leadingAnchor.constraint(equalTo: filterUIView.leadingAnchor, constant: 25),
+            filterDataTextView.widthAnchor.constraint(equalToConstant: 250),
             
             // multifunc Button
             multifuncButton.widthAnchor.constraint(equalToConstant: 30),
@@ -110,43 +112,43 @@ extension DataDetailController{
             totalHardnessLabel.topAnchor.constraint(equalTo: mesureDataUIView.topAnchor),
             totalHardnessLabel.leadingAnchor.constraint(equalTo: mesureDataUIView.leadingAnchor, constant: 30),
             totalHardnessLabel.trailingAnchor.constraint(equalTo: alkalinityLabel.leadingAnchor),
-            totalHardnessLabel.bottomAnchor.constraint(equalTo: totalHardnessDataLabel.topAnchor),
+            totalHardnessLabel.bottomAnchor.constraint(equalTo: totalHardnessTextView.topAnchor),
             totalHardnessLabel.widthAnchor.constraint(equalToConstant: 105),
             
             // total Hardness Data Label
-            totalHardnessDataLabel.topAnchor.constraint(equalTo: totalHardnessLabel.bottomAnchor),
-            totalHardnessDataLabel.leadingAnchor.constraint(equalTo: mesureDataUIView.leadingAnchor, constant: 30),
-            totalHardnessDataLabel.trailingAnchor.constraint(equalTo: alkalinityDataLabel.leadingAnchor),
-            totalHardnessDataLabel.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
-            totalHardnessDataLabel.widthAnchor.constraint(equalToConstant: 105),
+            totalHardnessTextView.topAnchor.constraint(equalTo: totalHardnessLabel.bottomAnchor),
+            totalHardnessTextView.leadingAnchor.constraint(equalTo: mesureDataUIView.leadingAnchor, constant: 25),
+            totalHardnessTextView.trailingAnchor.constraint(equalTo: alkalinityDataTextView.leadingAnchor),
+            totalHardnessTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
+            totalHardnessTextView.widthAnchor.constraint(equalToConstant: 105),
             
             // alkalinity Label
             alkalinityLabel.topAnchor.constraint(equalTo: mesureDataUIView.topAnchor),
             alkalinityLabel.leadingAnchor.constraint(equalTo: totalHardnessLabel.trailingAnchor),
             alkalinityLabel.trailingAnchor.constraint(equalTo: phLabel.leadingAnchor),
-            alkalinityLabel.bottomAnchor.constraint(equalTo: alkalinityDataLabel.topAnchor),
+            alkalinityLabel.bottomAnchor.constraint(equalTo: alkalinityDataTextView.topAnchor),
             alkalinityLabel.widthAnchor.constraint(equalToConstant: 105),
             
-            // alkalinity Data Label
-            alkalinityDataLabel.topAnchor.constraint(equalTo: alkalinityLabel.bottomAnchor),
-            alkalinityDataLabel.leadingAnchor.constraint(equalTo: totalHardnessDataLabel.trailingAnchor),
-            alkalinityDataLabel.trailingAnchor.constraint(equalTo: phDataLabel.leadingAnchor),
-            alkalinityDataLabel.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
-            alkalinityDataLabel.widthAnchor.constraint(equalToConstant: 105),
+            // alkalinity Data TextView
+            alkalinityDataTextView.topAnchor.constraint(equalTo: alkalinityLabel.bottomAnchor),
+            alkalinityDataTextView.leadingAnchor.constraint(equalTo: totalHardnessTextView.trailingAnchor),
+            alkalinityDataTextView.trailingAnchor.constraint(equalTo: phDataTextView.leadingAnchor),
+            alkalinityDataTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
+            alkalinityDataTextView.widthAnchor.constraint(equalToConstant: 105),
             
             // ph Label
             phLabel.topAnchor.constraint(equalTo: mesureDataUIView.topAnchor),
             phLabel.leadingAnchor.constraint(equalTo: alkalinityLabel.trailingAnchor),
             phLabel.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: 30),
-            phLabel.bottomAnchor.constraint(equalTo: phDataLabel.topAnchor),
+            phLabel.bottomAnchor.constraint(equalTo: phDataTextView.topAnchor),
             phLabel.widthAnchor.constraint(equalToConstant: 105),
             
-            // alkalinity Data Label
-            phDataLabel.topAnchor.constraint(equalTo: phLabel.bottomAnchor),
-            phDataLabel.leadingAnchor.constraint(equalTo: alkalinityDataLabel.trailingAnchor),
-            phDataLabel.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: 30),
-            phDataLabel.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
-            phDataLabel.widthAnchor.constraint(equalToConstant: 105),
+            // alkalinity Data TextView
+            phDataTextView.topAnchor.constraint(equalTo: phLabel.bottomAnchor),
+            phDataTextView.leadingAnchor.constraint(equalTo: alkalinityDataTextView.trailingAnchor),
+            phDataTextView.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: 30),
+            phDataTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
+            phDataTextView.widthAnchor.constraint(equalToConstant: 105),
             
             // memo UIView
             memoUIView.topAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor, constant: 30),
@@ -160,12 +162,11 @@ extension DataDetailController{
             memoLabel.widthAnchor.constraint(equalToConstant: 50),
             memoLabel.bottomAnchor.constraint(equalTo: memoDataLabel.topAnchor),
             
-            // memo Data Label
+            // memo Data TextView
             memoDataLabel.topAnchor.constraint(equalTo: memoLabel.bottomAnchor),
             memoDataLabel.leadingAnchor.constraint(equalTo: memoUIView.leadingAnchor, constant: 25),
             memoDataLabel.trailingAnchor.constraint(equalTo: memoUIView.trailingAnchor, constant: 30),
             memoDataLabel.bottomAnchor.constraint(equalTo: memoUIView.bottomAnchor, constant: 20)
-            
         ])
         
         // graph Image
@@ -182,10 +183,11 @@ extension DataDetailController{
         filterLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         filterLabel.textColor = .gray
         
-        // filter Data Label
-        filterDataLabel.text = "Claris Prime"
-        filterDataLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        filterDataLabel.textColor = .gray
+        // filter Data Text View
+        filterDataTextView.text = "Claris Prime"
+        filterDataTextView.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        filterDataTextView.textColor = .gray
+        filterDataTextView.isEditable = false
         
         // multiFunc Button
         multifuncButton.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
@@ -202,18 +204,19 @@ extension DataDetailController{
         alkalinityLabel.text = "Alkalinity"
         phLabel.text = "PH"
         
-        // mesure Data labels
-        [totalHardnessDataLabel, alkalinityDataLabel, phDataLabel].forEach{
+        // mesure Data Text View
+        [totalHardnessTextView, alkalinityDataTextView, phDataTextView].forEach{
             $0.font = UIFont.systemFont(ofSize: 25, weight: .bold)
             $0.textColor = .black
+            $0.isEditable = false
         }
-        totalHardnessDataLabel.text = "60"
-        alkalinityDataLabel.text = "40"
-        phDataLabel.text = "3"
+        totalHardnessTextView.text = "60"
+        alkalinityDataTextView.text = "40"
+        phDataTextView.text = "3"
         
         // set dot position
-        let x = (290 / 120) * (Double(alkalinityDataLabel.text ?? "") ?? 0)
-        let y = (-220 / 200) * (Double(totalHardnessDataLabel.text ?? "") ?? 0)
+        let x = (290 / 120) * (Double(alkalinityDataTextView.text ?? "") ?? 0)
+        let y = (-220 / 200) * (Double(totalHardnessTextView.text ?? "") ?? 0)
         dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: x)
         dotXAnchor?.isActive = true
         dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: y)
@@ -224,11 +227,12 @@ extension DataDetailController{
         memoLabel.textColor = .lightGray
         memoLabel.text = "Memo"
         
-        // memo Data Label
+        // memo Data Text View
         memoDataLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         memoDataLabel.textContainerInset.right = 50
         memoDataLabel.textContainerInset.left = .zero
         memoDataLabel.textColor = .lightGray
+        memoDataLabel.isEditable = false
         memoDataLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
     }
 }
@@ -240,6 +244,7 @@ extension DataDetailController{
         if sender == navigationItem.rightBarButtonItem{
             let DataDeatilShareController = UINavigationController(rootViewController: DataDeatilShareController())
             DataDeatilShareController.modalPresentationStyle = .overCurrentContext
+//            DataDeatilShareController.delegate = self
             present(DataDeatilShareController, animated: false)
         } else{
             self.dismiss(animated: true)
@@ -289,5 +294,17 @@ extension DataDetailController{
         self.navigationItem.titleView = titleStackView
     }
 }
+
+// [Mark] Data Detail Update Delete Controller Protocol
+extension DataDetailController: UpdateProtocol{
+    func update(){
+        print("?")
+        [self.filterDataTextView, self.totalHardnessTextView, self.alkalinityDataTextView, self.phDataTextView].forEach{
+            $0.textColor = .systemBlue
+            $0.isEditable = true
+        }
+    }
+}
+
 
 

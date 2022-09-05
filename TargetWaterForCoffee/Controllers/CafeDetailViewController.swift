@@ -40,12 +40,10 @@ extension CafeDetailViewController{
     private func setUI(){
         // navigation
         navigationController?.navigationBar.tintColor = .white
-        navigationItem.title = "Cafe Name"
+        navigationItem.title = "Water for Coffee"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
         
         navigationItem.rightBarButtonItem?.tintColor = .black
-        navigationItem.leftBarButtonItem?.tintColor = .black
         
         [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, separator1,
          tableHeaderUIView, separator2, tableView].forEach{
