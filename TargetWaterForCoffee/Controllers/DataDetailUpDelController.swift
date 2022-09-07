@@ -2,7 +2,7 @@
 import Foundation
 import UIKit
 
-protocol UpdateProtocol: AnyObject{
+protocol UpdateDelegate: AnyObject{
     func update()
 }
 
@@ -11,7 +11,7 @@ class DataDetailUpDelController: UIViewController{
     let editButton = UIButton(type: .system)
     let deleteButton = UIButton(type: .system)
     
-    weak var updateProtocol: UpdateProtocol?
+    weak var updateDelegate: UpdateDelegate?
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -113,7 +113,7 @@ extension DataDetailUpDelController{
     @objc
     func didTapEditButton(_ sender: UIButton){
         print("Editbutton")
-        updateProtocol?.update()
+        updateDelegate?.update()
         self.dismiss(animated: true)
     }
     

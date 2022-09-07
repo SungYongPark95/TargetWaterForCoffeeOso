@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class DataDetailController: UIViewController {
     
@@ -30,14 +31,22 @@ class DataDetailController: UIViewController {
     
     let memoUIView = UIView()
     let memoLabel = UILabel()
-    let memoDataLabel = UITextView()
+    let memoDataTextView = UITextView()
+    
+    let saveButton = UIButton(type: .system)
     
     var dotXAnchor: NSLayoutConstraint?
     var dotYAnchor: NSLayoutConstraint?
     
+    var container: NSPersistentContainer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
     }
 }
 
@@ -51,11 +60,12 @@ extension DataDetailController{
         
         navigationItem.rightBarButtonItem?.tintColor = .black
         navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.titleView?.backgroundColor = .white
         
-        [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, filterUIView,
-         filterLabel, filterDataTextView, multifuncButton, mesureDataUIView, totalHardnessLabel,
-         totalHardnessTextView, alkalinityLabel, alkalinityDataTextView, phLabel, phDataTextView,
-         memoUIView, memoLabel, memoDataLabel].forEach{
+        [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView,
+         filterUIView, filterLabel, filterDataTextView, multifuncButton, mesureDataUIView,
+         totalHardnessLabel, totalHardnessTextView, alkalinityLabel, alkalinityDataTextView,
+         phLabel, phDataTextView, memoUIView, memoLabel, memoDataTextView, saveButton].forEach{
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -139,34 +149,40 @@ extension DataDetailController{
             // ph Label
             phLabel.topAnchor.constraint(equalTo: mesureDataUIView.topAnchor),
             phLabel.leadingAnchor.constraint(equalTo: alkalinityLabel.trailingAnchor),
-            phLabel.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: 30),
+            phLabel.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: -30),
             phLabel.bottomAnchor.constraint(equalTo: phDataTextView.topAnchor),
             phLabel.widthAnchor.constraint(equalToConstant: 105),
             
-            // alkalinity Data TextView
+            // ph Data TextView
             phDataTextView.topAnchor.constraint(equalTo: phLabel.bottomAnchor),
             phDataTextView.leadingAnchor.constraint(equalTo: alkalinityDataTextView.trailingAnchor),
-            phDataTextView.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: 30),
+            phDataTextView.trailingAnchor.constraint(equalTo: mesureDataUIView.trailingAnchor, constant: -30),
             phDataTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
             phDataTextView.widthAnchor.constraint(equalToConstant: 105),
             
             // memo UIView
-            memoUIView.topAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor, constant: 30),
+            memoUIView.topAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor, constant: 20),
             memoUIView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             memoUIView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            memoUIView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 40),
+            memoUIView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -30),
             
             // memo Label
             memoLabel.topAnchor.constraint(equalTo: memoUIView.topAnchor),
             memoLabel.leadingAnchor.constraint(equalTo: memoUIView.leadingAnchor, constant: 30),
             memoLabel.widthAnchor.constraint(equalToConstant: 50),
-            memoLabel.bottomAnchor.constraint(equalTo: memoDataLabel.topAnchor),
+            memoLabel.heightAnchor.constraint(equalToConstant: 25),
             
             // memo Data TextView
-            memoDataLabel.topAnchor.constraint(equalTo: memoLabel.bottomAnchor),
-            memoDataLabel.leadingAnchor.constraint(equalTo: memoUIView.leadingAnchor, constant: 25),
-            memoDataLabel.trailingAnchor.constraint(equalTo: memoUIView.trailingAnchor, constant: 30),
-            memoDataLabel.bottomAnchor.constraint(equalTo: memoUIView.bottomAnchor, constant: 20)
+            memoDataTextView.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
+            memoDataTextView.leadingAnchor.constraint(equalTo: memoUIView.leadingAnchor, constant: 25),
+            memoDataTextView.trailingAnchor.constraint(equalTo: memoUIView.trailingAnchor, constant: -20),
+            memoDataTextView.bottomAnchor.constraint(equalTo: memoUIView.bottomAnchor, constant: -10),
+            
+            // save Button
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            saveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            saveButton.heightAnchor.constraint(equalToConstant: 49)
         ])
         
         // graph Image
@@ -181,13 +197,14 @@ extension DataDetailController{
         // filter Label
         filterLabel.text = "Filter"
         filterLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        filterLabel.textColor = .gray
+        filterLabel.textColor = .darkGray
         
         // filter Data Text View
         filterDataTextView.text = "Claris Prime"
         filterDataTextView.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        filterDataTextView.textColor = .gray
+        filterDataTextView.textColor = .darkGray
         filterDataTextView.isEditable = false
+        filterDataTextView.isScrollEnabled = false
         
         // multiFunc Button
         multifuncButton.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
@@ -198,7 +215,7 @@ extension DataDetailController{
         // mesure labels
         [totalHardnessLabel, alkalinityLabel, phLabel].forEach{
             $0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-            $0.textColor = .gray
+            $0.textColor = .darkGray
         }
         totalHardnessLabel.text = "Total Hardness"
         alkalinityLabel.text = "Alkalinity"
@@ -207,8 +224,10 @@ extension DataDetailController{
         // mesure Data Text View
         [totalHardnessTextView, alkalinityDataTextView, phDataTextView].forEach{
             $0.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-            $0.textColor = .black
+            $0.textColor = .darkGray
             $0.isEditable = false
+            $0.keyboardType = .decimalPad
+            $0.isScrollEnabled = false
         }
         totalHardnessTextView.text = "60"
         alkalinityDataTextView.text = "40"
@@ -223,29 +242,37 @@ extension DataDetailController{
         dotYAnchor?.isActive = true
         
         // memo Label
-        memoLabel.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        memoLabel.textColor = .lightGray
+        memoLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        memoLabel.textColor = .darkGray
         memoLabel.text = "Memo"
         
         // memo Data Text View
-        memoDataLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        memoDataLabel.textContainerInset.right = 50
-        memoDataLabel.textContainerInset.left = .zero
-        memoDataLabel.textColor = .lightGray
-        memoDataLabel.isEditable = false
-        memoDataLabel.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+        memoDataTextView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        memoDataTextView.textContainerInset.left = .zero
+        memoDataTextView.textColor = .darkGray
+        memoDataTextView.isEditable = false
+        memoDataTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+        memoDataTextView.textContainerInset.top = 0
+        
+        // save Button
+        saveButton.backgroundColor = .systemBlue
+        saveButton.setTitle("저장하기", for: .normal)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        saveButton.addTarget(self, action: #selector(didTapSaveButton(_:)), for: .touchUpInside)
+        saveButton.layer.cornerRadius = 10
+        saveButton.isHidden = true
     }
 }
 
 // [MARK] Button Function
-extension DataDetailController{
+extension DataDetailController: UINavigationControllerDelegate{
     @objc
     private func didTapBarButton(_ sender: UIBarButtonItem){
         if sender == navigationItem.rightBarButtonItem{
-            let DataDeatilShareController = UINavigationController(rootViewController: DataDeatilShareController())
-            DataDeatilShareController.modalPresentationStyle = .overCurrentContext
-//            DataDeatilShareController.delegate = self
-            present(DataDeatilShareController, animated: false)
+            let naviagtionController = UINavigationController(rootViewController: DataDeatilShareController())
+            naviagtionController.modalPresentationStyle = .overCurrentContext
+            present(naviagtionController, animated: false)
         } else{
             self.dismiss(animated: true)
         }
@@ -253,12 +280,20 @@ extension DataDetailController{
     
     @objc
     private func didTapMuitiFunctionButton(_ sender: UIButton){
-        let DataDetailUpDelController = UINavigationController(rootViewController: DataDetailUpDelController())
+        let dataDetailUpDelController = DataDetailUpDelController()
+        dataDetailUpDelController.updateDelegate = self
+        let DataDetailUpDelController = UINavigationController(rootViewController: dataDetailUpDelController)
         DataDetailUpDelController.modalPresentationStyle = .overCurrentContext
         present(DataDetailUpDelController, animated: false)
     }
+    
+    @objc
+    private func didTapSaveButton(_ sender: UIButton){
+
+    }
 }
 
+// [ MARK ] UISheet Presentation Controller Delegate
 extension DataDetailController: UISheetPresentationControllerDelegate {
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
 
@@ -266,8 +301,8 @@ extension DataDetailController: UISheetPresentationControllerDelegate {
 }
 
 // [MARK] Function
-extension DataDetailController{
-    func setTitle(title: String, subTitle: String){
+extension DataDetailController {
+    func setTitle(title: String, subTitle: String) {
         let main = UILabel()
         main.text = title
         main.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -295,14 +330,53 @@ extension DataDetailController{
     }
 }
 
+// [ MARK ] Keyboard Set
+extension DataDetailController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.graphImageView.isHidden = false
+        self.graphPointImageView.isHidden = false
+        self.view.frame.origin.y = 0
+        self.view.endEditing(true)
+    }
+    @objc func keyboardWillShow(_ sender:Notification) {
+        self.graphImageView.isHidden = true
+        self.graphPointImageView.isHidden = true
+        self.view.frame.origin.y = 0
+        self.view.frame.origin.y = -320
+    }
+}
+extension DataDetailController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.view.frame.origin.y = 0
+    }
+}
+
 // [Mark] Data Detail Update Delete Controller Protocol
-extension DataDetailController: UpdateProtocol{
+extension DataDetailController: UpdateDelegate {
     func update(){
-        print("?")
-        [self.filterDataTextView, self.totalHardnessTextView, self.alkalinityDataTextView, self.phDataTextView].forEach{
-            $0.textColor = .systemBlue
+        // set Navigation Title
+        let title = UILabel()
+        title.text = "편집하기"
+        title.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        title.sizeToFit()
+        self.navigationItem.titleView = title
+        
+        // activate Data TextView
+        [self.filterDataTextView, self.totalHardnessTextView, self.alkalinityDataTextView,
+         self.phDataTextView, self.memoDataTextView].forEach {
             $0.isEditable = true
         }
+        
+        // show save Button
+        self.saveButton.isHidden = false
+        
+        // filter Data TextView focus
+        filterDataTextView.becomeFirstResponder()
+        
+        // deactivate Buttons
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.rightBarButtonItem?.tintColor = .clear
+        multifuncButton.isHidden = true
     }
 }
 

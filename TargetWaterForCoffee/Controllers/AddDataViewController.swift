@@ -54,7 +54,7 @@ extension AddDataViewController {
             memoTextView.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
             memoTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             memoTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            memoTextView.heightAnchor.constraint(equalToConstant: 93),
+            memoTextView.heightAnchor.constraint(equalToConstant: 105),
             
             saveButton.topAnchor.constraint(equalTo: memoTextView.bottomAnchor, constant: 28),
             saveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -85,7 +85,6 @@ extension AddDataViewController {
         memoTextView.delegate = self
         
         // Save Button
-        saveButton.backgroundColor = .systemBlue
         saveButton.setTitle("저장하기", for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -100,12 +99,7 @@ extension AddDataViewController {
 extension AddDataViewController {
     @objc // Save Button
     func didTapSaveButton(_ sender: UIButton) {
-        if InsertData[0] == "" || InsertData[1] == "" || InsertData[2] == "" {
-            let alertController = UIAlertController(title: "", message: "데이터를 모두 입력하세요", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "확인", style: .default)
-            alertController.addAction(confirmAction)
-            present(alertController, animated: true)
-        }else if InsertData[3] == ""{
+        if InsertData[3] == ""{
             InsertData[3] = "No Filter"
         }else{
             InsertData[4] = memoTextView.text ?? ""
