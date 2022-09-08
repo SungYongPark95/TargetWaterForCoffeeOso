@@ -5,6 +5,10 @@
 //  Created by 김현준 on 2022/09/02.
 //
 
+protocol ShareDelegate: AnyObject{
+    func alert(result: String)
+}
+
 import Foundation
 import UIKit
 
@@ -13,6 +17,8 @@ class DataDeatilShareController: UIViewController{
     let label = UILabel()
     let pdfSaveButton = UIButton(type: .system)
     let pdfShareButton = UIButton(type: .system)
+    
+    weak var shareDelegate: ShareDelegate?
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -86,6 +92,7 @@ extension DataDeatilShareController{
         pdfShareButton.setTitle("PDF 파일로 내보내기", for: .normal)
         pdfShareButton.titleLabel?.tintColor = .black
         pdfShareButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        pdfShareButton.addTarget(self, action: #selector(didTapShareButton(_:)), for: .touchUpInside)
     }
     
     func setupConstraints() {
@@ -125,14 +132,29 @@ extension DataDeatilShareController{
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
-            print(UIView.exportAsPdfFromView(dataView.view)())
+            self.shareDelegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)())
         }
     }
     
     // Share Button
     @objc
     func didTapShareButton(_ sender: UIButton){
-        
+        self.animateDissmiss()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let fileManager = FileManager.default
+            let dataView = UIApplication.topViewController()!
+            let documentoPath = (self.getDirectoryPath() as NSString).appendingPathComponent(UIView.exportAsPdfFromView(dataView.view)())
+            
+            if fileManager.fileExists(atPath: documentoPath){
+                let documento = NSData(contentsOfFile: documentoPath)
+                let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView=self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+            else {
+                print("document was not found")
+            }
+        }
     }
 }
 
