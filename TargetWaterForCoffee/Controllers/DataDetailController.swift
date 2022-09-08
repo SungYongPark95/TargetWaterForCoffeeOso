@@ -270,7 +270,9 @@ extension DataDetailController: UINavigationControllerDelegate{
     @objc
     private func didTapBarButton(_ sender: UIBarButtonItem){
         if sender == navigationItem.rightBarButtonItem{
-            let naviagtionController = UINavigationController(rootViewController: DataDeatilShareController())
+            let dataDetailShareController = DataDeatilShareController()
+            dataDetailShareController.shareDelegate = self
+            let naviagtionController = UINavigationController(rootViewController: dataDetailShareController)
             naviagtionController.modalPresentationStyle = .overCurrentContext
             present(naviagtionController, animated: false)
         } else{
@@ -354,6 +356,7 @@ extension DataDetailController: UITextViewDelegate {
 // [Mark] Data Detail Update Delete Controller Protocol
 extension DataDetailController: UpdateDelegate {
     func update(){
+        print("?")
         // set Navigation Title
         let title = UILabel()
         title.text = "편집하기"
@@ -377,6 +380,24 @@ extension DataDetailController: UpdateDelegate {
         navigationItem.rightBarButtonItem?.isEnabled = false
         navigationItem.rightBarButtonItem?.tintColor = .clear
         multifuncButton.isHidden = true
+    }
+}
+
+// [Mark] Data Detail Share Controller Protocol
+extension DataDetailController: ShareDelegate {
+    func alert(result: String){
+        var message = ""
+        
+        if result != "" {
+            message = "데이터 리포트가 PDF파일로 저장되었습니다."
+        } else {
+            message = "파일 저장에 실패하였습니다."
+        }
+        
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        alertController.addAction(confirmAction)
+        self.present(alertController, animated: true)
     }
 }
 
