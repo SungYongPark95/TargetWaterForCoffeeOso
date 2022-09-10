@@ -7,6 +7,8 @@
 
 protocol ShareDelegate: AnyObject{
     func alert(result: String)
+    func share(filePath: String)
+    func getTitle() -> String
 }
 
 import Foundation
@@ -132,7 +134,8 @@ extension DataDeatilShareController{
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
-            self.shareDelegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)())
+            let title = self.shareDelegate?.getTitle()
+            self.shareDelegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)(title: title!))
         }
     }
     
@@ -141,19 +144,8 @@ extension DataDeatilShareController{
     func didTapShareButton(_ sender: UIButton){
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let fileManager = FileManager.default
             let dataView = UIApplication.topViewController()!
-            let documentoPath = (self.getDirectoryPath() as NSString).appendingPathComponent(UIView.exportAsPdfFromView(dataView.view)())
-            
-            if fileManager.fileExists(atPath: documentoPath){
-                let documento = NSData(contentsOfFile: documentoPath)
-                let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
-                activityViewController.popoverPresentationController?.sourceView=self.view
-                self.present(activityViewController, animated: true, completion: nil)
-            }
-            else {
-                print("document was not found")
-            }
+            self.shareDelegate?.share(filePath: UIView.exportAsPdfFromView(dataView.view)(title: "???"))
         }
     }
 }

@@ -291,7 +291,20 @@ extension DataDetailController: UINavigationControllerDelegate{
     
     @objc
     private func didTapSaveButton(_ sender: UIButton){
-
+        if Int(totalHardnessTextView.text)! >= 120 || Int(alkalinityDataTextView.text)! >= 200 ||
+            Int(phDataTextView.text)! >= 10 {
+            let message = "입력한 데이터의 크기가 적절하지 않습니다."
+            let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "확인", style: .default){_ in 
+                self.totalHardnessTextView.text = "0"
+                self.alkalinityDataTextView.text = "0"
+                self.phDataTextView.text = "0"
+            }
+            alertController.addAction(confirmAction)
+            self.present(alertController, animated: true)
+        } else {
+            // CoreData - Update
+        }
     }
 }
 
@@ -385,6 +398,7 @@ extension DataDetailController: UpdateDelegate {
 
 // [Mark] Data Detail Share Controller Protocol
 extension DataDetailController: ShareDelegate {
+    
     func alert(result: String){
         var message = ""
         
@@ -398,6 +412,28 @@ extension DataDetailController: ShareDelegate {
         let confirmAction = UIAlertAction(title: "확인", style: .default)
         alertController.addAction(confirmAction)
         self.present(alertController, animated: true)
+    }
+    
+    func share(filePath: String) {
+        // Create fileURL
+        let fileURL = NSURL(fileURLWithPath: filePath)
+
+        // Create the Array which includes the files you want to share
+        var filesToShare = [Any]()
+
+        // Add the path of the file to the Array
+        filesToShare.append(fileURL)
+        
+        // Make the activityViewContoller which shows the share-view
+        let activityViewController = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
+
+        // Show the share-view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    func getTitle() -> String{
+        let title = "2022년8월31일_10시02분"
+        return title
     }
 }
 
