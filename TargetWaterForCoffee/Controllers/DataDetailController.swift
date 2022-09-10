@@ -54,7 +54,9 @@ class DataDetailController: UIViewController {
 extension DataDetailController{
     func setUI(){
         // navigation
-        setTitle(title: "2022년 8월 31일", subTitle: "10:02 AM")
+        let date = "2022년 8월 31일"
+        let time = "10:02 AM"
+        setTitle(title: date, subTitle: time)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
         
@@ -304,6 +306,31 @@ extension DataDetailController: UINavigationControllerDelegate{
             self.present(alertController, animated: true)
         } else {
             // CoreData - Update
+            
+            // set title
+            let date = "2022년 8월 31일"
+            let time = "10:02 AM"
+            setTitle(title: date, subTitle: time)
+            
+            // show graph
+            self.graphImageView.isHidden = false
+            self.graphPointImageView.isHidden = false
+            self.view.frame.origin.y = 0
+            self.view.endEditing(true)
+            
+            // activate Data TextView
+            [self.filterDataTextView, self.totalHardnessTextView, self.alkalinityDataTextView,
+             self.phDataTextView, self.memoDataTextView].forEach {
+                $0.isEditable = false
+            }
+            
+            // show save Button
+            self.saveButton.isHidden = true
+            
+            // deactivate Buttons
+            navigationItem.rightBarButtonItem?.isEnabled = true
+            navigationItem.rightBarButtonItem?.tintColor = .none
+            multifuncButton.isHidden = false
         }
     }
 }
@@ -369,7 +396,6 @@ extension DataDetailController: UITextViewDelegate {
 // [Mark] Data Detail Update Delete Controller Protocol
 extension DataDetailController: UpdateDelegate {
     func update(){
-        print("?")
         // set Navigation Title
         let title = UILabel()
         title.text = "편집하기"
@@ -432,7 +458,9 @@ extension DataDetailController: ShareDelegate {
     }
     
     func getTitle() -> String{
-        let title = "2022년8월31일_10시02분"
+        let date = "2022년 8월 31일"
+        let time = "10:02 AM"
+        let title = "\(date)_\(time)"
         return title
     }
 }

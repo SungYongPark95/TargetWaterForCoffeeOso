@@ -121,7 +121,22 @@ extension DataDetailUpDelController{
     func didTapDeleteButton(_ sender: UIButton){
         let message = "데이터 리포트를 삭제하시겠습니까?"
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        let confirmAction = UIAlertAction(title: "확인", style: .default){_ in
+            // CoreData
+            
+            // UI
+            let resultMessage = "데이터 리포트가 삭제되었습니다."
+            let resultAlertController = UIAlertController(title: "", message: resultMessage, preferredStyle: .alert)
+            let resultConfirmAction = UIAlertAction(title: "확인", style: .default){ _ in
+                self.dismiss(animated: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    let dataView = UIApplication.topViewController()!
+                    dataView.dismiss(animated: true)
+                }
+            }
+            resultAlertController.addAction(resultConfirmAction)
+            self.present(resultAlertController, animated: true)
+        }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
