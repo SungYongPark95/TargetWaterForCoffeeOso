@@ -135,7 +135,7 @@ extension DataDeatilShareController{
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
             let title = self.shareDelegate?.getTitle()
-            self.shareDelegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)(title: title!))
+            self.shareDelegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)(title: title ?? "GetTitleError"))
         }
     }
     
@@ -145,7 +145,8 @@ extension DataDeatilShareController{
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
-            self.shareDelegate?.share(filePath: UIView.exportAsPdfFromView(dataView.view)(title: "???"))
+            let title = self.shareDelegate?.getTitle()
+            self.shareDelegate?.share(filePath: UIView.exportAsPdfFromView(dataView.view)(title: title ?? "GetTitleError"))
         }
     }
 }
