@@ -27,17 +27,12 @@ class DataTableHeaderUIView: UIView {
         lazy var alkalinityLabel = makeLabel("Alkalinity")
         lazy var phLabel = makeLabel("PH")
         
-        addSubview(circleImageView)
-        addSubview(dateLabel)
-        addSubview(hardnessLabel)
-        addSubview(alkalinityLabel)
-        addSubview(phLabel)
-         
-        circleImageView.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        hardnessLabel.translatesAutoresizingMaskIntoConstraints = false
-        alkalinityLabel.translatesAutoresizingMaskIntoConstraints = false
-        phLabel.translatesAutoresizingMaskIntoConstraints = false
+        [circleImageView, dateLabel, hardnessLabel, alkalinityLabel, phLabel].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        let labelWidth = (UIScreen.main.bounds.size.width - 110) / 4
         
         NSLayoutConstraint.activate([
             circleImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,constant: 8),
@@ -46,23 +41,23 @@ class DataTableHeaderUIView: UIView {
             circleImageView.heightAnchor.constraint(equalToConstant: 32),
             
             dateLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
-            dateLabel.leadingAnchor.constraint(equalTo: circleImageView.trailingAnchor, constant: 14.5),
-            dateLabel.widthAnchor.constraint(equalToConstant: 71),
+            dateLabel.leadingAnchor.constraint(equalTo: circleImageView.trailingAnchor, constant: 18),
+            dateLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             dateLabel.heightAnchor.constraint(equalToConstant: 32),
             
             hardnessLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,constant: 8),
-            hardnessLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 14.5),
-            hardnessLabel.widthAnchor.constraint(equalToConstant: 71),
+            hardnessLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10),
+            hardnessLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             hardnessLabel.heightAnchor.constraint(equalToConstant: 32),
             
             alkalinityLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,constant: 8),
-            alkalinityLabel.leadingAnchor.constraint(equalTo: hardnessLabel.trailingAnchor, constant: 14.5),
-            alkalinityLabel.widthAnchor.constraint(equalToConstant: 71),
+            alkalinityLabel.leadingAnchor.constraint(equalTo: hardnessLabel.trailingAnchor, constant: 10),
+            alkalinityLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             alkalinityLabel.heightAnchor.constraint(equalToConstant: 32),
             
             phLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,constant: 8),
-            phLabel.leadingAnchor.constraint(equalTo: alkalinityLabel.trailingAnchor, constant: 14.5),
-            phLabel.widthAnchor.constraint(equalToConstant: 40),
+            phLabel.leadingAnchor.constraint(equalTo: alkalinityLabel.trailingAnchor, constant: 10),
+            phLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             phLabel.heightAnchor.constraint(equalToConstant: 32)
         ])
         hardnessLabel.sizeToFit()

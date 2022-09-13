@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CafeDetailTableViewCellDelegate: AnyObject{
-    func getXY(totalHardness: String, Alkalinity: String)
+    func getXY(alkalinity: String, hardness: String)
 }
 
 class DataTableViewCell: UITableViewCell {
@@ -40,6 +40,7 @@ extension DataTableViewCell{
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        let labelWidth = (UIScreen.main.bounds.size.width - 110) / 4
         
         NSLayoutConstraint.activate([
             circleDataImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 6),
@@ -48,22 +49,23 @@ extension DataTableViewCell{
             circleDataImageView.heightAnchor.constraint(equalToConstant: 32),
             
             dateLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 6),
-            dateLabel.leadingAnchor.constraint(equalTo: circleDataImageView.trailingAnchor, constant: 14.5),
-            dateLabel.widthAnchor.constraint(equalToConstant: 71),
+            dateLabel.leadingAnchor.constraint(equalTo: circleDataImageView.trailingAnchor, constant: 18),
+            dateLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             dateLabel.heightAnchor.constraint(equalToConstant: 32),
             
             hardnessLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 6),
-            hardnessLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 14.5),
-            hardnessLabel.widthAnchor.constraint(equalToConstant: 71),
+            hardnessLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10),
+            hardnessLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             hardnessLabel.heightAnchor.constraint(equalToConstant: 32),
             
             alkalinityLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 6),
-            alkalinityLabel.leadingAnchor.constraint(equalTo: hardnessLabel.trailingAnchor, constant: 14.5),            alkalinityLabel.widthAnchor.constraint(equalToConstant: 71),
+            alkalinityLabel.leadingAnchor.constraint(equalTo: hardnessLabel.trailingAnchor, constant: 10),
+            alkalinityLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             alkalinityLabel.heightAnchor.constraint(equalToConstant: 32),
             
             phLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 6),
-            phLabel.leadingAnchor.constraint(equalTo: alkalinityLabel.trailingAnchor, constant: 14.5),
-            phLabel.widthAnchor.constraint(equalToConstant: 40),
+            phLabel.leadingAnchor.constraint(equalTo: alkalinityLabel.trailingAnchor, constant: 10),
+            phLabel.widthAnchor.constraint(equalToConstant: labelWidth),
             phLabel.heightAnchor.constraint(equalToConstant: 32)
         ])
         
@@ -83,7 +85,7 @@ extension DataTableViewCell{
     func getXY(notification: Notification) {
         let object = notification.object as? Int ?? 0
         if object == tag{
-            delegate?.getXY(totalHardness: hardnessLabel.text ?? "", Alkalinity: alkalinityLabel.text ?? "")
+            delegate?.getXY(alkalinity: alkalinityLabel.text ?? "", hardness: hardnessLabel.text ?? "")
         }
     }
 }

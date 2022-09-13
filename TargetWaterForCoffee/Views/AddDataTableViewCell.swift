@@ -14,7 +14,7 @@ protocol AddDataTableViewCellDelegate: AnyObject{
 class AddDataTableViewCell: UITableViewCell{
     
     let dataTypeLabel = UILabel()
-    let textField = UITextField()
+    let textView = UITextView()
     
     weak var delegate: AddDataTableViewCellDelegate?
     
@@ -31,7 +31,7 @@ class AddDataTableViewCell: UITableViewCell{
 // [MARK] Set UI
 extension AddDataTableViewCell{
     func setUI(){
-        [dataTypeLabel, textField].forEach {
+        [dataTypeLabel, textView].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -42,25 +42,25 @@ extension AddDataTableViewCell{
             dataTypeLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             dataTypeLabel.widthAnchor.constraint(equalToConstant: 110),
             
-            textField.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
-            textField.leadingAnchor.constraint(equalTo: dataTypeLabel.trailingAnchor),
-            textField.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            textField.heightAnchor.constraint(equalToConstant: 22)
+            textView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
+            textView.leadingAnchor.constraint(equalTo: dataTypeLabel.trailingAnchor),
+            textView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            textView.heightAnchor.constraint(equalToConstant: 22)
         ])
         
         dataTypeLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        textField.font = UIFont.systemFont(ofSize: 15)
-        textField.keyboardType = .numberPad
-        textField.textAlignment = .right
-        textField.tintColor = .clear
-        textField.delegate = self
+        textView.font = UIFont.systemFont(ofSize: 15)
+        textView.keyboardType = .numberPad
+        textView.textAlignment = .right
+        textView.tintColor = .gray
+        textView.delegate = self
     }
 }
 
 // [MARK] Delegate Pattern
-extension AddDataTableViewCell: UITextFieldDelegate{
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let textData = textField.text else { print("error"); return}
+extension AddDataTableViewCell: UITextViewDelegate{
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        guard let textData = textView.text else { print("error"); return}
         delegate?.setData(data: textData, tag: tag) ?? print("Error")
     }
 }

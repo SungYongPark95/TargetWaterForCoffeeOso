@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScen)
         window?.rootViewController = UINavigationController(rootViewController: CafeDetailViewController())
         window?.backgroundColor = .systemBackground
+        window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
     }
 

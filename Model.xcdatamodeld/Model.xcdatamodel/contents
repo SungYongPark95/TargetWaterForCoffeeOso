@@ -2,15 +2,14 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CafeDetail" representedClassName="CafeDetail" syncable="YES">
         <attribute name="alkalinity" optional="YES" attributeType="String"/>
-        <attribute name="cafePrimaryKey" optional="YES" attributeType="String"/>
         <attribute name="circle" optional="YES" attributeType="String"/>
-        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="filter" optional="YES" attributeType="String"/>
         <attribute name="hardness" optional="YES" attributeType="String"/>
         <attribute name="memo" optional="YES" attributeType="String"/>
         <attribute name="ph" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CafeDetail" positionX="-18" positionY="27" width="128" height="149"/>
+        <element name="CafeDetail" positionX="-18" positionY="27" width="128" height="134"/>
     </elements>
 </model>

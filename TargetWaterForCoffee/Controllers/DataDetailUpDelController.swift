@@ -67,7 +67,7 @@ extension DataDetailUpDelController{
         ])
         
         // PDF Save Button
-        editButton.setTitle("편집하기", for: .normal)
+        editButton.setTitle("수정하기", for: .normal)
         editButton.titleLabel?.tintColor = .black
         editButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         editButton.addTarget(self, action: #selector(didTapEditButton(_:)), for: .touchUpInside)

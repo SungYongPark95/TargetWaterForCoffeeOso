@@ -17,7 +17,7 @@ func circles(hardness: Int, alkalinity: Int) -> String{
     }
     
     // [ Mark ] Colonna-Dashwood & Hendon Check(Red)
-    if 37 <= alkalinity, alkalinity <= 80, 47 <= hardness, hardness <= 175{
+    if 37 <= alkalinity, alkalinity <= 80, 46 <= hardness, hardness <= 175{
         if alkalinity == 37{
             if 46 <= hardness, hardness <= 108{ ColonnaDashwoodHendon = true }
         }else if alkalinity == 38{
@@ -154,7 +154,7 @@ func circles(hardness: Int, alkalinity: Int) -> String{
         }else if alkalinity == 59{
             if 81 <= hardness, hardness <= 107{ SCAE = true }
         }else if alkalinity == 60{
-            if 84 <= hardness, hardness <= 109{ SCAE = true }
+            if 84 <= hardness, hardness <= 110{ SCAE = true }
         }else if alkalinity == 61{
             if 86 <= hardness, hardness <= 106{ SCAE = true }
         }else if alkalinity == 62{
@@ -165,11 +165,11 @@ func circles(hardness: Int, alkalinity: Int) -> String{
     }
     
     // [ MARK ] Return Circle Check
-    if SCAFullRange , ColonnaDashwoodHendon , SCAFullRange{
+    if SCAE , ColonnaDashwoodHendon , SCAFullRange{
         return "GraphDataCircles_111"
     }else if SCAFullRange , ColonnaDashwoodHendon{
         return "GraphDataCircles_110"
-    }else if ColonnaDashwoodHendon , SCAFullRange{
+    }else if ColonnaDashwoodHendon , SCAE{
         return "GraphDataCircles_101"
     }else if ColonnaDashwoodHendon{
         return "GraphDataCircles_100"

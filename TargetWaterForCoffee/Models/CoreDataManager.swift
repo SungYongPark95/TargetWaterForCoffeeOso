@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class CoreDataManager{
+    
+    // [ MARK ] 싱글턴으로 만들기
     static var shared: CoreDataManager = CoreDataManager()
+    private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
@@ -39,7 +43,6 @@ extension CoreDataManager{
             managedObject.setValue(mesureData.hardness, forKey: "hardness")
             managedObject.setValue(mesureData.alkalinity, forKey: "alkalinity")
             managedObject.setValue(mesureData.date, forKey: "date")
-            managedObject.setValue(mesureData.cafePrimaryKey, forKey: "cafePrimaryKey")
             managedObject.setValue(mesureData.circle, forKey: "circle")
             managedObject.setValue(mesureData.filter, forKey: "filter")
             managedObject.setValue(mesureData.ph, forKey: "ph")
@@ -75,8 +78,7 @@ extension CoreDataManager{
         let fetchResults = fetchCafeDetails()
         
         for result in fetchResults{
-            let MesureData = MesureData(cafePrimaryKey: result.cafePrimaryKey ?? "",
-                                        date: result.date ?? "",
+            let MesureData = MesureData(date: result.date ?? "",
                                         circle: result.circle ?? "",
                                         ph: result.ph ?? "",
                                         alkalinity: result.alkalinity ?? "",

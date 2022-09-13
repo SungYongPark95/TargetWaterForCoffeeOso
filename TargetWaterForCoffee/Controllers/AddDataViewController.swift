@@ -16,10 +16,11 @@ class AddDataViewController: UIViewController {
     let memoTextView = UITextView()
     let saveButton = UIButton(type: .system)
     let dataTypes = ["Total Hardness", "Alkalinity", "PH", "Filter"]
-    let coreDataKeys = ["hardness", "alkalinity", "ph", "filter", "memo", "circle", "date", "cafePrimaryKey"]
-    var InsertData = ["", "", "", "", "", "", "", ""]
+    let coreDataKeys = ["hardness", "alkalinity", "ph", "filter", "memo", "circle", "date"]
+    var InsertData = ["", "", "", "", "", "", ""]
     
     var container: NSPersistentContainer!
+    let coreDataManager = CoreDataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,25 +51,26 @@ extension AddDataViewController {
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor , constant: 30),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            tableView.heightAnchor.constraint(equalToConstant: 200),
+            tableView.heightAnchor.constraint(equalToConstant: 202),
             
-            memoLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 28),
+            memoLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
             memoLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            memoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -313),
+            memoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20),
             memoLabel.heightAnchor.constraint(equalToConstant: 30),
             
             memoTextView.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
             memoTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             memoTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            memoTextView.heightAnchor.constraint(equalToConstant: 105),
+//            memoTextView.heightAnchor.constraint(equalToConstant: 105),
+            memoTextView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -20),
             
             saveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -227),
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
             saveButton.heightAnchor.constraint(equalToConstant: 49)
         ])
         // Title View
-        titleLabel.text = "데이터 입력하기"
+        titleLabel.text = "데이터 입력"
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         titleLabel.sizeToFit()
         
@@ -84,6 +86,8 @@ extension AddDataViewController {
         
         // Memo Label
         memoLabel.text = "Memo"
+        memoLabel.textColor = .darkGray
+        memoLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         
         // Memo TextView
         memoTextView.backgroundColor = .white
@@ -91,7 +95,6 @@ extension AddDataViewController {
         memoTextView.font = UIFont.systemFont(ofSize: 14)
         memoTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         memoTextView.keyboardType = .default
-        memoTextView.delegate = self
         
         // Save Button
         saveButton.setTitle("저장하기", for: .normal)
@@ -109,7 +112,7 @@ extension AddDataViewController {
     @objc // Save Button
     func didTapSaveButton(_ sender: UIButton) {
         
-        if Int(InsertData[0])! >= 120 || Int(InsertData[1])! >= 200 || Int(InsertData[2])! >= 10 {
+        if Int(InsertData[0])! >= 200 || Int(InsertData[1])! >= 120 || Int(InsertData[2])! >= 10 {
             let message = "입력한 데이터의 크기가 적절하지 않습니다."
             let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default){ _ in
@@ -123,17 +126,14 @@ extension AddDataViewController {
             // set empty Data
             if InsertData[3] == ""{
                 InsertData[3] = "No Filter"
-            }else{
-                InsertData[4] = memoTextView.text ?? ""
-                if InsertData[4] == ""{
-                    InsertData[4] = "No Memo"
-                }
-                InsertData[5] = circles(hardness: Int(InsertData[0])!, alkalinity: Int(InsertData[1])!)
-                InsertData[6] = calcDate()
-                InsertData[7] = "CafePrimaryKey"
-                print(InsertData)
-                self.dismiss(animated: true)
             }
+            InsertData[4] = memoTextView.text ?? ""
+            if InsertData[4] == "" {
+                InsertData[4] = "No Memo"
+            }
+            InsertData[5] = circles(hardness: Int(InsertData[0])!, alkalinity: Int(InsertData[1])!)
+            InsertData[6] = calcDate()
+            print(InsertData)
             
             // CoreData
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -149,8 +149,8 @@ extension AddDataViewController {
             
             // CoreData : Save Data
             do{
-                print("SAVE SUCCESS")
                 try self.container.viewContext.save()
+                print("SAVE SUCCESS")
             }catch{
                 print("SAVE ERROR")
                 fatalError()
@@ -182,16 +182,7 @@ extension AddDataViewController{
     }
     @objc func keyboardWillShow(_ sender:Notification){
         self.view.frame.origin.y = 0
-        self.view.frame.origin.y = -75
-    }
-}
-extension AddDataViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        self.view.frame.origin.y = -150
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        self.view.frame.origin.y = 0
+        self.view.frame.origin.y = -60
     }
 }
 

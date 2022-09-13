@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CafeDetailViewController: UIViewController {
     
@@ -22,15 +23,23 @@ class CafeDetailViewController: UIViewController {
     var dotXAnchor: NSLayoutConstraint?
     var dotYAnchor: NSLayoutConstraint?
     
-    let circles = ["GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101", "GraphDataCircles_100", "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110"]
-    let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
-    let hardnesses = ["0", "20", "40", "60", "80", "100", "120"]
-    let alkalinities = ["0", "50", "80", "100", "130", "150", "200"]
-    let pHs = ["3", "3", "3", "3", "3", "3", "3"]
+    let coreDataManager = CoreDataManager.shared
+    
+    let circles = ["GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101", "GraphDataCircles_100", "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110",
+         "GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101","GraphDataCircles_100",
+         "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110",]
+    let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18",
+                 "22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
+    let hardnesses = ["0", "50", "80", "100", "130", "150", "200", "0", "50", "80", "100", "130", "150", "200"]
+    let alkalinities = ["0", "20", "40", "60", "80", "100", "120", "0", "20", "40", "60", "80", "100", "120"]
+    let pHs = ["3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        print(coreDataManager.fetchCafeDetails().forEach {
+            print($0.date ?? "")
+        })
     }
 }
 
@@ -38,42 +47,52 @@ class CafeDetailViewController: UIViewController {
 // [ MARK ] Set UI
 extension CafeDetailViewController{
     private func setUI(){
-        // navigation
+        // navigation - Title
         navigationController?.navigationBar.tintColor = .white
-        navigationItem.title = "Water for Coffee"
+        let mainTitle = UILabel()
+        mainTitle.text = "Water For Coffee"
+        mainTitle.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        mainTitle.sizeToFit()
+        navigationItem.titleView = mainTitle
+        // navigation - Bar Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
+        let logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.image = UIImage(named: "Logo")
+        navigationItem.leftBarButtonItem?.customView = logoImageView
         navigationItem.rightBarButtonItem?.tintColor = .black
         
+        // Add & set Views
         [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, separator1,
          tableHeaderUIView, separator2, tableView].forEach{
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 290)
+        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 285)
         dotXAnchor?.isActive = true
-        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -220)
+        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -221)
         dotYAnchor?.isActive = true
         
         NSLayoutConstraint.activate([
             // graph - UIView
             graphImageUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            graphImageUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            graphImageUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            graphImageUIView.heightAnchor.constraint(equalToConstant: 325),
+            graphImageUIView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            graphImageUIView.widthAnchor.constraint(equalToConstant: 380),
+            graphImageUIView.heightAnchor.constraint(equalToConstant: 320),
             
             // graph - ImageView
-            graphImageView.widthAnchor.constraint(equalToConstant: 360),
-            graphImageView.heightAnchor.constraint(equalToConstant: 288),
             graphImageView.centerXAnchor.constraint(equalTo:graphImageUIView.centerXAnchor),
             graphImageView.centerYAnchor.constraint(equalTo: graphImageUIView.centerYAnchor),
+            graphImageView.widthAnchor.constraint(equalToConstant: 352),
+            graphImageView.heightAnchor.constraint(equalToConstant: 288),
             
             // graph - pointUIView
-            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 32),
-            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 69),
-            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -32),
-            graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
+            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 28),
+            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 66),
+            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -29),
+            graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -61),
             
             // separator1
             separator1.topAnchor.constraint(equalTo: graphImageUIView.bottomAnchor),
@@ -99,6 +118,8 @@ extension CafeDetailViewController{
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -10)
         ])
+        
+//        graphImageUIView.backgroundColor = .red
         
         let graphImage = UIImage(named: "WaterGraph")
         graphImageView.image = graphImage
@@ -131,7 +152,13 @@ extension CafeDetailViewController{
             present(navVC, animated: true)
         } else{
             // navigation left button click event
+            print("left")
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 }
 
@@ -183,9 +210,9 @@ extension Notification.Name{
 
 // [Mark] Cell Delegate Protocol
 extension CafeDetailViewController: CafeDetailTableViewCellDelegate{
-    func getXY(totalHardness: String, Alkalinity: String){
-        let x = (290 / 120) * (Double(totalHardness) ?? 0)
-        let y = (-220 / 200) * (Double(Alkalinity) ?? 0)
+    func getXY(alkalinity: String, hardness: String){
+        let x = (285 / 120) * (Double(alkalinity) ?? 0)
+        let y = (-221 / 200) * (Double(hardness) ?? 0)
         self.dotXAnchor?.constant = CGFloat(x)
         self.dotYAnchor?.constant = CGFloat(y)
     }

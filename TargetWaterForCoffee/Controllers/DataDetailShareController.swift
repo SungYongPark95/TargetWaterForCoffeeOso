@@ -17,6 +17,7 @@ import UIKit
 class DataDeatilShareController: UIViewController{
     
     let label = UILabel()
+    let separatorLabel = UILabel()
     let pdfSaveButton = UIButton(type: .system)
     let pdfShareButton = UIButton(type: .system)
     
@@ -60,16 +61,22 @@ extension DataDeatilShareController{
     }
     
     func setUI(){
-        [label, pdfSaveButton, pdfShareButton].forEach {
+        [label, separatorLabel, pdfSaveButton, pdfShareButton].forEach {
             containerView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            label.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 25),
+            label.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 15),
             
-            pdfSaveButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            // separator1
+            separatorLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 15),
+            separatorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
+            separatorLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
+            separatorLabel.heightAnchor.constraint(equalToConstant: 2),
+            
+            pdfSaveButton.topAnchor.constraint(equalTo: separatorLabel.bottomAnchor, constant: 20),
             pdfSaveButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             pdfSaveButton.widthAnchor.constraint(equalToConstant: 200),
             
@@ -79,10 +86,13 @@ extension DataDeatilShareController{
         ])
         
         // label
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 19, weight: .heavy)
-        label.text = "공유하기"
+        label.textColor = UIColor.darkGray
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.text = "데이터 리포트 공유"
         label.sizeToFit()
+        
+        // seperator
+        separatorLabel.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         
         // PDF Save Button
         pdfSaveButton.setTitle("PDF 파일로 저장하기", for: .normal)

@@ -39,10 +39,12 @@ class DataDetailController: UIViewController {
     var dotYAnchor: NSLayoutConstraint?
     
     var container: NSPersistentContainer?
+    let coreDataManager = CoreDataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        swipeRecognizer()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow(_:)),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -75,21 +77,21 @@ extension DataDetailController{
         NSLayoutConstraint.activate([
             // graph - UIView
             graphImageUIView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            graphImageUIView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            graphImageUIView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            graphImageUIView.heightAnchor.constraint(equalToConstant: 325),
+            graphImageUIView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            graphImageUIView.widthAnchor.constraint(equalToConstant: 380),
+            graphImageUIView.heightAnchor.constraint(equalToConstant: 320),
             
             // graph - ImageView
-            graphImageView.widthAnchor.constraint(equalToConstant: 360),
-            graphImageView.heightAnchor.constraint(equalToConstant: 288),
             graphImageView.centerXAnchor.constraint(equalTo:graphImageUIView.centerXAnchor),
             graphImageView.centerYAnchor.constraint(equalTo: graphImageUIView.centerYAnchor),
+            graphImageView.widthAnchor.constraint(equalToConstant: 352),
+            graphImageView.heightAnchor.constraint(equalToConstant: 288),
             
             // graph - pointUIView
-            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 32),
-            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 69),
-            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -32),
-            graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -64),
+            graphDrawPointUIView.topAnchor.constraint(equalTo: graphImageUIView.topAnchor, constant: 28),
+            graphDrawPointUIView.leadingAnchor.constraint(equalTo: graphImageUIView.leadingAnchor, constant: 66),
+            graphDrawPointUIView.trailingAnchor.constraint(equalTo: graphImageUIView.trailingAnchor, constant: -29),
+            graphDrawPointUIView.bottomAnchor.constraint(equalTo: graphImageUIView.bottomAnchor, constant: -61),
             
             // filter UIView
             filterUIView.topAnchor.constraint(equalTo: graphImageView.bottomAnchor, constant: 30),
@@ -228,16 +230,16 @@ extension DataDetailController{
             $0.font = UIFont.systemFont(ofSize: 25, weight: .bold)
             $0.textColor = .darkGray
             $0.isEditable = false
-            $0.keyboardType = .decimalPad
+            $0.keyboardType = .numberPad
             $0.isScrollEnabled = false
         }
-        totalHardnessTextView.text = "60"
+        totalHardnessTextView.text = "100"
         alkalinityDataTextView.text = "40"
         phDataTextView.text = "3"
         
         // set dot position
-        let x = (290 / 120) * (Double(alkalinityDataTextView.text ?? "") ?? 0)
-        let y = (-220 / 200) * (Double(totalHardnessTextView.text ?? "") ?? 0)
+        let x = (285 / 120) * (Double(alkalinityDataTextView.text ?? "") ?? 0)
+        let y = (-221 / 200) * (Double(totalHardnessTextView.text ?? "") ?? 0)
         dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: x)
         dotXAnchor?.isActive = true
         dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: y)
@@ -293,7 +295,7 @@ extension DataDetailController: UINavigationControllerDelegate{
     
     @objc
     private func didTapSaveButton(_ sender: UIButton){
-        if Int(totalHardnessTextView.text)! >= 120 || Int(alkalinityDataTextView.text)! >= 200 ||
+        if Int(totalHardnessTextView.text)! >= 200 || Int(alkalinityDataTextView.text)! >= 120 ||
             Int(phDataTextView.text)! >= 10 {
             let message = "입력한 데이터의 크기가 적절하지 않습니다."
             let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
@@ -393,12 +395,33 @@ extension DataDetailController: UITextViewDelegate {
     }
 }
 
+// [ MARK ] Swipe Gesture
+extension DataDetailController{
+    func swipeRecognizer() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+    }
+    
+    @objc
+    func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction{
+            case UISwipeGestureRecognizer.Direction.right:
+                self.dismiss(animated: true, completion: nil)
+            default:
+                break
+            }
+        }
+    }
+}
+
 // [Mark] Data Detail Update Delete Controller Protocol
 extension DataDetailController: UpdateDelegate {
     func update(){
         // set Navigation Title
         let title = UILabel()
-        title.text = "편집하기"
+        title.text = "정보 수정"
         title.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         title.sizeToFit()
         self.navigationItem.titleView = title
@@ -464,6 +487,3 @@ extension DataDetailController: ShareDelegate {
         return title
     }
 }
-
-
-

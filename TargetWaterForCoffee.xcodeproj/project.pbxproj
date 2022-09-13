@@ -17,6 +17,7 @@
 		CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */; };
 		CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */; };
 		CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */; };
+		CE970EF128D0BF4500CB5BAD /* CoreDataManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE970EF028D0BF4500CB5BAD /* CoreDataManager2.swift */; };
 		CE97EC4A28B7587800FBDD79 /* CheckGraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */; };
 		CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */; };
 		CE9F84DC28C24A5400F2D294 /* DataDetailShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */; };
@@ -41,6 +42,7 @@
 		CE94A76628AFB7C100AA315A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE970EF028D0BF4500CB5BAD /* CoreDataManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager2.swift; sourceTree = "<group>"; };
 		CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckGraphData.swift; sourceTree = "<group>"; };
 		CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailController.swift; sourceTree = "<group>"; };
 		CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailShareController.swift; sourceTree = "<group>"; };
@@ -86,11 +88,11 @@
 		4936CB9F28522FBB002A30D9 /* TargetWaterForCoffee */ = {
 			isa = PBXGroup;
 			children = (
+				4936CBA028522FBB002A30D9 /* AppDelegate.swift */,
+				4936CBA228522FBB002A30D9 /* SceneDelegate.swift */,
 				CE067D9B28A4874100184E57 /* Controllers */,
 				CE067D9A28A4873B00184E57 /* Views */,
 				CE067D9928A4873100184E57 /* Models */,
-				4936CBA028522FBB002A30D9 /* AppDelegate.swift */,
-				4936CBA228522FBB002A30D9 /* SceneDelegate.swift */,
 				4936CBA928522FBE002A30D9 /* Assets.xcassets */,
 				4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */,
 				4936CBAE28522FBE002A30D9 /* Info.plist */,
@@ -105,6 +107,7 @@
 				CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */,
 				CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */,
 				CECB2A5828BB887B00754FFF /* CoreDataManager.swift */,
+				CE970EF028D0BF4500CB5BAD /* CoreDataManager2.swift */,
 				CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */,
 				CECB2A5A28BB8DA500754FFF /* MesureData.swift */,
 				CE9F84DF28C3656C00F2D294 /* Extentensions.swift */,
@@ -227,6 +230,7 @@
 				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
 				CE9F84E028C3656C00F2D294 /* Extentensions.swift in Sources */,
 				CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */,
+				CE970EF128D0BF4500CB5BAD /* CoreDataManager2.swift in Sources */,
 				CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */,
 				4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */,
 			);
@@ -250,6 +254,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -310,6 +315,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -365,15 +371,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GC62836342;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TargetWaterForCoffee/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WaterForCoffee;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -384,7 +393,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -393,15 +402,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GC62836342;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TargetWaterForCoffee/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WaterForCoffee;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -412,7 +424,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

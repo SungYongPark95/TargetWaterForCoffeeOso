@@ -8,7 +8,6 @@
 import Foundation
 
 struct MesureData: Codable, Equatable {
-    let cafePrimaryKey: String
     let date: String
     let circle: String
     let ph: String
