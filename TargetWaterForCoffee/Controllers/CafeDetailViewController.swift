@@ -28,12 +28,14 @@ class CafeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        tableView.cellForRow(at: [0,1])?.select(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        let hardness = coreDataManager.getCafeDetailListFromCoreData()[0].hardness!
+        let alkalinity = coreDataManager.getCafeDetailListFromCoreData()[0].alkalinity!
+        setDotCoordinate(alkalinity: alkalinity, hardness: hardness)
     }
 }
 
@@ -48,13 +50,14 @@ extension CafeDetailViewController {
         mainTitle.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         mainTitle.sizeToFit()
         navigationItem.titleView = mainTitle
+        
         // navigation - Bar Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
-        let logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        logoImageView.contentMode = .scaleAspectFit
-        logoImageView.image = UIImage(named: "LOGO")
-        navigationItem.leftBarButtonItem?.customView = logoImageView
+        navigationItem.leftBarButtonItem = UIBarButtonItem()
+        let logoButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        logoButton.setImage(UIImage(named: "LOGO"), for: .normal)
+        logoButton.addTarget(self, action: #selector(didTapLogoButton(_:)), for: .touchUpInside)
+        navigationItem.leftBarButtonItem?.customView = logoButton
         navigationItem.rightBarButtonItem?.tintColor = .black
         
         // Add & set Views
@@ -139,7 +142,7 @@ extension CafeDetailViewController {
     }
 }
 
-// [ Mark ] function
+// [ Mark ] Button function
 extension CafeDetailViewController {
     @objc
     func didTapBarButton(_ sender: UIBarButtonItem) {
@@ -152,6 +155,21 @@ extension CafeDetailViewController {
             // navigation left button click event
             print("left")
         }
+    }
+    
+    @objc
+    func didTapLogoButton(_ sender: UIButton) {
+        print("logo Button")
+    }
+}
+
+// [ Mark ] Function
+extension CafeDetailViewController {
+    func setDotCoordinate(alkalinity: String, hardness: String) {
+        let x = (285 / 120) * (Double(alkalinity) ?? 0)
+        let y = (-221 / 200) * (Double(hardness) ?? 0)
+        self.dotXAnchor?.constant = CGFloat(x)
+        self.dotYAnchor?.constant = CGFloat(y)
     }
 }
 
@@ -172,6 +190,7 @@ extension CafeDetailViewController: UITableViewDataSource {
         cell.cafeDetailData = cafeDetailData[indexPath.row]
         cell.delegate = self
         cell.tag = indexPath.row
+        cell.accessoryType = .none
         return cell
     }
 }
@@ -179,18 +198,19 @@ extension CafeDetailViewController: UITableViewDataSource {
 extension CafeDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType == .disclosureIndicator {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
             let dataDetailController = DataDetailController()
             dataDetailController.cafeDetailData = coreDataManager.getCafeDetailListFromCoreData()[indexPath.row]
             let navVC = UINavigationController(rootViewController: dataDetailController)
             navVC.modalPresentationStyle = .fullScreen
             navVC.modalTransitionStyle = .crossDissolve
             present(navVC, animated: true)
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
             NotificationCenter.default.post(name: Notification.Name.callCell, object: indexPath.row)
         }
     }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
@@ -204,17 +224,16 @@ extension Notification.Name {
 // [Mark] Cell Delegate Protocol
 extension CafeDetailViewController: CafeDetailTableViewCellDelegate {
     func getXY(alkalinity: String, hardness: String){
-        let x = (285 / 120) * (Double(alkalinity) ?? 0)
-        let y = (-221 / 200) * (Double(hardness) ?? 0)
-        self.dotXAnchor?.constant = CGFloat(x)
-        self.dotYAnchor?.constant = CGFloat(y)
+        setDotCoordinate(alkalinity: alkalinity, hardness: hardness)
     }
 }
 
 // [MARK] After Add Data Protocol
 extension CafeDetailViewController: CafeDetailTableReloadDelegate {
     func reloadTable() {
-        print("delegate reload")
         tableView.reloadData()
+        let hardness = coreDataManager.getCafeDetailListFromCoreData()[0].hardness!
+        let alkalinity = coreDataManager.getCafeDetailListFromCoreData()[0].alkalinity!
+        setDotCoordinate(alkalinity: alkalinity, hardness: hardness)
     }
 }

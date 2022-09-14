@@ -15,6 +15,7 @@
 		4936CBB628523439002A30D9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB528523439002A30D9 /* SnapKit */; };
 		4936CBB928523455002A30D9 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB828523455002A30D9 /* Charts */; };
 		CE0F213D28D17ACD00101833 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F213C28D17ACD00101833 /* DateManager.swift */; };
+		CE0F213F28D242FF00101833 /* LogoUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F213E28D242FF00101833 /* LogoUIView.swift */; };
 		CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */; };
 		CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */; };
 		CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */; };
@@ -39,6 +40,7 @@
 		4936CBAC28522FBE002A30D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4936CBAE28522FBE002A30D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0F213C28D17ACD00101833 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		CE0F213E28D242FF00101833 /* LogoUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoUIView.swift; sourceTree = "<group>"; };
 		CE94A76628AFB7C100AA315A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */,
 				CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */,
 				CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */,
+				CE0F213E28D242FF00101833 /* LogoUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				CE0F213D28D17ACD00101833 /* DateManager.swift in Sources */,
 				CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */,
 				CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */,
+				CE0F213F28D242FF00101833 /* LogoUIView.swift in Sources */,
 				4936CBA528522FBB002A30D9 /* CafeDetailViewController.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
 				CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */,
