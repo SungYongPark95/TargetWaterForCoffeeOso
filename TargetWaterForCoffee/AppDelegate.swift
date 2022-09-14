@@ -1,8 +1,8 @@
 //
-//  AppDelegate.swift
-//  TargetWaterForCoffee
+//  SceneDelegate.swift
+//  WaterForCoffee_Store
 //
-//  Created by Sung Yong Park on 2022/06/09.
+//  Created by 김현준 on 2022/08/04.
 //
 
 import UIKit
@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // 임시저장소의 내용을 저장하는 메서드 (변화가 있다면 -> 저장)
     func saveContext () {
+        // context = 임시 저장소
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

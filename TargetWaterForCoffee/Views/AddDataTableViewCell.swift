@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol AddDataTableViewCellDelegate: AnyObject{
+protocol AddDataTableViewCellDelegate: AnyObject {
     func setData(data: String, tag: Int)
 }
 
-class AddDataTableViewCell: UITableViewCell{
+class AddDataTableViewCell: UITableViewCell {
     
     let dataTypeLabel = UILabel()
     let textView = UITextView()
@@ -29,8 +29,8 @@ class AddDataTableViewCell: UITableViewCell{
 }
 
 // [MARK] Set UI
-extension AddDataTableViewCell{
-    func setUI(){
+extension AddDataTableViewCell {
+    func setUI() {
         [dataTypeLabel, textView].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -58,9 +58,9 @@ extension AddDataTableViewCell{
 }
 
 // [MARK] Delegate Pattern
-extension AddDataTableViewCell: UITextViewDelegate{
+extension AddDataTableViewCell: UITextViewDelegate {
     func textViewDidChangeSelection(_ textView: UITextView) {
-        guard let textData = textView.text else { print("error"); return}
+        guard let textData = textView.text else { print("error"); return }
         delegate?.setData(data: textData, tag: tag) ?? print("Error")
     }
 }

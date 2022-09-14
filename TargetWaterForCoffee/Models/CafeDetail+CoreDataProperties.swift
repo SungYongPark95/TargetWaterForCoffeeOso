@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension CafeDetail {
+extension CafeDetailData {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CafeDetail> {
-        return NSFetchRequest<CafeDetail>(entityName: "CafeDetail")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CafeDetailData> {
+        return NSFetchRequest<CafeDetailData>(entityName: "CafeDetailData")
     }
 
     @NSManaged public var date: Date?
@@ -23,17 +23,8 @@ extension CafeDetail {
     @NSManaged public var hardness: String?
     @NSManaged public var filter: String?
     @NSManaged public var memo: String?
-    
-//    var dateString: String? {
-//        let myFormatter = DateFormatter()
-//        myFormatter.dateFormat = "yyyy.mm.dd"
-//        guard let date = self.date else { return "" }
-//        let savedDateString = myFormatter.string(from: date)
-//        return savedDateString
-//    }
-
 }
 
-extension CafeDetail : Identifiable {
+extension CafeDetailData : Identifiable {
 
 }

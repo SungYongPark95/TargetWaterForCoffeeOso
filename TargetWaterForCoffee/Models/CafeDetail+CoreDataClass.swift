@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(CafeDetail)
-public class CafeDetail: NSManagedObject {
+@objc(CafeDetailData)
+public class CafeDetailData: NSManagedObject {
 
 }

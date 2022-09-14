@@ -24,29 +24,23 @@ class CafeDetailViewController: UIViewController {
     var dotYAnchor: NSLayoutConstraint?
     
     let coreDataManager = CoreDataManager.shared
-    
-    let circles = ["GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101", "GraphDataCircles_100", "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110",
-         "GraphDataCircles_111", "GraphDataCircles_111", "GraphDataCircles_101","GraphDataCircles_100",
-         "GraphDataCircles_100", "GraphDataCircles_110","GraphDataCircles_110",]
-    let dates = ["22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18",
-                 "22.08.31", "22.06.20", "22.05.18", "22.04.17", "22.03.18", "22.02.19","22.01.18"]
-    let hardnesses = ["0", "50", "80", "100", "130", "150", "200", "0", "50", "80", "100", "130", "150", "200"]
-    let alkalinities = ["0", "20", "40", "60", "80", "100", "120", "0", "20", "40", "60", "80", "100", "120"]
-    let pHs = ["3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        print(coreDataManager.fetchCafeDetails().forEach {
-            print($0.date ?? "")
-        })
+        tableView.cellForRow(at: [0,1])?.select(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 }
 
 
 // [ MARK ] Set UI
-extension CafeDetailViewController{
-    private func setUI(){
+extension CafeDetailViewController {
+    private func setUI() {
         // navigation - Title
         navigationController?.navigationBar.tintColor = .white
         let mainTitle = UILabel()
@@ -59,13 +53,13 @@ extension CafeDetailViewController{
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapBarButton(_:)))
         let logoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         logoImageView.contentMode = .scaleAspectFit
-        logoImageView.image = UIImage(named: "Logo")
+        logoImageView.image = UIImage(named: "LOGO")
         navigationItem.leftBarButtonItem?.customView = logoImageView
         navigationItem.rightBarButtonItem?.tintColor = .black
         
         // Add & set Views
         [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView, separator1,
-         tableHeaderUIView, separator2, tableView].forEach{
+         tableHeaderUIView, separator2, tableView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -119,8 +113,6 @@ extension CafeDetailViewController{
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -10)
         ])
         
-//        graphImageUIView.backgroundColor = .red
-        
         let graphImage = UIImage(named: "WaterGraph")
         graphImageView.image = graphImage
         
@@ -141,58 +133,59 @@ extension CafeDetailViewController{
         tableView.register(DataTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
     }
+    
+    func setTableView() {
+        
+    }
 }
 
 // [ Mark ] function
-extension CafeDetailViewController{
+extension CafeDetailViewController {
     @objc
-    func didTapBarButton(_ sender: UIBarButtonItem){
+    func didTapBarButton(_ sender: UIBarButtonItem) {
         if sender == navigationItem.rightBarButtonItem{
-            let navVC = UINavigationController(rootViewController: AddDataViewController())
+            let addDataViewController = AddDataViewController()
+            addDataViewController.delegate = self
+            let navVC = UINavigationController(rootViewController: addDataViewController)
             present(navVC, animated: true)
-        } else{
+        } else {
             // navigation left button click event
             print("left")
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
 }
 
 // [ Mark ] 테스트 데이터를 사용하여 데이터 테이블에 셀 생성
-extension CafeDetailViewController: UITableViewDataSource{
+extension CafeDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return circles.count
+        if coreDataManager.getCafeDetailListFromCoreData().count == 0 {
+            coreDataManager.saveCafeDetailData(hardness: "70", alkalinity: "40", ph: "3", circle: circles(hardness: 70, alkalinity: 40), filter: "Claris Prime", memo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.") {
+                print("Create Defalt Data")
+            }
+        }
+        return coreDataManager.getCafeDetailListFromCoreData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-                as? DataTableViewCell else{ fatalError() }
-        cell.circleDataImageView.image = UIImage(named: circles[indexPath.row])
-        cell.dateLabel.text = dates[indexPath.row]
-        cell.dateLabel.sizeToFit()
-        cell.hardnessLabel.text = hardnesses[indexPath.row]
-        cell.hardnessLabel.sizeToFit()
-        cell.alkalinityLabel.text = alkalinities[indexPath.row]
-        cell.alkalinityLabel.sizeToFit()
-        cell.phLabel.text = pHs[indexPath.row]
-        cell.phLabel.sizeToFit()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DataTableViewCell
+        let cafeDetailData = coreDataManager.getCafeDetailListFromCoreData()
+        cell.cafeDetailData = cafeDetailData[indexPath.row]
         cell.delegate = self
         cell.tag = indexPath.row
         return cell
     }
 }
 
-extension CafeDetailViewController: UITableViewDelegate{
+extension CafeDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .disclosureIndicator{
-            let navVC = UINavigationController(rootViewController: DataDetailController())
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .disclosureIndicator {
+            let dataDetailController = DataDetailController()
+            dataDetailController.cafeDetailData = coreDataManager.getCafeDetailListFromCoreData()[indexPath.row]
+            let navVC = UINavigationController(rootViewController: dataDetailController)
             navVC.modalPresentationStyle = .fullScreen
             navVC.modalTransitionStyle = .crossDissolve
             present(navVC, animated: true)
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }else{
             tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
             NotificationCenter.default.post(name: Notification.Name.callCell, object: indexPath.row)
@@ -204,16 +197,24 @@ extension CafeDetailViewController: UITableViewDelegate{
 }
 
 // [Mark] Notification Center Name
-extension Notification.Name{
+extension Notification.Name {
     static let callCell = Notification.Name("callCell")
 }
 
 // [Mark] Cell Delegate Protocol
-extension CafeDetailViewController: CafeDetailTableViewCellDelegate{
+extension CafeDetailViewController: CafeDetailTableViewCellDelegate {
     func getXY(alkalinity: String, hardness: String){
         let x = (285 / 120) * (Double(alkalinity) ?? 0)
         let y = (-221 / 200) * (Double(hardness) ?? 0)
         self.dotXAnchor?.constant = CGFloat(x)
         self.dotYAnchor?.constant = CGFloat(y)
+    }
+}
+
+// [MARK] After Add Data Protocol
+extension CafeDetailViewController: CafeDetailTableReloadDelegate {
+    func reloadTable() {
+        print("delegate reload")
+        tableView.reloadData()
     }
 }

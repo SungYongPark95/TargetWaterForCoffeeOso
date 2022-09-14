@@ -14,10 +14,11 @@
 		4936CBAD28522FBE002A30D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4936CBAB28522FBE002A30D9 /* LaunchScreen.storyboard */; };
 		4936CBB628523439002A30D9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB528523439002A30D9 /* SnapKit */; };
 		4936CBB928523455002A30D9 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB828523455002A30D9 /* Charts */; };
+		CE0F213D28D17ACD00101833 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F213C28D17ACD00101833 /* DateManager.swift */; };
 		CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */; };
 		CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */; };
 		CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */; };
-		CE970EF128D0BF4500CB5BAD /* CoreDataManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE970EF028D0BF4500CB5BAD /* CoreDataManager2.swift */; };
+		CE970EF128D0BF4500CB5BAD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE970EF028D0BF4500CB5BAD /* CoreDataManager.swift */; };
 		CE97EC4A28B7587800FBDD79 /* CheckGraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */; };
 		CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */; };
 		CE9F84DC28C24A5400F2D294 /* DataDetailShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */; };
@@ -27,8 +28,6 @@
 		CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */; };
 		CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */; };
 		CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */; };
-		CECB2A5928BB887B00754FFF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB2A5828BB887B00754FFF /* CoreDataManager.swift */; };
-		CECB2A5B28BB8DA500754FFF /* MesureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB2A5A28BB8DA500754FFF /* MesureData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,10 +38,11 @@
 		4936CBA928522FBE002A30D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4936CBAC28522FBE002A30D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4936CBAE28522FBE002A30D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0F213C28D17ACD00101833 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		CE94A76628AFB7C100AA315A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CE970EF028D0BF4500CB5BAD /* CoreDataManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager2.swift; sourceTree = "<group>"; };
+		CE970EF028D0BF4500CB5BAD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckGraphData.swift; sourceTree = "<group>"; };
 		CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailController.swift; sourceTree = "<group>"; };
 		CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetailShareController.swift; sourceTree = "<group>"; };
@@ -52,8 +52,6 @@
 		CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC6BC5928A402E90057AEF5 /* AddDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
 		CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataTableViewCell.swift; sourceTree = "<group>"; };
-		CECB2A5828BB887B00754FFF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		CECB2A5A28BB8DA500754FFF /* MesureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesureData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +104,9 @@
 			children = (
 				CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */,
 				CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */,
-				CECB2A5828BB887B00754FFF /* CoreDataManager.swift */,
-				CE970EF028D0BF4500CB5BAD /* CoreDataManager2.swift */,
+				CE970EF028D0BF4500CB5BAD /* CoreDataManager.swift */,
 				CE97EC4928B7587800FBDD79 /* CheckGraphData.swift */,
-				CECB2A5A28BB8DA500754FFF /* MesureData.swift */,
+				CE0F213C28D17ACD00101833 /* DateManager.swift */,
 				CE9F84DF28C3656C00F2D294 /* Extentensions.swift */,
 			);
 			path = Models;
@@ -215,22 +212,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0F213D28D17ACD00101833 /* DateManager.swift in Sources */,
 				CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */,
 				CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */,
 				4936CBA528522FBB002A30D9 /* CafeDetailViewController.swift in Sources */,
 				4936CBA128522FBB002A30D9 /* AppDelegate.swift in Sources */,
 				CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */,
 				CE9F84DE28C24A7B00F2D294 /* DataDetailUpDelController.swift in Sources */,
-				CECB2A5B28BB8DA500754FFF /* MesureData.swift in Sources */,
 				CE9F84DC28C24A5400F2D294 /* DataDetailShareController.swift in Sources */,
 				CE97EC4A28B7587800FBDD79 /* CheckGraphData.swift in Sources */,
-				CECB2A5928BB887B00754FFF /* CoreDataManager.swift in Sources */,
 				CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */,
 				CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */,
 				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
 				CE9F84E028C3656C00F2D294 /* Extentensions.swift in Sources */,
 				CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */,
-				CE970EF128D0BF4500CB5BAD /* CoreDataManager2.swift in Sources */,
+				CE970EF128D0BF4500CB5BAD /* CoreDataManager.swift in Sources */,
 				CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */,
 				4936CBA328522FBB002A30D9 /* SceneDelegate.swift in Sources */,
 			);

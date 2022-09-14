@@ -8,6 +8,10 @@
 import UIKit
 import CoreData
 
+protocol CafeDetailTableReloadDelegate: AnyObject {
+    func reloadTable()
+}
+
 class AddDataViewController: UIViewController {
     
     let titleLabel = UILabel()
@@ -16,10 +20,10 @@ class AddDataViewController: UIViewController {
     let memoTextView = UITextView()
     let saveButton = UIButton(type: .system)
     let dataTypes = ["Total Hardness", "Alkalinity", "PH", "Filter"]
-    let coreDataKeys = ["hardness", "alkalinity", "ph", "filter", "memo", "circle", "date"]
-    var InsertData = ["", "", "", "", "", "", ""]
+    var InsertData = ["", "", "", "", "", ""]
     
-    var container: NSPersistentContainer!
+    weak var delegate: CafeDetailTableReloadDelegate?
+    
     let coreDataManager = CoreDataManager.shared
     
     override func viewDidLoad() {
@@ -111,7 +115,6 @@ extension AddDataViewController {
 extension AddDataViewController {
     @objc // Save Button
     func didTapSaveButton(_ sender: UIButton) {
-        
         if Int(InsertData[0])! >= 200 || Int(InsertData[1])! >= 120 || Int(InsertData[2])! >= 10 {
             let message = "입력한 데이터의 크기가 적절하지 않습니다."
             let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
@@ -122,7 +125,7 @@ extension AddDataViewController {
             }
             alertController.addAction(confirmAction)
             self.present(alertController, animated: true)
-        } else{
+        } else {
             // set empty Data
             if InsertData[3] == ""{
                 InsertData[3] = "No Filter"
@@ -132,55 +135,36 @@ extension AddDataViewController {
                 InsertData[4] = "No Memo"
             }
             InsertData[5] = circles(hardness: Int(InsertData[0])!, alkalinity: Int(InsertData[1])!)
-            InsertData[6] = calcDate()
             print(InsertData)
             
             // CoreData
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            self.container = appDelegate.persistentContainer
-            
-            let entity = NSEntityDescription.entity(forEntityName: "CafeDetail", in: self.container.viewContext)!
-            let cafeData = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
-            
-            // CoreData : Set Value
-            for i in 0..<coreDataKeys.count {
-                cafeData.setValue(InsertData[i], forKey: coreDataKeys[i])
-            }
-            
-            // CoreData : Save Data
-            do{
-                try self.container.viewContext.save()
-                print("SAVE SUCCESS")
-            }catch{
-                print("SAVE ERROR")
-                fatalError()
-            }
-            
-            // UI
-            self.view.frame.origin.y = 0
-            self.view.endEditing(true)
-            let resultMessage = "데이터 리포트가 저장되었습니다."
-            let resultAlertController = UIAlertController(title: "", message: resultMessage, preferredStyle: .alert)
-            let resultConfirmAction = UIAlertAction(title: "확인", style: .default){ _ in
-                self.dismiss(animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    let dataView = UIApplication.topViewController()!
-                    dataView.dismiss(animated: true)
+            coreDataManager.saveCafeDetailData(hardness: InsertData[0], alkalinity: InsertData[1], ph: InsertData[2], circle: InsertData[5], filter: InsertData[3], memo: InsertData[4]) {
+                self.view.frame.origin.y = 0
+                self.view.endEditing(true)
+                let resultMessage = "데이터 리포트가 저장되었습니다."
+                let resultAlertController = UIAlertController(title: "", message: resultMessage, preferredStyle: .alert)
+                let resultConfirmAction = UIAlertAction(title: "확인", style: .default){ _ in
+                    self.dismiss(animated: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.delegate?.reloadTable()
+                        let dataView = UIApplication.topViewController()!
+                        dataView.dismiss(animated: true)
+                    }
                 }
+                resultAlertController.addAction(resultConfirmAction)
+                self.present(resultAlertController, animated: true)
             }
-            resultAlertController.addAction(resultConfirmAction)
-            self.present(resultAlertController, animated: true)
         }
     }
 }
 
 // [ MARK ] Keyboard Set
-extension AddDataViewController{
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+extension AddDataViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.frame.origin.y = 0
         self.view.endEditing(true)
     }
-    @objc func keyboardWillShow(_ sender:Notification){
+    @objc func keyboardWillShow(_ sender:Notification) {
         self.view.frame.origin.y = 0
         self.view.frame.origin.y = -60
     }
@@ -213,10 +197,10 @@ extension AddDataViewController: UITableViewDataSource {
 extension AddDataViewController: AddDataTableViewCellDelegate {
     func setData(data: String, tag: Int){
         InsertData[tag] = data
-        if InsertData[0] != "", InsertData[1] != "", InsertData[2] != ""{
+        if InsertData[0] != "", InsertData[1] != "", InsertData[2] != "" {
             saveButton.isEnabled = true
             saveButton.backgroundColor = .systemBlue
-        }else{
+        } else {
             saveButton.isEnabled = false
             saveButton.backgroundColor = .lightGray
         }

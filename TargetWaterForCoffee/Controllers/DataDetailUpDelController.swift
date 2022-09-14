@@ -1,17 +1,24 @@
+//
+//  DataDetailShareController.swift
+//  TargetWaterForCoffee
+//
+//  Created by 김현준 on 2022/09/02.
+//
 
 import Foundation
 import UIKit
 
-protocol UpdateDelegate: AnyObject{
+protocol UpDelDelegate: AnyObject {
     func update()
+    func delete() -> Bool
 }
 
-class DataDetailUpDelController: UIViewController{
+class DataDetailUpDelController: UIViewController {
     
     let editButton = UIButton(type: .system)
     let deleteButton = UIButton(type: .system)
     
-    weak var updateDelegate: UpdateDelegate?
+    weak var upDelDelegate: UpDelDelegate?
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -45,7 +52,7 @@ class DataDetailUpDelController: UIViewController{
 }
 
 // [ MARK ] Set UI
-extension DataDetailUpDelController{
+extension DataDetailUpDelController {
     func setupView() {
         view.backgroundColor = .clear
     }
@@ -109,33 +116,34 @@ extension DataDetailUpDelController{
 }
 
 // [ MARK ] Button Function
-extension DataDetailUpDelController{
+extension DataDetailUpDelController {
     @objc
-    func didTapEditButton(_ sender: UIButton){
-        print("Editbutton")
-        updateDelegate?.update()
+    func didTapEditButton(_ sender: UIButton) {
+        upDelDelegate?.update()
         self.dismiss(animated: true)
     }
     
     @objc
-    func didTapDeleteButton(_ sender: UIButton){
+    func didTapDeleteButton(_ sender: UIButton) {
         let message = "데이터 리포트를 삭제하시겠습니까?"
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .default){_ in
             // CoreData
-            
-            // UI
-            let resultMessage = "데이터 리포트가 삭제되었습니다."
-            let resultAlertController = UIAlertController(title: "", message: resultMessage, preferredStyle: .alert)
-            let resultConfirmAction = UIAlertAction(title: "확인", style: .default){ _ in
-                self.dismiss(animated: false)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    let dataView = UIApplication.topViewController()!
-                    dataView.dismiss(animated: true)
+            let deleteResult = self.upDelDelegate?.delete()
+            if deleteResult == true {
+                // UI
+                let resultMessage = "데이터 리포트가 삭제되었습니다."
+                let resultAlertController = UIAlertController(title: "", message: resultMessage, preferredStyle: .alert)
+                let resultConfirmAction = UIAlertAction(title: "확인", style: .default){ _ in
+                    self.dismiss(animated: false)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        let dataView = UIApplication.topViewController()!
+                        dataView.dismiss(animated: true)
+                    }
                 }
+                resultAlertController.addAction(resultConfirmAction)
+                self.present(resultAlertController, animated: true)
             }
-            resultAlertController.addAction(resultConfirmAction)
-            self.present(resultAlertController, animated: true)
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         alertController.addAction(confirmAction)
@@ -145,8 +153,8 @@ extension DataDetailUpDelController{
 }
 
 // [ MARK ] Tap Gesture
-extension DataDetailUpDelController{
-    func setupTapGesture(){
+extension DataDetailUpDelController {
+    func setupTapGesture() {
         let dimmedViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTap(sender:)))
         dimmedView.addGestureRecognizer(dimmedViewTapGesture)
     }
@@ -156,15 +164,15 @@ extension DataDetailUpDelController{
 }
 
 // [ MARK ] Animation
-extension DataDetailUpDelController{
-    func animateDissmiss(){
-        UIView.animate(withDuration : 0.3){
+extension DataDetailUpDelController {
+    func animateDissmiss() {
+        UIView.animate(withDuration : 0.3) {
             self.containerViewBottomConstraint?.constant = self.defaultHeight
             self.view.layoutIfNeeded()
         }
         
         dimmedView.alpha = maxDimmedAlpha
-        UIView.animate(withDuration : 0.4){
+        UIView.animate(withDuration : 0.4) {
             self.dimmedView.alpha = 0
         } completion: { _ in
             self.dismiss(animated: false)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CafeDetailTableViewCellDelegate: AnyObject{
+protocol CafeDetailTableViewCellDelegate: AnyObject {
     func getXY(alkalinity: String, hardness: String)
 }
 
@@ -18,6 +18,13 @@ class DataTableViewCell: UITableViewCell {
     let hardnessLabel = UILabel()
     let alkalinityLabel = UILabel()
     let phLabel = UILabel()
+    
+    // cafeDetailData를 전달받을 변수
+    var cafeDetailData: CafeDetailData? {
+        didSet {
+            configureUIwithData()
+        }
+    }
     
     weak var delegate: CafeDetailTableViewCellDelegate?
     
@@ -34,9 +41,9 @@ class DataTableViewCell: UITableViewCell {
 }
 
 // [Mark] Set UI
-extension DataTableViewCell{
-    private func setUI(){
-        [circleDataImageView, dateLabel, hardnessLabel, alkalinityLabel, phLabel].forEach{
+extension DataTableViewCell {
+    private func setUI() {
+        [circleDataImageView, dateLabel, hardnessLabel, alkalinityLabel, phLabel].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -77,10 +84,23 @@ extension DataTableViewCell{
             $0.font = UIFont.systemFont(ofSize: 14)
         }
     }
+    
+    // 데이터를 가지고 적절한 UI 표시하기
+    func configureUIwithData() {
+        circleDataImageView.image = UIImage(named: (cafeDetailData?.circle)!)
+        dateLabel.text = cafeDetailDateFormatter(date: (cafeDetailData?.date)!)
+        dateLabel.sizeToFit()
+        hardnessLabel.text = cafeDetailData?.hardness
+        hardnessLabel.sizeToFit()
+        alkalinityLabel.text = cafeDetailData?.alkalinity
+        alkalinityLabel.sizeToFit()
+        phLabel.text = cafeDetailData?.ph
+        phLabel.sizeToFit()
+    }
 }
 
 // [Mark] Cell Protocol Function
-extension DataTableViewCell{
+extension DataTableViewCell {
     @objc
     func getXY(notification: Notification) {
         let object = notification.object as? Int ?? 0

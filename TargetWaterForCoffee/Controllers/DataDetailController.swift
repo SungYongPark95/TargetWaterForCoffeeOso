@@ -23,7 +23,7 @@ class DataDetailController: UIViewController {
     
     let mesureDataUIView = UIView()
     let totalHardnessLabel = UILabel()
-    let totalHardnessTextView = UITextView()
+    let totalHardnessDataTextView = UITextView()
     let alkalinityLabel = UILabel()
     let alkalinityDataTextView = UITextView()
     let phLabel = UILabel()
@@ -38,7 +38,6 @@ class DataDetailController: UIViewController {
     var dotXAnchor: NSLayoutConstraint?
     var dotYAnchor: NSLayoutConstraint?
     
-    var container: NSPersistentContainer?
     let coreDataManager = CoreDataManager.shared
     
     var dateData: Date = Date()
@@ -48,14 +47,14 @@ class DataDetailController: UIViewController {
     var phData: String = ""
     var memoData: String = ""
     
-    var cafeDetail: CafeDetail? {
+    var cafeDetailData: CafeDetailData? {
         didSet {
-            dateData = cafeDetail?.date ?? Date()
-            filterData = cafeDetail?.filter ?? ""
-            hardnessData = cafeDetail?.hardness ?? ""
-            alkalinityData = cafeDetail?.alkalinity ?? ""
-            phData = cafeDetail?.ph ?? ""
-            memoData = cafeDetail?.memo ?? ""
+            dateData = cafeDetailData?.date ?? Date()
+            filterData = cafeDetailData?.filter ?? ""
+            hardnessData = cafeDetailData?.hardness ?? ""
+            alkalinityData = cafeDetailData?.alkalinity ?? ""
+            phData = cafeDetailData?.ph ?? ""
+            memoData = cafeDetailData?.memo ?? ""
         }
     }
     
@@ -71,12 +70,10 @@ class DataDetailController: UIViewController {
 }
 
 // [MARK] Set UI
-extension DataDetailController{
-    func setUI(){
+extension DataDetailController {
+    func setUI() {
         // navigation
-        let date = "2022년 8월 31일"
-        let time = "10:02 AM"
-        setTitle(title: date, subTitle: time)
+        setNavigationTitle()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(didTapBarButton(_:)))
         
@@ -86,8 +83,8 @@ extension DataDetailController{
         
         [graphImageUIView, graphImageView, graphDrawPointUIView, graphPointImageView,
          filterUIView, filterLabel, filterDataTextView, multifuncButton, mesureDataUIView,
-         totalHardnessLabel, totalHardnessTextView, alkalinityLabel, alkalinityDataTextView,
-         phLabel, phDataTextView, memoUIView, memoLabel, memoDataTextView, saveButton].forEach{
+         totalHardnessLabel, totalHardnessDataTextView, alkalinityLabel, alkalinityDataTextView,
+         phLabel, phDataTextView, memoUIView, memoLabel, memoDataTextView, saveButton].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -144,15 +141,15 @@ extension DataDetailController{
             totalHardnessLabel.topAnchor.constraint(equalTo: mesureDataUIView.topAnchor),
             totalHardnessLabel.leadingAnchor.constraint(equalTo: mesureDataUIView.leadingAnchor, constant: 30),
             totalHardnessLabel.trailingAnchor.constraint(equalTo: alkalinityLabel.leadingAnchor),
-            totalHardnessLabel.bottomAnchor.constraint(equalTo: totalHardnessTextView.topAnchor),
+            totalHardnessLabel.bottomAnchor.constraint(equalTo: totalHardnessDataTextView.topAnchor),
             totalHardnessLabel.widthAnchor.constraint(equalToConstant: 105),
             
             // total Hardness Data Label
-            totalHardnessTextView.topAnchor.constraint(equalTo: totalHardnessLabel.bottomAnchor),
-            totalHardnessTextView.leadingAnchor.constraint(equalTo: mesureDataUIView.leadingAnchor, constant: 25),
-            totalHardnessTextView.trailingAnchor.constraint(equalTo: alkalinityDataTextView.leadingAnchor),
-            totalHardnessTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
-            totalHardnessTextView.widthAnchor.constraint(equalToConstant: 105),
+            totalHardnessDataTextView.topAnchor.constraint(equalTo: totalHardnessLabel.bottomAnchor),
+            totalHardnessDataTextView.leadingAnchor.constraint(equalTo: mesureDataUIView.leadingAnchor, constant: 25),
+            totalHardnessDataTextView.trailingAnchor.constraint(equalTo: alkalinityDataTextView.leadingAnchor),
+            totalHardnessDataTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
+            totalHardnessDataTextView.widthAnchor.constraint(equalToConstant: 105),
             
             // alkalinity Label
             alkalinityLabel.topAnchor.constraint(equalTo: mesureDataUIView.topAnchor),
@@ -163,7 +160,7 @@ extension DataDetailController{
             
             // alkalinity Data TextView
             alkalinityDataTextView.topAnchor.constraint(equalTo: alkalinityLabel.bottomAnchor),
-            alkalinityDataTextView.leadingAnchor.constraint(equalTo: totalHardnessTextView.trailingAnchor),
+            alkalinityDataTextView.leadingAnchor.constraint(equalTo: totalHardnessDataTextView.trailingAnchor),
             alkalinityDataTextView.trailingAnchor.constraint(equalTo: phDataTextView.leadingAnchor),
             alkalinityDataTextView.bottomAnchor.constraint(equalTo: mesureDataUIView.bottomAnchor),
             alkalinityDataTextView.widthAnchor.constraint(equalToConstant: 105),
@@ -222,7 +219,7 @@ extension DataDetailController{
         filterLabel.textColor = .darkGray
         
         // filter Data Text View
-        filterDataTextView.text = "Claris Prime"
+        filterDataTextView.text = filterData
         filterDataTextView.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         filterDataTextView.textColor = .darkGray
         filterDataTextView.isEditable = false
@@ -235,7 +232,7 @@ extension DataDetailController{
         multifuncButton.addTarget(self, action: #selector(didTapMuitiFunctionButton(_:)), for: .touchUpInside)
         
         // mesure labels
-        [totalHardnessLabel, alkalinityLabel, phLabel].forEach{
+        [totalHardnessLabel, alkalinityLabel, phLabel].forEach {
             $0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
             $0.textColor = .darkGray
         }
@@ -244,20 +241,20 @@ extension DataDetailController{
         phLabel.text = "PH"
         
         // mesure Data Text View
-        [totalHardnessTextView, alkalinityDataTextView, phDataTextView].forEach{
+        [totalHardnessDataTextView, alkalinityDataTextView, phDataTextView].forEach {
             $0.font = UIFont.systemFont(ofSize: 25, weight: .bold)
             $0.textColor = .darkGray
             $0.isEditable = false
             $0.keyboardType = .numberPad
             $0.isScrollEnabled = false
         }
-        totalHardnessTextView.text = "100"
-        alkalinityDataTextView.text = "40"
-        phDataTextView.text = "3"
+        totalHardnessDataTextView.text = hardnessData
+        alkalinityDataTextView.text = alkalinityData
+        phDataTextView.text = phData
         
         // set dot position
         let x = (285 / 120) * (Double(alkalinityDataTextView.text ?? "") ?? 0)
-        let y = (-221 / 200) * (Double(totalHardnessTextView.text ?? "") ?? 0)
+        let y = (-221 / 200) * (Double(totalHardnessDataTextView.text ?? "") ?? 0)
         dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: x)
         dotXAnchor?.isActive = true
         dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: y)
@@ -269,11 +266,11 @@ extension DataDetailController{
         memoLabel.text = "Memo"
         
         // memo Data Text View
+        memoDataTextView.text = memoData
         memoDataTextView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         memoDataTextView.textContainerInset.left = .zero
         memoDataTextView.textColor = .darkGray
         memoDataTextView.isEditable = false
-        memoDataTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
         memoDataTextView.textContainerInset.top = 0
         
         // save Button
@@ -288,37 +285,37 @@ extension DataDetailController{
 }
 
 // [MARK] Button Function
-extension DataDetailController: UINavigationControllerDelegate{
+extension DataDetailController: UINavigationControllerDelegate {
     @objc
-    private func didTapBarButton(_ sender: UIBarButtonItem){
+    private func didTapBarButton(_ sender: UIBarButtonItem) {
         if sender == navigationItem.rightBarButtonItem{
             let dataDetailShareController = DataDeatilShareController()
             dataDetailShareController.shareDelegate = self
             let naviagtionController = UINavigationController(rootViewController: dataDetailShareController)
             naviagtionController.modalPresentationStyle = .overCurrentContext
             present(naviagtionController, animated: false)
-        } else{
+        } else {
             self.dismiss(animated: true)
         }
     }
     
     @objc
-    private func didTapMuitiFunctionButton(_ sender: UIButton){
+    private func didTapMuitiFunctionButton(_ sender: UIButton) {
         let dataDetailUpDelController = DataDetailUpDelController()
-        dataDetailUpDelController.updateDelegate = self
+        dataDetailUpDelController.upDelDelegate = self
         let DataDetailUpDelController = UINavigationController(rootViewController: dataDetailUpDelController)
         DataDetailUpDelController.modalPresentationStyle = .overCurrentContext
         present(DataDetailUpDelController, animated: false)
     }
     
     @objc
-    private func didTapSaveButton(_ sender: UIButton){
-        if Int(totalHardnessTextView.text)! >= 200 || Int(alkalinityDataTextView.text)! >= 120 ||
+    private func didTapSaveButton(_ sender: UIButton) {
+        if Int(totalHardnessDataTextView.text)! >= 200 || Int(alkalinityDataTextView.text)! >= 120 ||
             Int(phDataTextView.text)! >= 10 {
             let message = "입력한 데이터의 크기가 적절하지 않습니다."
             let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
             let confirmAction = UIAlertAction(title: "확인", style: .default){_ in 
-                self.totalHardnessTextView.text = "0"
+                self.totalHardnessDataTextView.text = "0"
                 self.alkalinityDataTextView.text = "0"
                 self.phDataTextView.text = "0"
             }
@@ -326,31 +323,44 @@ extension DataDetailController: UINavigationControllerDelegate{
             self.present(alertController, animated: true)
         } else {
             // CoreData - Update
-            
-            // set title
-            let date = "2022년 8월 31일"
-            let time = "10:02 AM"
-            setTitle(title: date, subTitle: time)
-            
-            // show graph
-            self.graphImageView.isHidden = false
-            self.graphPointImageView.isHidden = false
-            self.view.frame.origin.y = 0
-            self.view.endEditing(true)
-            
-            // activate Data TextView
-            [self.filterDataTextView, self.totalHardnessTextView, self.alkalinityDataTextView,
-             self.phDataTextView, self.memoDataTextView].forEach {
-                $0.isEditable = false
+            let hardness = self.totalHardnessDataTextView.text!
+            let alkalinity = self.alkalinityDataTextView.text!
+            cafeDetailData?.filter = self.filterDataTextView.text
+            cafeDetailData?.hardness = hardness
+            cafeDetailData?.alkalinity = alkalinity
+            cafeDetailData?.ph = self.phDataTextView.text
+            cafeDetailData?.memo = self.memoDataTextView.text
+            cafeDetailData?.circle = circles(hardness: Int(hardness)!, alkalinity: Int(alkalinity)!)
+            coreDataManager.updateToDo(newCafeDetailData: cafeDetailData!) {
+                let message = "데이터 리포트가 수정되었습니다."
+                let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .default){_ in
+                    // set title
+                    self.setNavigationTitle()
+                    
+                    // show graph
+                    self.graphImageView.isHidden = false
+                    self.graphPointImageView.isHidden = false
+                    self.view.frame.origin.y = 0
+                    self.view.endEditing(true)
+                    
+                    // activate Data TextView
+                    [self.filterDataTextView, self.totalHardnessDataTextView, self.alkalinityDataTextView,
+                     self.phDataTextView, self.memoDataTextView].forEach {
+                        $0.isEditable = false
+                    }
+                    
+                    // show save Button
+                    self.saveButton.isHidden = true
+                    
+                    // deactivate Buttons
+                    self.navigationItem.rightBarButtonItem?.isEnabled = true
+                    self.navigationItem.rightBarButtonItem?.tintColor = .none
+                    self.multifuncButton.isHidden = false
+                }
+                alertController.addAction(confirmAction)
+                self.present(alertController, animated: true)
             }
-            
-            // show save Button
-            self.saveButton.isHidden = true
-            
-            // deactivate Buttons
-            navigationItem.rightBarButtonItem?.isEnabled = true
-            navigationItem.rightBarButtonItem?.tintColor = .none
-            multifuncButton.isHidden = false
         }
     }
 }
@@ -364,14 +374,18 @@ extension DataDetailController: UISheetPresentationControllerDelegate {
 
 // [MARK] Function
 extension DataDetailController {
-    func setTitle(title: String, subTitle: String) {
+    func setNavigationTitle() {
+        let formattedDateData = dataDetailDateFormatter(date: dateData)
+        let date = formattedDateData.day
+        let time = formattedDateData.time
+        
         let main = UILabel()
-        main.text = title
+        main.text = date
         main.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         main.sizeToFit()
         
         let sub = UILabel()
-        sub.text = subTitle
+        sub.text = time
         sub.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         sub.textColor = .lightGray
         sub.textAlignment = .center
@@ -418,7 +432,7 @@ extension DataDetailController: UITextViewDelegate {
 }
 
 // [ MARK ] Swipe Gesture
-extension DataDetailController{
+extension DataDetailController {
     func swipeRecognizer() {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
@@ -439,8 +453,8 @@ extension DataDetailController{
 }
 
 // [Mark] Data Detail Update Delete Controller Protocol
-extension DataDetailController: UpdateDelegate {
-    func update(){
+extension DataDetailController: UpDelDelegate {
+    func update() {
         // set Navigation Title
         let title = UILabel()
         title.text = "정보 수정"
@@ -449,7 +463,7 @@ extension DataDetailController: UpdateDelegate {
         self.navigationItem.titleView = title
         
         // activate Data TextView
-        [self.filterDataTextView, self.totalHardnessTextView, self.alkalinityDataTextView,
+        [self.filterDataTextView, self.totalHardnessDataTextView, self.alkalinityDataTextView,
          self.phDataTextView, self.memoDataTextView].forEach {
             $0.isEditable = true
         }
@@ -465,12 +479,20 @@ extension DataDetailController: UpdateDelegate {
         navigationItem.rightBarButtonItem?.tintColor = .clear
         multifuncButton.isHidden = true
     }
+    
+    func delete() -> Bool {
+        var result = false
+        coreDataManager.deleteCafeDetailData(data: cafeDetailData!) {
+            result = true
+        }
+        return result
+    }
 }
 
 // [Mark] Data Detail Share Controller Protocol
 extension DataDetailController: ShareDelegate {
     
-    func alert(result: String){
+    func alert(result: String) {
         var message = ""
         
         if result != "" {
@@ -502,9 +524,10 @@ extension DataDetailController: ShareDelegate {
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    func getTitle() -> String{
-        let date = "2022년 8월 31일"
-        let time = "10:02 AM"
+    func getTitle() -> String {
+        let formattedDateData = dataDetailDateFormatter(date: dateData)
+        let date = formattedDateData.day
+        let time = formattedDateData.time
         let title = "\(date)_\(time)"
         return title
     }

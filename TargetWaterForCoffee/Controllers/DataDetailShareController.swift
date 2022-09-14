@@ -5,7 +5,7 @@
 //  Created by 김현준 on 2022/09/02.
 //
 
-protocol ShareDelegate: AnyObject{
+protocol ShareDelegate: AnyObject {
     func alert(result: String)
     func share(filePath: String)
     func getTitle() -> String
@@ -14,7 +14,7 @@ protocol ShareDelegate: AnyObject{
 import Foundation
 import UIKit
 
-class DataDeatilShareController: UIViewController{
+class DataDeatilShareController: UIViewController {
     
     let label = UILabel()
     let separatorLabel = UILabel()
@@ -55,7 +55,7 @@ class DataDeatilShareController: UIViewController{
 }
 
 // [ MARK ] Set UI
-extension DataDeatilShareController{
+extension DataDeatilShareController {
     func setBackgroundUI() {
         view.backgroundColor = .clear
     }
@@ -137,10 +137,10 @@ extension DataDeatilShareController{
 }
 
 // [ MARK ] Button Action
-extension DataDeatilShareController{
+extension DataDeatilShareController {
     // Save Button
     @objc
-    func didTapSaveButton(_ sender: UIButton){
+    func didTapSaveButton(_ sender: UIButton) {
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
@@ -151,7 +151,7 @@ extension DataDeatilShareController{
     
     // Share Button
     @objc
-    func didTapShareButton(_ sender: UIButton){
+    func didTapShareButton(_ sender: UIButton) {
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
@@ -162,8 +162,8 @@ extension DataDeatilShareController{
 }
 
 // [ MARK ] Tap Gesture
-extension DataDeatilShareController{
-    func setupTapGesture(){
+extension DataDeatilShareController {
+    func setupTapGesture() {
         let dimmedViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTap(sender:)))
         dimmedView.addGestureRecognizer(dimmedViewTapGesture)
     }
@@ -173,15 +173,15 @@ extension DataDeatilShareController{
 }
 
 // [ MARK ] Animation
-extension DataDeatilShareController{
+extension DataDeatilShareController {
     func animateDissmiss(){
-        UIView.animate(withDuration : 0.3){
+        UIView.animate(withDuration : 0.3) {
             self.containerViewBottomConstraint?.constant = self.defaultHeight
             self.view.layoutIfNeeded()
         }
         
         dimmedView.alpha = maxDimmedAlpha
-        UIView.animate(withDuration : 0.4){
+        UIView.animate(withDuration : 0.4) {
             self.dimmedView.alpha = 0
         } completion: { _ in
             self.dismiss(animated: false)
