@@ -41,6 +41,24 @@ class DataDetailController: UIViewController {
     var container: NSPersistentContainer?
     let coreDataManager = CoreDataManager.shared
     
+    var dateData: Date = Date()
+    var filterData: String = ""
+    var hardnessData: String = ""
+    var alkalinityData: String = ""
+    var phData: String = ""
+    var memoData: String = ""
+    
+    var cafeDetail: CafeDetail? {
+        didSet {
+            dateData = cafeDetail?.date ?? Date()
+            filterData = cafeDetail?.filter ?? ""
+            hardnessData = cafeDetail?.hardness ?? ""
+            alkalinityData = cafeDetail?.alkalinity ?? ""
+            phData = cafeDetail?.ph ?? ""
+            memoData = cafeDetail?.memo ?? ""
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -371,6 +389,10 @@ extension DataDetailController {
         sub.sizeToFit()
         
         self.navigationItem.titleView = titleStackView
+    }
+    
+    func configureUI() {
+        
     }
 }
 

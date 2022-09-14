@@ -16,7 +16,7 @@ extension CafeDetail {
         return NSFetchRequest<CafeDetail>(entityName: "CafeDetail")
     }
 
-    @NSManaged public var date: String?
+    @NSManaged public var date: Date?
     @NSManaged public var circle: String?
     @NSManaged public var ph: String?
     @NSManaged public var alkalinity: String?
