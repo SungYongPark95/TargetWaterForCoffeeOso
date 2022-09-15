@@ -16,6 +16,8 @@
 		4936CBB928523455002A30D9 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 4936CBB828523455002A30D9 /* Charts */; };
 		CE0F213D28D17ACD00101833 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F213C28D17ACD00101833 /* DateManager.swift */; };
 		CE0F213F28D242FF00101833 /* LogoUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F213E28D242FF00101833 /* LogoUIView.swift */; };
+		CE0F214128D24A6400101833 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F214028D24A6400101833 /* InfoViewController.swift */; };
+		CE0F214328D31BF100101833 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F214228D31BF100101833 /* InfoTableViewCell.swift */; };
 		CE94A76728AFB7C100AA315A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76528AFB7C100AA315A /* Model.xcdatamodeld */; };
 		CE94A76A28AFB86900AA315A /* CafeDetail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */; };
 		CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */; };
@@ -41,6 +43,8 @@
 		4936CBAE28522FBE002A30D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0F213C28D17ACD00101833 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		CE0F213E28D242FF00101833 /* LogoUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoUIView.swift; sourceTree = "<group>"; };
+		CE0F214028D24A6400101833 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CE0F214228D31BF100101833 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		CE94A76628AFB7C100AA315A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CE94A76828AFB86900AA315A /* CafeDetail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE94A76928AFB86900AA315A /* CafeDetail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CafeDetail+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				CEC6BC5528A402010057AEF5 /* DataTableHeaderUIView.swift */,
 				CEC6BC5728A402860057AEF5 /* DataTableViewCell.swift */,
 				CEC6BC5B28A4033E0057AEF5 /* AddDataTableViewCell.swift */,
+				CE0F214228D31BF100101833 /* InfoTableViewCell.swift */,
 				CE0F213E28D242FF00101833 /* LogoUIView.swift */,
 			);
 			path = Views;
@@ -133,6 +138,7 @@
 				CE9F848A28BEFA1300F2D294 /* DataDetailController.swift */,
 				CE9F84DB28C24A5400F2D294 /* DataDetailShareController.swift */,
 				CE9F84DD28C24A7B00F2D294 /* DataDetailUpDelController.swift */,
+				CE0F214028D24A6400101833 /* InfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE0F213D28D17ACD00101833 /* DateManager.swift in Sources */,
+				CE0F214328D31BF100101833 /* InfoTableViewCell.swift in Sources */,
 				CEC6BC5828A402860057AEF5 /* DataTableViewCell.swift in Sources */,
 				CE94A76B28AFB86900AA315A /* CafeDetail+CoreDataProperties.swift in Sources */,
 				CE0F213F28D242FF00101833 /* LogoUIView.swift in Sources */,
@@ -229,6 +236,7 @@
 				CEC6BC5C28A4033E0057AEF5 /* AddDataTableViewCell.swift in Sources */,
 				CEC6BC5628A402010057AEF5 /* DataTableHeaderUIView.swift in Sources */,
 				CE9F84E028C3656C00F2D294 /* Extentensions.swift in Sources */,
+				CE0F214128D24A6400101833 /* InfoViewController.swift in Sources */,
 				CEC6BC5A28A402E90057AEF5 /* AddDataViewController.swift in Sources */,
 				CE970EF128D0BF4500CB5BAD /* CoreDataManager.swift in Sources */,
 				CE9F848B28BEFA1300F2D294 /* DataDetailController.swift in Sources */,
