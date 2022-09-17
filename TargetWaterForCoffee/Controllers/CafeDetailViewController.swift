@@ -32,10 +32,7 @@ class CafeDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-        let hardness = coreDataManager.getCafeDetailListFromCoreData()[0].hardness!
-        let alkalinity = coreDataManager.getCafeDetailListFromCoreData()[0].alkalinity!
-        setDotCoordinate(alkalinity: alkalinity, hardness: hardness)
+        reloadData()
     }
 }
 
@@ -67,10 +64,10 @@ extension CafeDetailViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 285)
-        dotXAnchor?.isActive = true
-        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: -221)
-        dotYAnchor?.isActive = true
+        dotXAnchor = graphPointImageView.centerXAnchor.constraint(equalTo: graphDrawPointUIView.leadingAnchor, constant: 0)
+        dotXAnchor?.isActive = false
+        dotYAnchor = graphPointImageView.centerYAnchor.constraint(equalTo: graphDrawPointUIView.bottomAnchor, constant: 0)
+        dotYAnchor?.isActive = false
         
         NSLayoutConstraint.activate([
             // graph - UIView
@@ -146,20 +143,17 @@ extension CafeDetailViewController {
 extension CafeDetailViewController {
     @objc
     func didTapBarButton(_ sender: UIBarButtonItem) {
-        if sender == navigationItem.rightBarButtonItem{
-            let addDataViewController = AddDataViewController()
-            addDataViewController.delegate = self
-            let navVC = UINavigationController(rootViewController: addDataViewController)
-            present(navVC, animated: true)
-        } else {
-            // navigation left button click event
-            print("left")
-        }
+        let addDataViewController = AddDataViewController()
+        addDataViewController.delegate = self
+        let navVC = UINavigationController(rootViewController: addDataViewController)
+        present(navVC, animated: true)
     }
     
     @objc
     func didTapLogoButton(_ sender: UIButton) {
-        print("logo Button")
+        let infoViewController = InfoViewController()
+        let navVC = UINavigationController(rootViewController: infoViewController)
+        present(navVC, animated: true)
     }
 }
 
@@ -170,6 +164,20 @@ extension CafeDetailViewController {
         let y = (-221 / 200) * (Double(hardness) ?? 0)
         self.dotXAnchor?.constant = CGFloat(x)
         self.dotYAnchor?.constant = CGFloat(y)
+        self.dotXAnchor?.isActive = true
+        self.dotYAnchor?.isActive = true
+    }
+    
+    func reloadData() {
+        tableView.reloadData()
+        
+        let hardness = self.coreDataManager.getCafeDetailListFromCoreData()[0].hardness!
+        let alkalinity = self.coreDataManager.getCafeDetailListFromCoreData()[0].alkalinity!
+        
+        setDotCoordinate(alkalinity: alkalinity, hardness: hardness)
+        
+        self.tableView.cellForRow(at: [0,0])?.isHighlighted = true
+        self.tableView.cellForRow(at: [0,0])?.accessoryType = .disclosureIndicator
     }
 }
 
@@ -206,6 +214,8 @@ extension CafeDetailViewController: UITableViewDelegate {
             navVC.modalTransitionStyle = .crossDissolve
             present(navVC, animated: true)
         }else{
+            tableView.cellForRow(at: [0,0])?.isHighlighted = false
+            tableView.cellForRow(at: [0,0])?.accessoryType = .none
             tableView.cellForRow(at: indexPath)?.accessoryType = .disclosureIndicator
             NotificationCenter.default.post(name: Notification.Name.callCell, object: indexPath.row)
         }
@@ -231,9 +241,6 @@ extension CafeDetailViewController: CafeDetailTableViewCellDelegate {
 // [MARK] After Add Data Protocol
 extension CafeDetailViewController: CafeDetailTableReloadDelegate {
     func reloadTable() {
-        tableView.reloadData()
-        let hardness = coreDataManager.getCafeDetailListFromCoreData()[0].hardness!
-        let alkalinity = coreDataManager.getCafeDetailListFromCoreData()[0].alkalinity!
-        setDotCoordinate(alkalinity: alkalinity, hardness: hardness)
+        reloadData()
     }
 }

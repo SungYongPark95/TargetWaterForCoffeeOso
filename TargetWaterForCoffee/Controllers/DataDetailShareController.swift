@@ -15,9 +15,7 @@ import Foundation
 import UIKit
 
 class DataDeatilShareController: UIViewController {
-    
-    let label = UILabel()
-    let separatorLabel = UILabel()
+
     let pdfSaveButton = UIButton(type: .system)
     let pdfShareButton = UIButton(type: .system)
     
@@ -39,7 +37,7 @@ class DataDeatilShareController: UIViewController {
         return view
     }()
     
-    let defaultHeight: CGFloat = 207
+    let defaultHeight: CGFloat = 161
     
     // Dynamic container constraint
     var containerViewHeightConstraint: NSLayoutConstraint?
@@ -61,22 +59,13 @@ extension DataDeatilShareController {
     }
     
     func setUI(){
-        [label, separatorLabel, pdfSaveButton, pdfShareButton].forEach {
+        [pdfSaveButton, pdfShareButton].forEach {
             containerView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            label.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 15),
-            
-            // separator1
-            separatorLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 15),
-            separatorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
-            separatorLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
-            separatorLabel.heightAnchor.constraint(equalToConstant: 2),
-            
-            pdfSaveButton.topAnchor.constraint(equalTo: separatorLabel.bottomAnchor, constant: 20),
+            pdfSaveButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 25),
             pdfSaveButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             pdfSaveButton.widthAnchor.constraint(equalToConstant: 200),
             
@@ -84,15 +73,6 @@ extension DataDeatilShareController {
             pdfShareButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             pdfShareButton.widthAnchor.constraint(equalToConstant: 200)
         ])
-        
-        // label
-        label.textColor = UIColor.darkGray
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.text = "데이터 리포트 공유"
-        label.sizeToFit()
-        
-        // seperator
-        separatorLabel.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         
         // PDF Save Button
         pdfSaveButton.setTitle("PDF 파일로 저장하기", for: .normal)

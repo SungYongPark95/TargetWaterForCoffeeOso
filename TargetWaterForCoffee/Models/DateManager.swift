@@ -17,7 +17,7 @@ func cafeDetailDateFormatter(date: Date) -> String {
 
 func dataDetailDateFormatter(date: Date) -> (day: String, time: String) {
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy년MM월dd일 a h:mm "
+    formatter.dateFormat = "yyyy년MM월dd일 h:mm a"
     let current_date_string = formatter.string(from: date)
     let arr = current_date_string.components(separatedBy: " ")
     return (arr[0], arr[1] + " " + arr[2])
