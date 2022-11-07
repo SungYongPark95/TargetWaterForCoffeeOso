@@ -6,11 +6,12 @@
 //
 
 import Foundation
-var ColonnaDashwoodHendon = false
-var SCAE = false
-var SCAFullRange = false
 
 func circles(hardness: Int, alkalinity: Int) -> String {
+    var ColonnaDashwoodHendon = false
+    var SCAE = false
+    var SCAFullRange = false
+    
     // [ Mark ] SCAFullRange Check(Green)
     if 39 <= alkalinity , alkalinity <= 41 , 15 <= hardness , hardness <= 88 {
         SCAFullRange = true

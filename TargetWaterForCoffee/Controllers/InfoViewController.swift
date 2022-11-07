@@ -18,9 +18,18 @@ class InfoViewController: UIViewController {
     let versionLabel = UILabel()
     
     let posision = ["iOS Developer", "UX/UI Designer"]
-    let personData = [["김현준", "iOS Developer", "https://gitHub.com/", "developer1@gmail.com"],
-                      ["박성용", "iOS Developer", "https://gitHub.com/", "developer1@gmail.com"],
-                      ["장인희", "UX/UI Designer", "https://behance.com/", "inheejang7@gmail.com"]]
+    let personData = [["김현준",
+                       "iOS Developer",
+                       "https://github.com/Hyeon-Jun-Kim",
+                       "holden.developer@gmail.com"],
+                      ["박성용",
+                       "iOS Developer",
+                       "https://github.com/SungYongPark95",
+                       "sungyong.park6@gmail.com"],
+                      ["장인희",
+                       "UX/UI Designer",
+                       "https://www.behance.net/innissi/moodboards",
+                       "inheejang7@gmail.com"]]
      
     override func viewDidLoad() {
         super.viewDidLoad()

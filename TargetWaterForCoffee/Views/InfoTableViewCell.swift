@@ -55,7 +55,7 @@ extension InfoTableViewCell {
             
             urlLabel.topAnchor.constraint(equalTo: personIcon.bottomAnchor, constant: 7),
             urlLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            urlLabel.widthAnchor.constraint(equalToConstant: 60),
+            urlLabel.widthAnchor.constraint(equalToConstant: 100),
             urlLabel.heightAnchor.constraint(equalToConstant: 16),
             
             urlAddressLabel.centerYAnchor.constraint(equalTo: urlLabel.centerYAnchor),
@@ -91,7 +91,7 @@ extension InfoTableViewCell {
         emailLabel.text = "E-mail |"
         
         [urlAddressLabel, emailAddressLabel].forEach {
-            $0.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+            $0.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             $0.backgroundColor = .clear
             $0.textContainerInset = .zero
             $0.isEditable = false

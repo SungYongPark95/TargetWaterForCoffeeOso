@@ -40,9 +40,9 @@ extension AddDataTableViewCell {
             dataTypeLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,constant: 16),
             dataTypeLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             dataTypeLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            dataTypeLabel.widthAnchor.constraint(equalToConstant: 110),
+            dataTypeLabel.widthAnchor.constraint(equalToConstant: 200),
             
-            textView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
+            textView.centerYAnchor.constraint(equalTo: dataTypeLabel.centerYAnchor),
             textView.leadingAnchor.constraint(equalTo: dataTypeLabel.trailingAnchor),
             textView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             textView.heightAnchor.constraint(equalToConstant: 22)

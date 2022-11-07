@@ -81,6 +81,7 @@ extension AddDataViewController {
         // Table View
         tableView.register(AddDataTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         tableView.separatorStyle = .singleLine
         tableView.layer.cornerRadius = 10
         tableView.separatorInset.left = 20
@@ -135,7 +136,6 @@ extension AddDataViewController {
                 InsertData[4] = "No Memo"
             }
             InsertData[5] = circles(hardness: Int(InsertData[0])!, alkalinity: Int(InsertData[1])!)
-            print(InsertData)
             
             // CoreData
             coreDataManager.saveCafeDetailData(hardness: InsertData[0], alkalinity: InsertData[1], ph: InsertData[2], circle: InsertData[5], filter: InsertData[3], memo: InsertData[4]) {
@@ -204,7 +204,6 @@ extension AddDataViewController: AddDataTableViewCellDelegate {
             saveButton.isEnabled = false
             saveButton.backgroundColor = .lightGray
         }
-        print(InsertData)
     }
 }
 
