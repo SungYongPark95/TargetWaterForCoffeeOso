@@ -85,7 +85,7 @@ extension DataTableViewCell {
         }
     }
     
-    // 데이터를 가지고 적절한 UI 표시
+    // 데이터를 적절한 UI로 표시
     func configureUIwithData() {
         circleDataImageView.image = UIImage(named: (cafeDetailData?.circle)!)
         dateLabel.text = cafeDetailDateFormatter(date: (cafeDetailData?.date)!)

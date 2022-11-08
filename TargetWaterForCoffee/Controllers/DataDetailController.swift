@@ -290,7 +290,7 @@ extension DataDetailController: UINavigationControllerDelegate {
     private func didTapBarButton(_ sender: UIBarButtonItem) {
         if sender == navigationItem.rightBarButtonItem{
             let dataDetailShareController = DataDeatilShareController()
-            dataDetailShareController.shareDelegate = self
+            dataDetailShareController.delegate = self
             let naviagtionController = UINavigationController(rootViewController: dataDetailShareController)
             naviagtionController.modalPresentationStyle = .overCurrentContext
             present(naviagtionController, animated: false)

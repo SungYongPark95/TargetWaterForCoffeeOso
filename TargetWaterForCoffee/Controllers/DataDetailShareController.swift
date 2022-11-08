@@ -19,7 +19,7 @@ class DataDeatilShareController: UIViewController {
     let pdfSaveButton = UIButton(type: .system)
     let pdfShareButton = UIButton(type: .system)
     
-    weak var shareDelegate: ShareDelegate?
+    weak var delegate: ShareDelegate?
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -124,8 +124,8 @@ extension DataDeatilShareController {
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
-            let title = self.shareDelegate?.getTitle()
-            self.shareDelegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)(title: title ?? "GetTitleError"))
+            let title = self.delegate?.getTitle()
+            self.delegate?.alert(result: UIView.exportAsPdfFromView(dataView.view)(title: title ?? "GetTitleError"))
         }
     }
     
@@ -135,8 +135,8 @@ extension DataDeatilShareController {
         self.animateDissmiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let dataView = UIApplication.topViewController()!
-            let title = self.shareDelegate?.getTitle()
-            self.shareDelegate?.share(filePath: UIView.exportAsPdfFromView(dataView.view)(title: title ?? "GetTitleError"))
+            let title = self.delegate?.getTitle()
+            self.delegate?.share(filePath: UIView.exportAsPdfFromView(dataView.view)(title: title ?? "GetTitleError"))
         }
     }
 }

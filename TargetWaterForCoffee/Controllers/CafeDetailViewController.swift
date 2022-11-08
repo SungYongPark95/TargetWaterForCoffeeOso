@@ -133,10 +133,6 @@ extension CafeDetailViewController {
         tableView.register(DataTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.dataSource = self
     }
-    
-    func setTableView() {
-        
-    }
 }
 
 // [ Mark ] Button function
@@ -185,8 +181,10 @@ extension CafeDetailViewController {
 extension CafeDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if coreDataManager.getCafeDetailListFromCoreData().count == 0 {
-            coreDataManager.saveCafeDetailData(hardness: "70", alkalinity: "40", ph: "3", circle: circles(hardness: 70, alkalinity: 40), filter: "Claris Prime", memo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.") {
-                print("Create Defalt Data")
+            coreDataManager.saveCafeDetailData(hardness: "70", alkalinity: "40", ph: "3",
+                                               circle: circles(hardness: 70, alkalinity: 40),
+                                               filter: "Claris Prime",
+                                               memo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.") {
             }
         }
         return coreDataManager.getCafeDetailListFromCoreData().count

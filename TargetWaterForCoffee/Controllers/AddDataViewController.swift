@@ -50,7 +50,7 @@ extension AddDataViewController {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
+            titleLabel.heightAnchor.constraint(equalToConstant: 15),
             
             tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor , constant: 30),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -65,12 +65,11 @@ extension AddDataViewController {
             memoTextView.topAnchor.constraint(equalTo: memoLabel.bottomAnchor, constant: 5),
             memoTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             memoTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-//            memoTextView.heightAnchor.constraint(equalToConstant: 105),
             memoTextView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -20),
             
             saveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -(view.frame.height / 4) * 1.13),
             saveButton.heightAnchor.constraint(equalToConstant: 49)
         ])
         // Title View
