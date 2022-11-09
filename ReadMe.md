@@ -57,7 +57,7 @@ TargetWaterForCoffee
 ## Feature-1. 데이터 목록화면 구현
 
 ### UI
-![Simulator Screen Shot - iPhone 11 Pro - 2022-11-09 at 02 47 00](https://user-images.githubusercontent.com/59905688/200640701-f844f351-fd9b-4c56-bc2e-9c1e2ca9b755.png)
+<img width="415" alt="스크린샷 2022-11-09 오후 2 11 12" src="https://user-images.githubusercontent.com/59905688/200744169-a2de9812-5ca4-4fbb-92ca-1559d340471a.png" width="40%" height="40%">
 
 ### Trouble Shooting
 #### Table View cell Event 문제
@@ -72,7 +72,7 @@ TargetWaterForCoffee
 ## Feature-2. 데이터 추가화면 구현
 
 ### UI
-<img width="608" alt="스크린샷 2022-11-09 오전 3 03 02" src="https://user-images.githubusercontent.com/59905688/200641324-54adad09-87b3-413e-8d61-393f90e92faa.png">
+<img width="608" alt="스크린샷 2022-11-09 오전 3 03 02" src="https://user-images.githubusercontent.com/59905688/200641324-54adad09-87b3-413e-8d61-393f90e92faa.png" width="40%" height="40%">
 
 ### 2️⃣ Trouble Shooting
 ####  IPhone 8에서 tableView가 전부 보이지 않는 문제
@@ -82,7 +82,7 @@ TargetWaterForCoffee
 ## Feature-3. 데이터 상세화면 구현
 
 ### UI
-<img width="971" alt="스크린샷 2022-11-09 오전 3 07 09" src="https://user-images.githubusercontent.com/59905688/200642055-e7abae5d-2e43-4d43-92dd-cc542026cd7a.png">
+<img width="971" alt="스크린샷 2022-11-09 오전 3 07 09" src="https://user-images.githubusercontent.com/59905688/200642055-e7abae5d-2e43-4d43-92dd-cc542026cd7a.png" width="40%" height="40%">
 
 ### Trouble Shooting
 #### 정보 수정 시 잦은 화면 전환으로 딜레이가 발생하는 문제
