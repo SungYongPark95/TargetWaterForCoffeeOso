@@ -18,13 +18,16 @@ WaterForCoffee는 brewing water chemistry log Application 입니다.
 `MVC`를 적용했습니다.
 `UIKit`을 활용하여 코드로 오토레이아웃을 구현했습니다.
    
-- 참여자 : 김현준(iOS Developer) holden.developer@gmail.com, 박성용(iOS Developer) sungyong.park6@gmail.com, 장인희(UI/UX Designer) inheejang@gmail (총 3명)
+- 참여자(총 3명)
+    + 김현준(iOS Developer) holden.developer@gmail.com
+    + 박성용(iOS Developer) sungyong.park6@gmail.com
+    + 장인희(UI/UX Designer) inheejang@gmail
          
 - 진행 기간 : 2022.08.23 - 2022.09.29 (총 5주)   
 <br/>
 
 ## Architecture
-![Architecture](https://user-images.githubusercontent.com/59905688/200632487-a1900bb0-9efa-47ca-9d0a-15eb2d3c480a.png)
+![WaterForCoffee_Architecture 001](https://user-images.githubusercontent.com/59905688/200747092-a296fe6e-9b99-4f3c-8c3c-a9d89c884848.png)
 
 ## Foldering
 ```
